@@ -3,7 +3,7 @@
         <meta charset = "utf-8">
         <title>CEO/Worker Pay Ratio</title>
         <link rel = "stylesheet" type = "text/css" href = "payratio.css">
-        <script type = "text/javascript" src = "http://d3js.org/d3.v3.min.js"></script>
+        <script type = "text/javascript" src = "//d3js.org/d3.v3.min.js"></script>
         <style type = "text/css"></style>
     </head>
     <body>
@@ -166,7 +166,7 @@ function initialize(category){
             div.transition()
                 .duration(200)
                 .style("opacity", 1.0)
-            
+
             div.html("<center>-" + d.Employer + "-</center>" + " <center> CEO: " + d.CEO + "</center><br/>" + "Worker Pay: <span class=\"right\">" + "$" + parse(d.Worker_Pay) + "</span><br />" + "CEO Pay: <span class=\"right\">" + "$" + parse(d.CEO_Pay_TT) +  "</span><br />" + "CEO/Worker Pay Ratio: <span class=\"right\">"  + parse(d.Ratio) +"</span><br />" + "-----------------------------------------" + "<br/>" + "Glassdoor Rating: <span class=\"right\">" + parse(d.Rating) + "</span>")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY) + "px");
@@ -256,7 +256,7 @@ function overviewScale(){
         .range([0, width-(margin + 350)])
         .domain([d3.min(companies, function(d) { return d.CEO_Pay; }),
             d3.max(companies, function(d) { return 90000000; })]);
-    
+
     var xAxis = d3.svg.axis()
         .scale(grossScale)
         .tickFormat(function(d, i){
@@ -271,7 +271,7 @@ function overviewScale(){
         .attr("class", "x axis")
         .call(xAxis)
         .attr("transform", "translate(100, 300)");
-    
+
     svg.append("text")
         .attr("class", "label")
         .attr("x", (width/2) - 280)
@@ -304,7 +304,7 @@ function overviewScale(){
         .style("font-family", "sans-serif")
         .style("font-size", "15px")
         .text("Median 14.7M");
-    
+
     svg.append("line")
        .attr("class", "y axis")
        .attr("x1", 1211)
@@ -316,7 +316,7 @@ function overviewScale(){
        .style("stroke", "black")
         .style("shape-rendering", "crispEdges")
        .style("fill", "none");
-    
+
     svg.append("line")
        .attr("class", "y axis")
        .attr("x1", 1211)
@@ -341,7 +341,7 @@ function overviewScale(){
        .style("stroke-width", 2)
        .style("stroke", "black")
        .style("fill", "none");
-    
+
     svg.append("line")
        .attr("class", "y axis")
        .attr("x1", 1221)
@@ -352,7 +352,7 @@ function overviewScale(){
        .style("stroke-width", 2)
        .style("stroke", "black")
        .style("fill", "none");
-    
+
     svg.append("line")
        .attr("class", "y axis")
        .attr("x1", 1201)
@@ -363,7 +363,7 @@ function overviewScale(){
        .style("stroke-width", 2)
        .style("stroke", "black")
        .style("fill", "none");
-    
+
     svg.append("line")
        .attr("class", "x axis")
        .attr("x1", 1201)
@@ -374,7 +374,7 @@ function overviewScale(){
         .style("stroke-width", 1)
         .style("shape-rendering", "crispEdges")
        .style("stroke", "black");
-    
+
     svg.append("line")
        .attr("class", "y axis")
        .attr("x1", 1400)
@@ -385,7 +385,7 @@ function overviewScale(){
         .style("stroke-width", 1)
         .style("shape-rendering", "crispEdges")
        .style("stroke", "black");
-    
+
     svg.append("text")
         .attr("class", "label")
         .attr("x", 1400)
@@ -393,8 +393,8 @@ function overviewScale(){
         .attr("transform", "translate(100,"+margin+")")
         .style("text-anchor", "middle")
         .text("160M");
-        
-    
+
+
     RatioLegend();
 };
 
@@ -440,43 +440,43 @@ function RatioLegend(){
         .attr("cx", 302.5)
         .attr("cy", 375)
         .style("fill", "1a9850");
-    
+
     svg.append("circle")
         .attr("r", 8)
         .attr("cx", 337.5)
         .attr("cy", 375)
         .style("fill", "66bd63");
-    
+
     svg.append("circle")
         .attr("r", 8)
         .attr("cx", 372.5)
         .attr("cy", 375)
         .style("fill", "a6d96a");
-    
+
     svg.append("circle")
         .attr("r", 8)
         .attr("cx", 407.5)
         .attr("cy", 375)
         .style("fill", "d9ef8b");
-    
+
     svg.append("circle")
         .attr("r", 8)
         .attr("cx", 442.5)
         .attr("cy", 375)
         .style("fill", "fee08b");
-    
+
     svg.append("circle")
         .attr("r", 8)
         .attr("cx", 477.5)
         .attr("cy", 375)
         .style("fill", "fdae61");
-    
+
     svg.append("circle")
         .attr("r", 8)
         .attr("cx", 512.5)
         .attr("cy", 375)
         .style("fill", "f46d43");
-    
+
     svg.append("circle")
         .attr("r", 8)
         .attr("cx", 547.5)
@@ -551,35 +551,35 @@ function RatioLegend(){
     //---------------------
     //--------Text---------
     //---------------------
-    
+
     svg.append("text")
         .attr("class", "label")
         .attr("x", 330)
         .attr("y", 35)
         .style("text-anchor", "end")
         .text("0-100");
-    
+
     svg.append("text")
         .attr("class", "label")
         .attr("x", 400)
         .attr("y", 35)
         .style("text-anchor", "end")
         .text("100-300");
-    
+
     svg.append("text")
         .attr("class", "label")
         .attr("x", 480)
         .attr("y", 35)
         .style("text-anchor", "end")
         .text("300-600");
-    
+
     svg.append("text")
         .attr("class", "label")
         .attr("x", 580)
         .attr("y", 35)
         .style("text-anchor", "end")
         .text("600-1000");
-    
+
     svg.append("text")
         .attr("class", "label")
         .attr("x", 660)
@@ -659,7 +659,7 @@ function RatioLegend(){
         .style("font-size", "11px")
         .style("font-family", "sans-serif")
         .style("fill", "lightgrey");
-    
+
     //----------------
     svg.append("text")
         .attr("class", "label")
