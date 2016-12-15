@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>  
-    <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">  
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
 
     <link href="main.css" rel="stylesheet">
         <h1>The Pulse of the UCs!</h1>
@@ -20,14 +20,14 @@
           <div id="tooltip" class="hidden">
 		<p><strong>Day of the Week: <span id="value">Sun</span></strong></p>
         <p><strong>School:<span id="schoolID"> UCB </span></strong></p>
-	</div>  
-    <div class="slider"></div>  
-      
-        <div id="cloud"></div>  
+	</div>
+    <div class="slider"></div>
+
+        <div id="cloud"></div>
     <div id="UCs" style="text-align:center;">
-            
+
     <svg width="900" height="100">
-        
+
         <image xlink:href="logos/UCB.png" x="0" y="20" height="75px" width="75px"/>
          <circle id="circle1" cx="36" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('1')"/>
         <image xlink:href="logos/UCI.png" x="100" y="20" height="75px" width="75px"/>
@@ -46,7 +46,7 @@
          <circle id="circle8" cx="736" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('8')"/>
         <image xlink:href="logos/UCSD.png" x="800" y="20" height="75px" width="75px"/>
          <circle id="circle9" cx="836" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('9')" />
-        
+
     </svg>
 
     </div>
@@ -67,7 +67,7 @@ loadData("CSVs/1_0.csv");
 <ul>
     <li><a href="https://www.yikyak.com/home" target="_blank">Yik Yak</a></li>
     <li><a href="http://www.wordcounter.com/" target="_blank">Word Counter</a></li>
-</ul>      
+</ul>
 <h4>Code Sources</h4>
 <ul>
     <li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 API Reference</a></li>
