@@ -1,0 +1,8 @@
+'elev_class','description'
+1,'-200 to 0 metres'
+2,'0 to 200 metres'
+3,'200 to 500 metres'
+4,'500 to 1000 metres'
+5,'1000 to 1500 metres'
+6,'1500 to 2000 metres'
+7,'>2000 metres'

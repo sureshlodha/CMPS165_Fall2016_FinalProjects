@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<style>
+body{
+    background-color: #E6E6E6;
+}   
+  
+ 
+p{
+    text-indent: 40px;
+}
+.bar{
+    fill: steelblue;
+    fill-opacity: .9;
+}    
+ 
+.axis text{
+    font: Times;
+    font-size: 12px;
+    font-weight: bold;
+}
+ 
+   
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+.tooltip {
+        position: absolute;
+        width: 200px;
+        height: auto;
+        padding: 10px;
+        background-color: white;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+}
+ 
+.tooltip.hidden {
+        display: none;
+}
+ 
+</style>
+ 
+ <body>
+     <h1><center>Pre-Enrollment Simulation</center></h1>  
+     <h2><center>Computer Science UCSC classes</center></h2>
+     <h3><center> Spring 2017</center></h3>  
+      <p><center>Simulation for expected enrollment of all Computer Science classes for Spring 2017 at UCSC. Large influxes of computer science majors over the past couple of years has caused extreme demand for Computer Science courses. </center></p>
+     
+    <script type= "text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+    <span style="display: inline;"> 
+
+     </span>
+    <div id="tooltip" class="hidden">        
+    </div>
+     <p>Sign up for at most 3 CMPS Classes for Spring 2017 below:</p>
+     <span style="display: inline;">
+     <!-- The follwoing div class page header creates dropdown menus for our classes -->
+         <div class="page-header">
+             
+         Student ID #: <input type="text" name="FirstName" >
+        <!-- drop menu 1-->
+             <select name="my_menu1" id = "my_menu1" size="1">
+                <option value="NA">NA</option>
+                <option value="CMPS111">CMPS111</option>   
+                <option value="CMPS11">CMPS11</option>
+                <option value="CMPS10">CMPS10</option>
+                <option value="CMPS101">CMPS101</option>
+                <option value="CMPS102">CMPS102</option>
+                <option value="CMPS104A">CMPS104A</option>
+                <option value="CMPS112">CMPS112</option>
+                <option value="CMPS12A">CMPS12A</option>
+                <option value="CMPS12B">CMPS12B</option>
+                <option value="CMPS130">CMPS130</option>
+                <option value="CMPS5J">CMPS5J</option>
+                <option value="CMPS5P">CMPS5P</option>
+            </select>
+        <!-- drop menu 2-->     
+        <select name="my_menu2" id = "my_menu2" size="1">
+                <option value="NA">NA</option>
+                <option value="CMPS111">CMPS111</option>   
+                <option value="CMPS11">CMPS12</option>
+                <option value="CMPS10">CMPS10</option>
+                <option value="CMPS101">CMPS101</option>
+                <option value="CMPS102">CMPS102</option>
+                <option value="CMPS104A">CMPS104A</option>
+                <option value="CMPS112">CMPS112</option>
+                <option value="CMPS12A">CMPS12A</option>
+                <option value="CMPS12B">CMPS12B</option>
+                <option value="CMPS130">CMPS130</option>
+                <option value="CMPS5J">CMPS5J</option>
+                <option value="CMPS5P">CMPS5P</option>
+            </select>
+        <!-- drop menu 3-->     
+        <select name="my_menu3" id = "my_menu3" size="1">
+                <option value="NA">NA</option>
+                <option value="CMPS111">CMPS111</option>   
+                <option value="CMPS11">CMPS11</option>
+                <option value="CMPS10">CMPS10</option>
+                <option value="CMPS101">CMPS101</option>
+                <option value="CMPS102">CMPS102</option>
+                <option value="CMPS104A">CMPS104A</option>
+                <option value="CMPS112">CMPS112</option>
+                <option value="CMPS12A">CMPS12A</option>
+                <option value="CMPS12B">CMPS12B</option>
+                <option value="CMPS130">CMPS130</option>
+                <option value="CMPS5J">CMPS5J</option>
+                <option value="CMPS5P">CMPS5P</option>
+            </select>
+            <!-- add student button --> 
+         <button onclick = "increment()">Add Student!</button>
+         </div>   </span>      
+<p>
+    
+    
+    
+     </p>     
+<script>  
+     
+var margin = {top: 10, right: 40, bottom: 30, left: 50},
+    width = 800 - margin.left - margin.right,  //760
+    height = 500 - margin.top - margin.bottom;
+   
+ 
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      
+var x = d3.time.scale().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);  
+       
+var xScale = d3.scale.ordinal()
+    .rangeRoundBands([0, width], 0.1);
+ 
+var yScale = d3.scale.linear()
+    .range([height, 0]);
+ 
+var xAxis = d3.svg.axis()
+    .scale(xScale)
+    .orient("bottom");
+//added tick marks to the y-axis and implements the "$" sign
+var yAxis = d3.svg.axis()
+    .scale(yScale)
+    .orient("left")
+    .ticks(8);
+ 
+var div = d3.select("body").append("bar")  
+    .attr("class", "tooltip")              
+    .style("opacity", 0);
+ // loads csv of the incomplete editable data
+d3.csv("SpringInterSim.csv",function(error, data){
+    data.forEach(function(d) {
+        d.key = d.key;
+        d.value = +d.value;
+    });
+   
+    xScale.domain(data.map(function(d){ return d.key; }));
+    yScale.domain([0,d3.max(data, function(d) {return d.value; })]);
+   
+    
+   // forms the x axis 
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .selectAll("text")
+        .attr("dx", " -.8em")
+        .attr("dy", ".50em")
+        .style("text-anchor", "middle")
+        .attr("font-size", "10px");
+    svg.append("text")
+       .attr("x", margin.right)
+       .attr("y", 0- width)
+       .attr("dx", "1em")
+       .style("text-anchor", "right")
+       .text("Courses");
+    
+    // Y axis and its labels
+    svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(0,0)")
+        .call(yAxis);
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left )
+        .attr("x", 0-(height/2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Total Pre-Enrolled Students");    
+   
+   // generates the bars 
+    svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return xScale(d.key); })
+      .attr("width", xScale.rangeBand() -15)
+      .attr("y", function(d) { return yScale(d.value); })
+      .attr("height", function(d) { return height - yScale(d.value); })
+      //tool tip for each bar
+      .on("mouseover", function(d) {      
+           div.transition()      
+              .duration(200)    
+              .style("opacity", .9);    
+        // &nbsp creates white space for our tool tips to gibe them better format   
+        div.html( "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + d.key + " <br/>  # of students &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " + d.value )
+               .style("left", (d3.event.pageX+20) + "px")    
+               .style("top", (d3.event.pageY - 28) + "px");  
+        //Show the tooltip
+            d3.select(".tooltip").classed("hidden", false);
+       })                
+       .on("mouseout", function() {
+ 
+//Hide the tooltip
+     d3.select(".tooltip").classed("hidden", true);
+    });
+   
+/*  
+   */
+   
+    window.updateData = function() {
+     
+    // Select the section we want to apply our changes to
+    var svg = d3.select("body").transition();
+ 
+    // Make the changes to our axises
+       
+        svg.select(".x.axis") // change the x axis
+            .duration(750)
+            .call(xAxis);
+        svg.select(".y.axis") // change the y axis
+            .duration(750)
+            .call(yAxis);
+  //  
+}
+     window.increment = function() {
+         // creates variables for comparison later
+        var dropdown1 = document.getElementById("my_menu1");
+         var value1 = dropdown1.options[dropdown1.selectedIndex].value;
+         var dropdown2 = document.getElementById("my_menu2");
+         var value2 = dropdown2.options[dropdown2.selectedIndex].value;
+         var dropdown3 = document.getElementById("my_menu3");
+         var value3 = dropdown3.options[dropdown3.selectedIndex].value;
+         // checks whether the selected course is in the csv 
+         // then increments the value if it is
+         data.forEach(function(d){
+         if(d.key == value1) {
+            d.value+=+1;
+        }
+        })
+        // if the values of value2 or value3 match any others
+         // it will not increment if a same class is selected
+         data.forEach(function(d){
+         if(d.key == value2 && value1 != value2) {
+            d.value+=+1;
+        }
+        })
+        
+         data.forEach(function(d){
+         if(d.key == value3 && value2 != value3 && value1 != value3) {
+            d.value+=+1;
+        }
+        })
+    
+    
+        xScale.domain(data.map(function(d){ return d.key; }));
+        yScale.domain([0,d3.max(data, function(d) {return d.value; })]);
+        // removes bars before redrawing the updated ones
+         svg.selectAll(".bar").remove();
+        svg.selectAll(".bar")
+           .data(data)
+        .enter().append("rect")
+           .attr("class", "bar")
+           .attr("x", function(d) { return xScale(d.key); })
+           .attr("width", xScale.rangeBand() - 15)
+           .attr("y", function(d) { return yScale(d.value); })
+           .attr("height", function(d) { return height - yScale(d.value); })
+           .on("mouseover", function(d) {      
+           
+        div.transition()      
+           .duration(200)    
+           .style("opacity", .9);    
+        div.html( "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + d.key + " <br/>  # of students &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " + d.value )
+                .style("left", (d3.event.pageX+20) + "px")    
+                .style("top", (d3.event.pageY - 28) + "px");  
+               
+       //Show the tooltip
+        d3.select(".tooltip").classed("hidden", false);
+        })                
+        .on("mouseout", function() {
+        //Hide the tooltip
+        d3.select(".tooltip").classed("hidden", true);
+ 
+        });
+        updateData();    
+ 
+    }
+    /////////////// 
+window.empty = function() {
+    /*    data.forEach(function(d){ 
+            d.value = 0;
+            
+        })
+        console.log(data);
+//console.log(d.value);           
+    xScale.domain(data.map(function(d){ return d.key; }));
+    yScale.domain([0,d3.max(data, function(d) {return d.value; })]);
+    */
+    
+    // loads separate csv with completed simulation data
+    // the rest is pretty much copy and paste
+    d3.csv("SpringSimulation2017.csv",function(error, data){
+    data.forEach(function(d) {
+        d.key = d.key;
+        d.value = +d.value;
+    });
+   
+    xScale.domain(data.map(function(d){ return d.key; }));
+    yScale.domain([0,d3.max(data, function(d) {return d.value; })]);
+   
+    //xAxis labels
+    svg.selectAll("text").remove();
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .selectAll("text")
+        .attr("dx", " -.8em")
+        .attr("dy", ".50em")
+        .style("text-anchor", "middle")
+        .attr("font-size", "10px");
+    svg.append("text")
+       .attr("x", margin.right)
+       .attr("y", 0- width)
+       .attr("dx", "1em")
+       .style("text-anchor", "right")
+       .text("Courses");
+          
+    svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(0,0)")
+        .call(yAxis);
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left )
+        .attr("x", 0-(height/2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Total Pre-Enrolled Students"); 
+    
+        svg.selectAll(".bar").remove();
+    d3.svg
+    svg.selectAll(".bar")
+      .data(data)
+   .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return xScale(d.key); })
+      .attr("width", xScale.rangeBand() - 15)
+      .attr("y", function(d) { return yScale(d.value); })
+      .attr("height", function(d) { return height - yScale(d.value); })
+      .on("mouseover", function(d) {             
+        div.transition()      
+                .duration(200)    
+                .style("opacity", .9);    
+            div.html( "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + d.key + " <br/>  # of students &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " + d.value )
+                .style("left", (d3.event.pageX+20) + "px")    
+                .style("top", (d3.event.pageY - 28) + "px");  
+               
+        //Show the tooltip
+        d3.select(".tooltip").classed("hidden", false);
+        })                
+        .on("mouseout", function() { 
+        //Hide the tooltip
+        d3.select(".tooltip").classed("hidden", true);
+        });
+       updateData();
+           
+       }); }
+
+
+    ////////////////////////   
+});
+       
+     </script> 
+     <body>
+         <!-- loading simulation data-->
+         <div class ='row'>
+        <div id ="footer">
+            <input type = "button" value ="Load Sim1" onclick = "location.reload();" />
+            <button  onclick = "empty()">Load Sim2</button>
+             </div>
+         </div>
+     </body>
+
+     <br>
+     <br>
+     <br>
+     <br>
+     <!-- the following is just the sources and created information -->
+       <div class='row'>
+        <div id="footer">
+          <div class="container">
+            <div class="row-1">
+              <h3> Created by: </h3>
+                  Jeff Wagenseller and Zach Reisenfeld <br>
+ 
+              <h3>Created for: </h3> CMPS165, Data Programming for Visualization, Fall 2016 Suresha Lodha<br>
+                
+                <h3> Sources:</h3> 
+                <p>Stack overflow question on html dropdown menus:
+<a href = "http://stackoverflow.com/questions/22845451/pass-html-dropdown-menu-values-to-javascript-function-onclick-function-call">DropDown Menu</a> </p>
+                
+<p>Mike Bostock sortable bar graph:
+<a href = "bostock/3885705">Sortable Bar Graph</a>
+                </p>
+<p>                
+Stack overflow for align buttons html:
+<a href = "http://stackoverflow.com/questions/5040935/displaying-two-form-buttons-inline">Aligning Buttons</a>
+                </p>
+                <p>Suresha Lodha</p> 
+                <br>
+                <h3> Files Submitted:</h3>
+                <p>index.html</p>
+                <p>SpringSimulation2017.csv</p>
+                <p>SpringInterSim.csv</p>
+
+                
+            </div><!--/col-sm-3-->
+            <br>
+            <div class="col-sm-3">
+              </div>
+                    

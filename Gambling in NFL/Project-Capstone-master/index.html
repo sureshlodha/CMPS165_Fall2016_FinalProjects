@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" href="images/NFL_Shield.png">
+        <meta charset="utf-8">
+        <title>NFL Statistics</title>   
+        <script type = "text/javascript" src = "https://d3js.org/d3.v3.js"></script>
+        <link rel = "stylesheet" type = "text/css" href = "index.css">
+        
+    </head>
+    <body>
+        <div id = "title">
+            <h1>
+                <center><b>Gambling and the National Football League</b></center>
+            </h1>
+        </div>
+        
+        <script type="text/javascript" src = "index.js"></script>
+        
+        <p>
+            <center>
+                <b>Select Year</b>
+                <input type = "range" class = "slider-width" min = "2003" max = "2015" value = "1992" step = "1" onchange = "showValue(this.value)" />
+                <span id = "range"><b>2003</b></span>
+            </center>
+        </p>
+        
+        <center><b>Team 1: </b><select id = "teamO" onchange = "offenseSelected()" class = "dropDown"></select></center>
+        <center><b>Team 2: </b><select id = "teamD" onchange = "defenseSelected()" class = "dropDown"></select></center>
+        <center>
+            <b>Enter bet: </b><input type = "text" id = "betAmount" class = "inputAmount">
+            <form action = "">
+                <input type = "radio" name = "betOn" value = "o" onchange = "findBet(this.value)"><b>Team 1</b>
+                <input type = "radio" name = "betOn" value = "d" onchange = "findBet(this.value)"><b>Team 2</b>
+            </form>
+            <b>Result: </b><input type = "text" class = "resultText" id = "results" value = "select teams and place bet" readonly="readonly" />
+        </center>
+        
+        <div id = "description">
+            <p>
+                <b>As the rise of new ways to gamble on football continues, the amount of money bet becomes staggering. 
+                During the 2015 season alone, an estimated $1.34 billion was bet the traditional way, $1.8 was bet in fantasy leagues, 
+                and an incredible $93 billion was bet illegally. To be able to consistently make money on these bets, gamblers must 
+                spend countless hours studying team statistics and consider an immense amount of factors leading up to the game.</b>
+            </p>
+            <p>
+                <center>
+                    Created by: Joshua Long in collaboration with Suresh K Lodha and Ryan Brounley</br>
+                    Created for: CMPS 165 at UCSC
+                </center>
+            </p>
+
+            <div class = "sources">
+                <ul>
+                    Program Files:
+                    <li><a href="https://github.com/JPL4494/Project-Capstone/blob/master/index.html">index.html</a></li>
+                    <li><a href="https://github.com/JPL4494/Project-Capstone/blob/master/index.css">index.css</a></li>
+                    <li><a href="https://github.com/JPL4494/Project-Capstone/blob/master/index.js">index.js</a></li>
+                </ul>
+                <ul>
+                    Data Files:
+                    <li><a href="https://github.com/JPL4494/Project-Capstone/tree/master/images">Images</a></li>
+                    <li><a href="https://github.com/JPL4494/Project-Capstone/tree/master/CSV">Data</a></li>
+                </ul>
+                <ul>
+                    </br>
+                    Sources:
+                    <li><a href = "http://www.pro-football-reference.com/"> Offense</a></li>
+                    <li><a href = "http://www.nfl.com/stats/team?seasonId=2016&seasonType=REG&Submit=Go"> Defense</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </body>
+    <div id="background"></div>
+</html>

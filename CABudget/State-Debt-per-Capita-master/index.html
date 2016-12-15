@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>State Debt per Capita</title>
+        <!-- CSS Stylesheet -->
+        <link rel="stylesheet" type="text/css" href="stateDebtStyleSheet.css">
+        <!-- D3.js Source -->
+        <script src="//d3js.org/d3.v3.min.js"></script>
+        <h1 style = "text-align:center; font size:2">
+            <bold>State debt per Capita</bold>
+        </h1>
+    </head>
+    <body>
+        <font size = "2">
+        <p>
+            States with greater expenses than income have increases in debt per capita, while states with greater income than expenses have decreases in debt per capita.  The larger the circle, the greater debt per Capita is.
+        </p>
+        </font>
+        
+        <div align="center">
+            <div id="allTen">
+            <input name="updateButton" 
+                   type="button" 
+                   value="AllTen" 
+                   onclick="showAllTen()" />
+            </div>
+            <div id="biggestOnly">
+            <input name="updateButton" 
+                   type="button" 
+                   value="Biggest5Only" 
+                   onclick="showBiggest()" />
+            </div>
+            <div id="smallestOnly">
+            <input name="updateButton" 
+                   type="button" 
+                   value="Smallest5Only" 
+                   onclick="showSmallest()" />
+            </div>
+        </div>
+        <p id="map"></p>
+        <p id="chart"></p>
+        <script type="text/javascript" src="stateDebt.js"></script>
+
+            <font size = "2">
+            <p>
+                Created by Ethan Cox in Collaboration with Suresh Lodha and Ryan.<br>
+                Created for CMPS 165: Data Programming for Visualization, Spring 2016.<br>
+            </p>
+            <h4>Files Submitted</h4>
+            <ul>
+                <li>index.html</li>
+                <li>fp.css</li>
+                <li>fp.js</li>
+                <li>data.json</li>
+            </ul>
+            <h4>Data Sources</h4>
+            <ul>
+                <li>
+                    <a href = "http://www.usgovernmentspending.com/compare_state_spending_2017dH0s">
+                    State debt per Capita</a>
+                </li>
+                <li>
+                    <a href = "http://www.usgovernmentrevenue.com/state_tax_gdp_population">
+                    State incomes from taxation</a>
+                </li>
+                <li>
+                    <a href = "http://www.usgovernmentspending.com/state_spend_gdp_population">
+                    State expenses</a>
+                </li>
+            </ul>
+            <h4>Visualization Sources</h4>
+            <ul>
+                <li>
+                    <a href = "https://bost.ocks.org/mike/nations/">
+                    The Health and Wealth of Nations</a>
+                </li>
+                <li>
+                    <a href = "https://github.com/edent/motion-chart">Motion chart code</a>
+                </li>
+                <li>
+                    <a href = "https://gist.github.com/michellechandra/0b2ce4923dc9b5809922#file-us-states-json">US Map Code</a>
+                </li>
+            </ul>
+            </font>
+
+    </body>
+</html>

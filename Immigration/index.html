@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<h1 class="Title">
+    IMMIGRATION IN THE UNITED STATES, 2014
+</h1>
+
+
+<p class="Head">
+    The best and horrifying stories ever told are about the journey immigrants take into the U.S. One big question is where are all of the immigrants located. Here we find out where most of immigrants reside and one good question to ask yourself is why they decided to immigrate to that specific location!
+</p>
+
+<style>
+    
+    .name1 {
+        float: left;
+    }
+    .name2 {
+        float: left;
+        margin-top: -102px;
+        margin-left: 200px;
+    }
+    
+    .name3 {
+        float: left;
+        margin-top: -70px;
+        margin-left: 200px;
+    }
+    
+    
+    .name4 {
+        float: left;
+        margin-top: -102px;
+        margin-left: 500px;
+    }
+    
+    .name5 {
+        float: left;
+        margin-top: -70px;
+        margin-left: 500px;
+    }
+    
+    .name6 {
+        float: left;
+        margin-top: -50px;
+        margin-left: 500px;
+    }
+    
+    .data {
+        background-color: gainsboro;
+    }
+    
+    svg {
+        font: 10px sans-serif;
+    }
+
+    .caption {
+        font-weight: bold;
+    }
+
+    .states {
+        fill: none;
+        stroke: #000;
+        stroke-linejoin: round;
+    }
+    .Title {
+        text-align: center;
+        color: darkgreen;
+    }
+    
+    .Head {
+        text-align: center;
+    }
+    
+    .Create {
+        text-align: left;
+        font-size: 15px;
+    }
+    
+    .counties {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .3;
+        
+    }
+    
+    .key path {
+        display: none;
+    }
+
+    .key line {
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+    
+    .tooltip {
+        position: absolute;
+        text-align: center;
+        width: 60px;
+        height: 12px;
+        padding: 8px;
+        margin-top: -20px;
+        font: 10px sans-serif;
+        background: #ddd;
+        pointer-events: none;
+    }
+    
+</style>
+<body>
+   
+<div id="option">
+           
+</div>
+       
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/queue.v1.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var width = 1500,
+    height = 800;    
+
+var color = d3.scale.threshold()
+    .domain([0.01, 0.1, 3, 20, 75])
+    .range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
+
+    var projection = d3.geo.albersUsa()
+    .scale(1000)
+    .translate([width / 2.4, height / 3]);
+
+var path = d3.geo.path().projection(projection);
+
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + 50)
+    .attr("height", height - 300);
+    
+var g = svg.append("g");    
+    queue()
+    .defer(d3.json, "us.json")
+    .defer(d3.csv, "immigration.csv")
+    .await(ready);
+
+function ready(error, us, immigration) {
+    
+  if (error) throw error;
+
+  var rateById = {};
+
+  immigration.forEach(function(d) { rateById[d.id] = +d.rate; });
+
+  svg.append("g")
+      .attr("class", "counties")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+      .attr("d", path)
+      .style("fill", function(d) { return color(rateById[d.id]*100); })
+  .append("rect")
+    .attr("width", 140)
+    .attr("height", 140)
+    
+    
+    function mouseover() {
+  div.style("display", "inline");
+}
+
+function mousemove() {
+  div
+      .text(d3.event.pageX + ", " + d3.event.pageY)
+      .style("left", (d3.event.pageX - 34) + "px")
+      .style("top", (d3.event.pageY - 12) + "px");
+}
+
+function mouseout() {
+  div.style("display", "none");
+}
+
+    
+    
+
+  svg.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a.id !== b.id; }))
+      .attr("class", "states")
+      .attr("d", path);
+}
+
+  
+     // draw legend colored circles
+    svg.append("rect")
+        .attr("x", 950)
+        .attr("y", height/3)
+        .attr("width", 220)
+        .attr("height", 180)
+        .attr("fill", "lightgrey")
+        .style("stroke-size", "1px");
+
+    svg.append("circle")
+        .attr("r", 5)
+        .attr("cx", 1150)
+        .attr("cy", height/2.75)
+        .style("fill", "#fff7ec");
+    
+    svg.append("circle")
+        .attr("r", 5)
+        .attr("cx", 1150)
+        .attr("cy", height/2.5)
+        .style("fill", "#fee8c8");
+
+    svg.append("circle")
+        .attr("r", 5)
+        .attr("cx", 1150)
+        .attr("cy", height/2.3)
+        .style("fill", "#fdd49e");
+    
+    svg.append("circle")
+        .attr("r", 5)
+        .attr("cx", 1150)
+        .attr("cy", height/2.1)
+        .style("fill", "#ef6548");
+    
+    svg.append("circle")
+        .attr("r", 5)
+        .attr("cx", 1150)
+        .attr("cy", height/1.93)
+        .style("fill", "#b30000");
+
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", 1100)
+        .attr("y", height/2.7)
+        .style("text-anchor", "end")
+        .attr("font-size", "17px")
+        .text(" 0 - 10,000");
+
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", 1100)
+        .attr("y", height/2.49)
+        .style("text-anchor", "end")
+        .attr("font-size", "17px")
+        .text(" 1,000 - 10,000");
+
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", 1100)
+        .attr("y", height/2.28)
+        .style("text-anchor", "end")
+        .attr("font-size", "17px")
+        .text(" 10,000 - 100,000");
+    
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", 1100)
+        .attr("y", height/2.09)
+        .style("text-anchor", "end")
+        .attr("font-size", "17px")
+        .text("100,000 - 1,000,000");
+    
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", 1100)
+        .attr("y", height/1.92)
+        .style("text-anchor", "end")
+        .attr("font-size", "17px")
+        .text(" 1,000,000+");
+    
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", 1060)
+        .attr("y", height/3.1)
+        .style("text-anchor", "middle")
+        .style("fill", "Green") 
+        .attr("font-size", "15px")
+        .text("Immigrant population by County");
+</script>
+<html>
+<div class="data">
+    <p class="Create">
+        Created by: Eduardo Gaona in collboration with Ahmed Almutawa, Suresh K Lodha and Shobhit Maheshwari
+    </p>
+    
+    <div> Created for: </div>
+    <div> CMPS 165, Data Programming for Visualization, Fall 2016</div>
+
+    <body>
+        <p>Files: </p>
+        <p class="name1"> 
+            <li>index.html</li>
+            <li>us.json</li>
+            <li>immigration.csv</li>
+        </p>
+    
+        <p class="name2">Data Sources: </p>
+        <p>
+            <li class="name3"> Migration Policy Institute </li>
+        </p>
+    
+        <p class="name4"> Code Sources: </p>
+        <p>
+            <li class="name5"><a href="https://bl.ocks.org/mbostock/5562380">Mike Bostock California</a></li>
+            <li class="name6"><a href="https://bl.ocks.org/mbostock/4090848">Mike Bostock USA TopoJSON</a></li>
+        </p>
+</div>
+    
+    </body>
+    
+</html>

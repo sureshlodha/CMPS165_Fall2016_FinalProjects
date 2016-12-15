@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Scotland's Clans by County</title>
+        <!-- Bootstrap core CSS -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!-- Static navbar -->
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <h3>Scotland's Clans per District</h3>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+                  <li>
+                      <form class="navbar-form navbar-left">
+                          <div class="form-group">
+                              <div id="the-basics">
+                                  <input class="typeahead form-control" type="text" placeholder="Clan Search">
+                              </div>
+                          </div>
+                      </form> 
+                  </li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row" style="padding-bottom: 20px">
+                <div id="map-container" class="col-sm-8">
+                </div>
+                <div id="clan-container" class="col-sm-4" style="border: 1px solid;">
+                </div>
+            </div>
+            <div id="clan-rundown" class="jumbotron">
+                <h1>What are clans?</h1>
+                <p>A Scottish clan (from Gaelic clann, "children") is a kinship group among the Scottish people. Clans give a sense of shared identity and descent to members. The clan names followed with the leaders who ruled the lands, ranging from early Pictish and Gaelic names, to pioneering settlers from France, Norway, and England who made their home in Scotland.<br><br>Some of the more powerful clans held large swaths of lands while others controlled smaller territories. This visualization compares the clan's occupied lands to the modern day districts of Scotland.</p><hr>
+                <h1>How to use</h1>
+                <p>Zoom, pan around the map to get a better view. By default the clans are presented in alphabetical order but can also be sorted by number of occupied lands. Click on a district to see that district's clans. Hover over a clan to see a tooltip of the clan's information. Click that clan to see more information.</p>
+            </div>
+            <div id="sources" class="jumbotron" style="background: #7eb7ed; padding-top: 15px;">
+                <div class="row" style="height: 200px;">
+                    <div id="sources-left" class="col-sm-9">
+                        <h4 style="margin-top: 0px; border-bottom-style: solid; border-bottom-width: 1px;">Sources:</h4>
+                        <div style="font-size: 15px;">
+                            <a href="http://www.jardineclan.com/ancient-jardine-clan.html">http://www.jardineclan.com/ancient-jardine-clan.html</a>
+                            <br>
+                            Detailed Information from <a href="https://www.houseofnames.com/">HouseofNames.com</a>
+                            <br>
+                            <a href="https://en.wikipedia.org/wiki/Scottish_clan">https://en.wikipedia.org/wiki/Scottish_clan</a>
+                            <br>
+                            Clans from <a href="http://www.scotclans.com/scottish-clans/">ScottishClans.com</a>
+                            <br>
+                            <a href="http://heraldry.celticradio.net/search.php?id=49&branch=Gibb">http://heraldry.celticradio.net/search.php?id=49&branch=Gibb</a>
+                            <br>
+                            <a href="http://www.ryanwadleigh.com/halliburton.html</p>">http://www.ryanwadleigh.com/halliburton.html</a>
+							<br>
+							Search by <a href="https://twitter.github.io/typeahead.js/">Typeahead</a>
+                            <br>
+                            <h4 style="margin-top: 0px; border-bottom-style: solid; border-bottom-width: 1px;">Files:</h4>
+                            <ul>
+                                <li>scotland_geo.html</li>
+                                <li>clans6.js</li>
+                                <li>Map_scotland.json</li>
+                                <li>main.js</li>
+                                <li>Tartans (tartan pictures folder)</li>
+                                <li>style.css</li>
+                                <li>typeahead.bundle.js</li>
+                                <li>sources.txt</li>
+                            </ul>
+                            <br>
+                        </div>
+                    </div>
+                    <div id="sources-right" class="col-sm-3">
+                        <h2 style="margin-top: 0px;">Created by:</h2>
+                        <p style="font-size: 15px">Michael Simpson<br>
+                        Instructor: Suresh Lodha <br>
+                        CMPS 165: Data programming for Visualization <br>
+                        Fall 2016</p>
+                        <a title="Github" href="https://github.com/misimpso"><i class="fa fa-github" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="http://d3js.org/topojson.v1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="typeahead.bundle.js"></script>
+        <script src="clans6.js"></script>
+        <script src="tartans.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,441 @@
+.title{
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 46px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    margin: 0.1em 0;
+    
+}
+
+.subtitle{
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -1.2px;
+    margin: 0.1em 0;
+    padding-left: 200px;
+    padding-right: 200px;
+
+}
+
+.button1{
+    text-align: center;
+    position: relative;
+    left: 110px;
+    top: 45px;
+    font-size: 16px;
+    width: 78px;
+    
+}
+
+.button2{
+    text-align: center;
+    position: relative;
+    left: 130px;
+    top: 45px;
+    font-size: 16px;
+    width: 78px;
+}
+.button3{
+    text-align: center;
+    position: relative;
+    left: 150px;
+    top: 45px;
+    font-size: 16px;
+    width: 78px;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    width: 200px;					
+    height: auto;					
+    padding: 2px;				
+    font: 12px sans-serif;		
+    font-size: 14px;	
+    border: 4px;		
+    border-radius: 8px;			
+    pointer-events: none;
+    top: 275px;
+}
+
+#Shoulders{
+    position: absolute;
+    left: 0px;
+    bottom:-85px;
+    
+    
+}
+
+#Chest{
+    position: absolute;
+    left: 100px;
+}
+.C{
+    position: absolute;
+    left: 160px;
+    top:280px;
+}
+.B{
+    position: absolute;
+    left: 300px;
+    top:280px;
+}
+.S{
+    position: absolute;
+    left: 450px;
+    top:280px;
+}
+.A{
+    position: absolute;
+    left: 620px;
+    top:280px;
+}
+.L{
+    position: absolute;
+    left: 780px;
+    top:280px;
+}
+.tooltip{
+    position: absolute;
+    left: 1000px;
+    
+}
+.pic{
+    position: absolute;
+    right: 5px;
+    
+}
+.box{
+    padding: 0px; 
+    background-color: lightgrey; 
+    position: absolute; 
+    width: 850px; 
+    height: 270px; 
+    bottom: -340px; 
+    right: 200px;
+}
+.expand{
+    position: absolute;
+    bottom: -370px;
+    right: 0px;
+}
+.Created{
+    position: absolute;
+    left: 50px;
+    top: 30px;
+}
+.dsources{
+    position: absolute;
+    right: 180px;
+    bottom: 73px;
+}
+.csources{
+    position: absolute;
+    right: -170px;
+    bottom: 2px;
+    
+}
+a>div { display: none; }
+a:hover>div { display: block; }
+.a1{
+    position: absolute;
+    left:450px;
+    top:140px;
+
+    
+}
+.a2{
+    position: absolute;
+    left:450px;
+    top:155px;
+
+    
+}
+.a3{
+    position: absolute;
+    left:450px;
+    top:170px;
+
+    
+}
+.a4{
+    position: absolute;
+    left:450px;
+    top:185px;
+
+    
+}
+.b1{
+    position: absolute;
+    left:625px;
+    top:140px;
+
+    
+}
+.b2{
+    position: absolute;
+    left:625px;
+    top:155px;
+
+    
+}
+.b3{
+    position: absolute;
+    left:625px;
+    top:170px;
+
+    
+}
+.b4{
+    position: absolute;
+    left:625px;
+    top:185px;
+
+    
+}
+.c1{
+    position: absolute;
+    left:775px;
+    top:140px;
+
+    
+}
+.c2{
+    position: absolute;
+    left:775px;
+    top:155px;
+
+    
+}
+.c3{
+    position: absolute;
+    left:775px;
+    top:170px;
+
+    
+}
+.c4{
+    position: absolute;
+    left:775px;
+    top:185px;
+
+    
+}
+.d1{
+    position: absolute;
+    left:950px;
+    top:140px;
+
+    
+}
+.d2{
+    position: absolute;
+    left:950px;
+    top:155px;
+
+    
+}
+.d3{
+    position: absolute;
+    left:950px;
+    top:170px;
+
+    
+}
+.d4{
+    position: absolute;
+    left:950px;
+    top:185px;
+
+    
+}
+.e1{
+    position: absolute;
+    left:1100px;
+    top:140px;
+
+    
+}
+.e2{
+    position: absolute;
+    left:1100px;
+    top:155px;
+
+    
+}
+.e3{
+    position: absolute;
+    left:1100px;
+    top:170px;
+
+    
+}
+.e4{
+    position: absolute;
+    left:1100px;
+    top:185px;
+
+    
+}
+
+.jp1{
+    position: absolute;
+    right: -600px;
+    bottom: -388px;
+    
+    
+}
+.jp2{
+    position: absolute;
+    right: -612px;
+    bottom: -373px;
+    
+    
+}
+.jp3{
+    position: absolute;
+    right: -626px;
+    bottom: -358px;
+    
+    
+}
+.jp4{
+    position: absolute;
+    right: -623px;
+    bottom: -343px;
+    
+    
+}
+.jp5{
+    position: absolute;
+    right: -457px;
+    bottom: -388px;
+    
+    
+}
+.jp6{
+    position: absolute;
+    right: -471px;
+    bottom: -373px;
+    
+    
+}
+.jp7{
+    position: absolute;
+    right: -453px;
+    bottom: -358px;
+    
+    
+}
+.jp8{
+    position: absolute;
+    right: -472px;
+    bottom: -343px;
+    
+    
+}
+.jp9{
+    position: absolute;
+    right: -278px;
+    bottom: -388px;
+    
+    
+}
+.jp10{
+    position: absolute;
+    right: -304px;
+    bottom: -373px;
+    
+    
+}
+.jp11{
+    position: absolute;
+    right: -276px;
+    bottom: -358px;
+    
+    
+}
+.jp12{
+    position: absolute;
+    right: -266px;
+    bottom: -343px;
+    
+    
+}
+.jp13{
+    position: absolute;
+    right: -132px;
+    bottom: -388px;
+    
+    
+}
+.jp14{
+    position: absolute;
+    right: -130px;
+    bottom: -373px;
+    
+    
+}
+.jp15{
+    position: absolute;
+    right: -120px;
+    bottom: -358px;
+    
+    
+}
+.jp16{
+    position: absolute;
+    right: -163px;
+    bottom: -343px;
+    
+    
+}
+.jp17{
+    position: absolute;
+    right: 43px;
+    bottom: -388px;
+    
+    
+}
+.jp18{
+    position: absolute;
+    right: 61px;
+    bottom: -373px;
+    
+    
+}
+.jp19{
+    position: absolute;
+    right: 7px;
+    bottom: -358px;
+    
+    
+}
+.jp20{
+    position: absolute;
+    right: 54px;
+    bottom: -343px;
+    
+    
+}
+/*
+.box2{
+    padding: 0px; 
+    background-color: lightgrey; 
+    position: absolute; 
+    width: 170px; 
+    height: 170px; 
+    right: 74px;
+    top: 300px;
+}
+*/

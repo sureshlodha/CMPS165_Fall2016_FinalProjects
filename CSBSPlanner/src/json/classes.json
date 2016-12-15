@@ -1,0 +1,473 @@
+[
+    {
+    "course": "CMPS 101",
+    "id": "cmps_101",
+    "type": "cmps",
+    "img": "101",
+    "title": "Algorithms & Abstract Data Types",
+    "units": "5",
+    "prereq": "CMPS(12B or 13H), CMPE(16 or 16H), Math( 11B or 19B or 20B) & Math(21, 22, 23A) or AMS(10)",
+    "info": "Studies basic algorithms and their relationships to common abstract data types. Covers the notions of abstract data types and the distinction between an abstract data type and an implementation of that data type."
+  },
+    {
+    "course": "CMPS 130",
+    "id": "cmps_130",
+    "type": "cmps",
+    "img": "130",
+    "title": "Computational Methods",
+    "units": "5",
+    "prereq": "CMPS 101",
+    "info": "Various representations for regular languages, context-free grammars, normal forms, parsing, pushdown automata, pumping lemmas, Turing machines, the Church-Turing thesis."
+  },
+    {
+    "course": "CMPS 112",
+    "id": "cmps_112",
+    "type": "cmps",
+    "img": "112",
+    "title": "Comparative Programming Languages",
+    "units": "5",
+    "prereq": "CMPS(101 or 109)",
+    "info": "Covers several programming languages and compares styles, philosophy, and design principles. Principles underlying declarative, functional, and object-oriented programming styles are studied."
+  },
+  {
+    "course": "CMPS 12A/L",
+    "id": "cmps_12_a",
+    "type": "cmps",
+    "img": "12al",
+    "title": "Intro to Programming(Aceelerated)/ Lab",
+    "info": "Topics include: functions; conditionals and loops; classes; event-driven programming and graphic user interfaces (GUIs); recursion; and arrays.",
+    "units": "7",
+    "prereq": "Math(3 or 11A or 19A) or AMS(3 or 11A)"
+  },
+    {
+    "course": "CMPS 104A",
+    "id": "cmps_104_a",
+    "type": "cmps",
+    "img": "104a",
+    "title": "Compiler Design 1",
+    "info": "Topics include compiler structure, symbol tables, regular expressions and languages, finite automata, lexical analysis, context-free languages, LL(1), recursive descent, LALR(1), and LR(1) parsing",
+    "units": "5",
+    "prereq": "CMPS(101) or CMPE(12/L)"
+  },
+  {
+    "course": "CMPS 12B/M",
+    "id": "cmps_12_b",
+    "type": "cmps",
+    "img": "12bm",
+    "title": "Intro to Data Structures",
+    "info": "Teaches students to implement common data structures and the algorithms associated with each data structure, through progressively difficult exercises.",
+    "units": "7",
+    "prereq": "CMPS(11 or 12A) or CMPE(13)"
+  },
+    {
+    "course": "CMPS 111",
+    "id": "cmps_111",
+    "type": "cmps",
+    "img": "111",
+    "title": "Intro to Operating Systems",
+    "info": "Process synchronization, deadlocks, memory management, resource allocation, scheduling, storage systems, and study of several operating systems.",
+    "units": "5",
+    "prereq": "CMPS(101), CMPE(110 or 112)"
+  },
+    {
+    "course": "CMPS 102",
+    "id": "cmps_102",
+    "type": "cmps",
+    "img": "102",
+    "title": "Intro. to Analysis of Algorithms",
+    "info": "Methods for the systematic construction and mathematical analysis of algorithms. Order notation, the RAM model of computation, lower bounds, and recurrence relations are covered.",
+    "units": "5",
+    "prereq": "CMPS(101)"
+  },
+  {
+    "course": "CMPE 13/L",
+    "id": "cmpe_13_l",
+    "type": "cmpe",
+    "img": "13l",
+    "title": "Computer Systems and C Programming",
+    "info": "You will learn how to program in C, how to write modular code, and some of the tips and tricks when dealing with an embedded micro.",
+    "units": "7",
+    "prereq": "n/a"
+  },
+  {
+    "course": "CMPS 13H/L",
+    "id": "cmps_13_h",
+    "type": "cmps",
+    "img": "13hl",
+    "title": "Honors Introduction to Programming and Data Structures",
+    "info": "This course presents an honors-level introduction to programming and data structures including the fundamentals of java programming and basic data structures such as linked lists, queues, trees, hashing, and computational complexity.",
+    "units": "7",
+    "prereq": "Instructor's permission"
+  },
+    {
+    "course": "CMPS 5J",
+    "id": "cmps_5_j",
+    "type": "cmps",
+    "img": "5j",
+    "title": "Introduction to Programming in Java",
+    "info": "This course introduces programming in Java for students who have no prior programming experience. Students learn programming and documentation skills, as well as algorithmic problem-solving, and programming methodologies",
+    "units": "5",
+    "prereq": "n/a"
+  },
+    {
+    "course": "CMPS 11",
+    "id": "cmps_11",
+    "type": "cmps",
+    "img": "11",
+    "title": "Intermediate Programming",
+    "info": "Covers basic object-oriented programming, event-driven programming, graphical user interface (GUI) creation, recursion, two-dimensional arrays",
+    "units": "5",
+    "prereq": "5J, Math(3 or 11A or 19A) or AMS(3 or 11A)"
+  },
+     {
+    "course": "CMPS 115",
+    "id": "cmps_115",
+    "type": "cmps",
+    "img": "115",
+    "title": "Intro. Software Engineering",
+    "info": "Emphasizes the characteristics of well-engineered software systems. Topics include requirements analysis and specification, design, programming, verification and validation, maintenance, and project management.",
+    "units": "5",
+    "prereq": "CMPS 101"
+  },
+     {
+    "course": "CMPS 132/W",
+    "id": "cmps_132_w",
+    "type": "cmps",
+    "img": "132w",
+    "title": "Computability and Computational Complexity",
+    "info": "Computational complexity, time and space bounds, NP-completeness with emphasis on reductions between problems from various areas.", 
+    "units": "7",
+    "prereq": "CMPS 130"
+  },
+    {
+    "course": "CMPS 180/W",
+    "id": "cmps_180_w",
+    "type": "cmps",
+    "img": "180w",
+    "title": "Database Systems",
+    "info": "Concepts, approaches, tools, and methodology of database design",
+    "units": "7",
+    "prereq": "CMPS 101"
+  },
+    {
+    "course": "CMPS 185",
+    "id": "cmps_185",
+    "type": "cmps",
+    "img": "185",
+    "title": "Technical Writing",
+    "info": "Writing and communication by computer science professionals to a technical audience",
+    "units": "5",
+    "prereq": "CMPS 101"
+  },
+    {
+    "course": "CMPS 195",
+    "id": "cmps_195",
+    "type": "cmps",
+    "img": "195",
+    "title": "Senior Thesis Research",
+    "info": "senior thesis consists of a self-contained project within the broad scope of computer science, but one that is not available in the regular course offerings",
+    "units": "5",
+    "prereq": "The student first submits a written thesis proposal and obtains approval of a faculty sponsor."
+  },
+    {
+    "course": "CMPS 161/L",
+    "id": "cmps_161_l",
+    "type": "capstone",
+    "img": "161l",
+    "title": "Intro. Data Visualization & Lab",
+    "info": "Concepts and methods for data analysis, information and scientific visualization, and effective communication of technical data",
+    "units": "7",
+    "prereq": "CMPS 160"
+  },
+    {
+    "course": "CMPS 181",
+    "id": "cmps_181",
+    "type": "capstone",
+    "img": "181",
+    "title": "Database System II",
+    "info": "Introduction to the architecture and implementation of database systems. Topics covered include data storage, tree and hash indexes, storage management, query evaluation and optimization, transaction management, concurrency control, recovery, and XML data management.",
+    "units": "5",
+    "prereq": "CMPS 180"
+  },
+    {
+    "course": "CMPS 104B",
+    "id": "cmps_104_b",
+    "type": "capstone",
+    "img": "104b",
+    "title": "Fundamentals of Compiler Design II",
+    "info": "Topics include compiler structure emphasizing the back end, type systems, run-time environments; static, stack and heap storage management, garbage collection; addressing, register allocation, code generation; basic blocks and data-flow analysis; local and global code optimization; interpretation versus compilation.",
+    "units": "5",
+    "prereq": "CMPS 104A"
+  },
+    {
+    "course": "CMPS 117",
+    "id": "cmps_117",
+    "type": "capstone",
+    "img": "117",
+    "title": "Software Design Project II",
+    "info": "Continuation of course 116. Students work in teams to develop, test, document, and deploy a substantial software project. Teams give a formal presentation and demonstration of each project.",
+    "units": "5",
+    "prereq": "CMPS 130"
+  },
+  {
+    "course": "PHYS 5A/L",
+    "id": "phys_5_a",
+    "type": "physics",
+    "img": "5al",
+    "title": "Intro Physics I",
+    "info": "Elementary mechanics. Vectors, Newton's laws, inverse square force laws, work and energy, conservation of momentum and energy, and oscillations.",
+    "units": "7",
+    "prereq": "Math(11A or 19A or 20A)"
+  },
+    {
+    "course": "PHYS 6A/L",
+    "id": "phys_5_a",
+    "type": "physics",
+    "img": "6al",
+    "title": "Kinematics",
+    "info": "Elementary mechanics. Vectors, Newton's laws, inverse square force laws, work and energy, conservation of momentum and energy, and oscillations.",
+    "units": "7",
+    "prereq": "Math(11A or 19A or 20A)"
+  },
+  {
+    "course": "PHYS 5B/M",
+    "id": "phys_5_b",
+    "type": "physics",
+    "img": "5bm",
+    "title": "Intro Physics II",
+    "info": "Geometric optics; statics and dynamics of fluids; introduction to thermodynamics, including temperature, heat, thermal conductivity, and molecular motion; wave motion in matter, including sound waves.",
+    "units": "7",
+    "prereq": "Phys(5A/L or 6A/L), Math(11A,11B or 19A,19B or 20A,20B)"
+  },
+    {
+    "course": "PHYS 6B/M",
+    "id": "phys_5_b",
+    "type": "physics",
+    "img": "6bm",
+    "title": "Intro.Physics II",
+    "info": "Geometric optics; statics and dynamics of fluids; introduction to thermodynamics, including temperature, heat, thermal conductivity, and molecular motion; wave motion in matter, including sound waves.",
+    "units": "7",
+    "prereq": "Phys(5A/L or 6A/L), Math(11A,11B or 19A,19B or 20A,20B)"
+  },
+    {
+    "course": "PHYS 5C/N",
+    "id": "phys_5_c",
+    "type": "physics",
+    "img": "5cn",
+    "title": "Intro. Physics III",
+    "info": "Introduction to electricity and magnetism. Electromagnetic radiation, Maxwell's equations.",
+    "units": "7",
+    "prereq": "Phys(5A/L or 6A/L), Math(11A,11B or 19A,19B or 20A,20B)"
+  },
+    {
+    "course": "PHYS 6C/N",
+    "id": "phys_5_c",
+    "type": "physics",
+    "img": "6cn",
+    "title": "Intro. Physics III",
+    "info": "Introduction to electricity and magnetism. Electromagnetic radiation, Maxwell's equations.",
+    "units": "7",
+    "prereq": "Phys(5A/L or 6A/L), Math(11A,11B or 19A,19B or 20A,20B)"
+  },
+  {
+    "course": "CHEM 1A",
+    "id": "chem_1_a",
+    "type": "chemistry",
+    "img": "1a",
+    "title": "General Chemistry I",
+    "info": "Covers a range of topics including the atomic structure of matter; molecules; chemical reactions; acids and bases; gases; and equilibria in the gas and liquid phase. Students expected to use algebra to solve problems.",
+    "units": "5",
+    "prereq": "Math 3"
+  },
+  {
+    "course": "CHEM 1B/M",
+    "id": "chem_1_b",
+    "type": "chemistry",
+    "img": "1bm",
+    "title": "General Chemistry II",
+    "info": "Coverage includes quantum mechanics; the hydrogen atom; many-electron atoms and chemical periodicity; elementary covalent bonding; transition metals; and chemical kinetics.",
+    "units": "7",
+    "prereq": "n/a"
+  },
+    {
+    "course": "CHEM 1C/N",
+    "id": "chem_1_c",
+    "type": "chemistry",
+    "img": "1cn",
+    "title": "General Chemistry III",
+    "info": "Coverage includes thermodynamics; oxidation-reduction and electrochemistry; liquids and solids; intermolecular forces and solutions, including colligative properties; and nuclear chemistry.",
+    "units": "7",
+    "prereq": "Chem 1A"
+  },
+    
+     {
+    "course": "CMPE 16",
+    "id": "cmpe_16",
+    "type": "cmpe",
+    "img": "16",
+    "title": "Applied Discrete Math",
+    "info": "Topics include sets, functions, relations, graphs, trees, switching algebra, first order predicate calculus, mathematical induction, permutations, combinations, summation, and recurrences. ",
+    "units": "5",
+    "prereq": "Math(11A or 19A or 20A)or AMS( 11B or 15B) or ECON 11B"
+  },
+    {
+    "course": "CMPE 107",
+    "id": "cmpe_107",
+    "type": "cmpe",
+    "img": "107",
+    "title": "Probability And Statistics For Engineers",
+    "info": "Probability, conditional probability, Bayes Theorem, random variables, independence, Poisson processes, Bernnoulli trials, and Markov chains.",
+    "units": "5",
+    "prereq": "Math(16 or 16H), Math(22 or 23A)"
+  },
+    {
+    "course": "CMPE 110",
+    "id": "cmpe_110",
+    "type": "cmpe",
+    "img": "110",
+    "title": "Computer Architecture",
+    "info": " Computer performance evaluation, basic combinatorial and sequential digital components, different instruction set architectures with a focus on the MIPS ISA and RISC paradigm.",
+    "units": "5",
+    "prereq": "CMPE 12/L"
+  },
+    {
+    "course": "CMPE 12/L",
+    "id": "cmpe_12_l",
+    "type": "cmpe",
+    "img": "12l",
+    "title": "Comp. Sys. and Assembly Lang.",
+    "info": " Topics include digital logic, number systems, data structures, compiling/assembly process, basics of system software, and computer architecture.",
+    "units": "7",
+    "prereq": "n/a"
+  },
+  {
+    "course": "AMS 131",
+    "id": "ams_131",
+    "type": "math",
+    "img": "131",
+    "title": "Intro. To Probability Theory",
+    "info": " Combinatorial analysis, axioms of probability and independence, random variables (discrete and continuous), joint probability distributions, properties of expectation, Central Limit Theorem, Law of Large Numbers, Markov chains.",
+    "units": "5",
+    "prereq": "AMS(11B) or ECON(11B) or Math(11B or 19B)"
+  },
+  {
+    "course": "AMS 10",
+    "id": "ams_10",
+    "type": "math",
+    "img": "10",
+    "title": "Mathematical Methods For Engineers I.",
+    "info": " Vectors, bases, and transformations; matrix algebra; solutions of linear systems, inverses and determinants; eigenvalues and eigenvectors; and geometric transformations.",
+    "units": "5",
+    "prereq": "Math 3 or equivalent"
+  },
+     {
+    "course": "MATH 148",
+    "id": "math_148",
+    "type": "math",
+    "img": "148",
+    "title": "Numerical Analysis",
+    "info": "Topics are difference equations, linear algebra, iteration, Bernoulli's method, quotient difference algorithm, the interpolating polynomial, numerical differentiation and integration, numerical solution of differential equations, finite Fourier series",
+    "units": "5",
+    "prereq": "Math(22 or 23A), (21 and 24) or AMS(10, 20), (100) or CMPS(101)"
+  },
+     {
+    "course": "MATH 126",
+    "id": "math_126",
+    "type": "math",
+    "img": "126",
+    "title": "Math Control Theory",
+    "info": "Theory behind control systems",
+    "units": "5",
+    "prereq": "n/a"
+  },
+     {
+    "course": "MATH 21",
+    "id": "math_21",
+    "type": "math",
+    "img": "21",
+    "title": "  Linear Algebra",
+    "prereq": "",
+    "units": "5",
+    "info": ""
+  },
+     {
+    "course": "MATH 115",
+    "id": "math_115",
+    "type": "math",
+    "img": "115",
+    "title": "Graph Theory",
+    "info": "Graph theory, trees, vertex and edge colorings, Hamilton cycles, Eulerian circuits, decompositions into isomorphic subgraphs, extremal problems, cages, Ramsey theory, Cayley's spanning tree formula, planar graphs, Euler's formula, crossing numbers, thickness, splitting numbers, magic graphs, graceful trees, rotations, and genus of graphs.",
+    "units": "5",
+    "prereq": "Math(21) or AMS(10) and  Math(100) or CMPS(101)"
+  },
+     {
+    "course": "MATH 147",
+    "id": "math_147",
+    "type": "math",
+    "img": "147",
+    "title": "Comp. Methods and App.",
+    "info": "Topics include solution of nonlinear equations, linear systems, differential equations, sparse matrix solver, and eigenvalue problems.",
+    "units": "5",
+    "prereq": "AMS(10) 0r Math(21)"
+  },
+    {
+    "course": "MATH 114",
+    "id": "math_114",
+    "type": "math",
+    "img": "114",
+    "title": "Introduction To Financial Mathematics.",
+    "info": "Financial derivatives: contracts and options. Hedging and risk managment. Arbitrage, interest rate, and discounted value. Geometric random walk and Brownian motion as models of risky assets. Ito's formula",
+    "units": "5",
+    "prereq": "AMS(131) or CMPS(107)"
+  },
+    {
+    "course": "MATH 23A",
+    "id": "math_23_a",
+    "type": "math",
+    "img": "23a",
+    "title": "Vector Calculus",
+    "info": "Vectors in n-dimensional Euclidean space. The inner and cross products. The derivative of functions from n-dimensional to m-dimensional Euclidean space is studied as a linear transformation having matrix representation. ",
+    "units": "5",
+    "prereq": "Math(19B or 20B)"
+  },
+    {
+    "course": "MATH 20B",
+    "id": "math_20_b",
+    "type": "math",
+    "img": "20b",
+    "title": "Honors Calculus",
+    "info": "Challenging course designed to approach single-variable calculus from the perspective of modern mathematics. Emphasis is on the evolution and historical development of core concepts underlying calculus and analysis.",
+    "units": "5",
+    "prereq": "Math(20A)"
+  },
+    {
+    "course": "MATH 20A",
+    "id": "math_20_a",
+    "type": "math",
+    "img": "20a",
+    "title": "Honors Calculus",
+    "info": "Challenging course designed to approach single-variable calculus from the perspective of modern mathematics. Emphasis is on the evolution and historical development of core concepts underlying calculus and analysis.",
+    "units": "5",
+    "prereq": "AP Calc. AB score of 4 or 5, MP score >499"
+  },
+    {
+    "course": "MATH 19B",
+    "id": "math_19_b",
+    "type": "math",
+    "img": "19b",
+    "title": "Calculus for Science, Engineering and Mathematics.",
+    "info": "The definite integral and the fundamental theorem of calculus. Areas, volumes. Integration by parts, trigonometric substitution, and partial fractions methods. Improper integrals. Sequences, series, absolute convergence and convergence tests. Power series, Taylor and Maclaurin series. ",
+    "units": "5",
+    "prereq": "Math(19A or 20A) or equivalent"
+  },
+  {
+    "course": "MATH 19A",
+    "id": "math_19_a",
+    "type": "math",
+    "img": "19a",
+    "title": "Calculus for Science, Engineering and Mathematics.",
+    "info": "The limit of a function, calculating limits, continuity, tangents, velocities, and other instantaneous rates of change. Derivatives, the chain rule, implicit differentiation, higher derivatives. Exponential functions, inverse functions, and their derivatives. ",
+    "units": "5",
+    "prereq": "Math 3"
+  }
+]

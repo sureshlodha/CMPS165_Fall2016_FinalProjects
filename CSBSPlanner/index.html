@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="noindex">
+        <title>Build Your Major at UCSC: Computer Science B.S. (CMPS 165 Fall 2016)</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+        <link href="src/css/lib/bootstrap.min.css" rel="stylesheet">
+        <link href="src/css/lib/d3.tip.css" rel="stylesheet">
+        <link href="src/css/main.css" rel="stylesheet">
+        
+        
+
+        <style>
+
+          .lessons ul
+          {
+            margin:0 auto;
+            padding: 0;
+          }
+          .lessons li
+          {
+            margin-left: 8px;
+            margin-right: 8px;
+            margin-top: -5px;
+            display: inline-block;
+            width:120px;
+            height:90px;
+            background-color: #fff;
+            -o-transition: all .2s; /* For Safari 3.1 to 6.0 */
+            -ms-transition: all .2s; /* For Safari 3.1 to 6.0 */
+            -webkit-transition: all .2s; /* For Safari 3.1 to 6.0 */
+            transition: all .2s;
+            color: #e6e7e8;
+
+          }
+
+          li:hover {
+            color: black;
+
+          }
+
+          /* Intro Classes */
+          .lessons
+          {
+            background-color: #e6e7e8;
+            text-align: center;
+            margin: 0 auto; 
+            display: inline-block;
+            margin-right:10px;
+            height:153px;
+          }
+          /* Intro Classes */
+          .lessons h1
+          {
+            padding-bottom:10px
+
+          }
+
+          /* Course Headings like CMPS 11 */
+          .lessons h2
+          {
+            padding-top: 6px;
+            font-size:0.70em;
+
+          }
+          .lessons p
+          {
+            font-size:0.6em;
+            font-weight: 40;
+            margin: 0 auto;
+            max-width:100px;
+            word-wrap: break-word;
+          }
+
+          #scrollable-content {
+            width: 100%;
+            overflow: auto;
+            background-color: black;
+            white-space: nowrap;
+            position: relative;
+            margin:auto;
+            border-style: solid;
+          }
+
+        </style>
+
+    </head>
+
+    <body>
+        <div id="content">
+            <h1>Plan your Future at UCSC and Build Your Major!<br><small>Computer Science Major, B.S.</small></h1>
+
+            <p class="well lead">
+                The class scheduling system is confusing.  We simplify everything by presenting a buffet of classes, and YOU choose the most delicious meal possible from our menu of classes.
+            </p>
+
+
+                  
+
+
+<br>
+
+            <div class="clearfix">
+                <div id="menu"></div>
+
+                <div id="plate">
+                    <button class="btn btn-lg btn-link" id="clear_plate" type="button">Clear Plate</button>
+                </div>
+            </div>
+            
+    <br>
+            <div id="scrollable-content">
+                    <div class="lessons">
+                      <h1>Intro Classes</h1>
+                      <ul>
+                        <a href=""><li id="cmps_12_a">
+                          <h2>CMPS 12A/L</h2>
+                          <p>Intro to Programming <br>(Accelerated)</p>
+                        </li></a>
+                        <a href=""><li id="cmps_5_j">
+                          <h2>CMPS 5J</h2>
+                          <p>Intro to Programming <br> Java <br></p>
+                        </li></a>
+                        <a href=""><li id="cmps_11">
+                          <h2>CMPS 11</h2>
+                          <p>Intermediate <br>Programming</p>
+                        </li></a>
+                        <a href=""><li id="cmpe_13_l">
+                          <h2>CMPE 13/L</h2>
+                          <p>Computer Systems <br>and C Programming</p>
+                        </li></a>
+                        <a href=""><li id="cmps_12_b">
+                          <h2>CMPS 12B/M</h2>
+                          <p>Data Structures<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="cmps_13_h">
+                          <h2>CMPS 13H/L</h2>
+                          <p>Intro to Programming <br>& Data Structures</p>
+                        </li></a>
+                      </ul>
+                    </div> 
+
+                    <div class="lessons">
+                      <h1>Physical Science</h1>
+                      <ul>
+                        <a href=""><li id="phys_5_a" xml:id="phys_6_a">
+                          <h2>PHYS 5A/L or 6A/L</h2>
+                          <p>Intro to Physics <br>1 Mechanics</p>
+                        </li></a>
+                        <a href=""><li id="phys_5_b" xml:id="phys_6_b">
+                          <h2>PHYS 5B/M or 6B/M</h2>
+                          <p>Waves & Optics<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="phys_5_c" xml:id="phys_6_c">
+                          <h2>PHYS 5C/N or 6C/N</h2>
+                          <p>Electricity <br>& Magnetism</p>
+                        </li></a>
+                        <a href=""><li id="chem_1_a">
+                          <h2>CHEM 1A</h2>
+                          <p>General Chemistry<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="chem_1_b">
+                          <h2>CHEM 1B/1M</h2>
+                          <p>General Chemistry<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="chem_1_c">
+                          <h2>CHEM 1C/N</h2>
+                          <p>General Chemistry<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                      </ul>
+                    </div> 
+
+                    <div class="lessons">
+                      <h1>Math</h1>
+                      <ul>
+                        <a href=""><li id="math_19_a">
+                          <h2>MATH 19A or 20A</h2>
+                          <p>Calculus<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="math_19_b">
+                          <h2>MATH 19B or 20B</h2>
+                          <p>Calculus<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="math_23_a">
+                          <h2>MATH 23A</h2>
+                          <p>Multivariable <br>Calculus</p>
+                        </li></a>
+                        <a href=""><li id="ams_10">
+                          <h2>AMS 10</h2>
+                          <p>Engr Math <br>Methods 1</p>
+                        </li></a>
+                        <a href=""><li id="math_21">
+                          <h2>MATH 21</h2>
+                          <p>Linear Algebra<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                      </ul>
+                    </div> 
+
+                    <div class="lessons">
+                      <h1>Computer Engineering</h1>
+                      <ul>
+                        <a href=""><li id="cmpe_16">
+                          <h2>CMPE 16</h2>
+                          <p>Discrete Math<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="cmpe_12_l">
+                          <h2>CMPE 12/L</h2>
+                          <p>Computer Systems <br>& Assembly Language</p>
+                        </li></a>
+                        <a href=""><li id="cmpe_110">
+                          <h2>CMPE 110</h2>
+                          <p>Computer <br>Architecture</p>
+                        </li></a>
+                      </ul>
+                    </div> 
+
+                    <div class="lessons">
+                      <h1>Computer Science</h1>
+                      <ul>
+                        <a href=""><li id="cmps_101">
+                          <h2>CMPS 101</h2>
+                          <p>Abstract Data Types<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="cmps_104_a">
+                          <h2>CMPS 104A</h2>
+                          <p>Compiler Design 1<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="cmps_111">
+                          <h2>CMPS 111</h2>
+                          <p>Operating Systems<br><div style="visibility:hidden; margin-top:-8px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="cmps_102">
+                          <h2>CMPS 102</h2>
+                          <p>Analysis <br>of Algorithms</p>
+                        </li></a>
+                        <a href=""><li id="cmps_112">
+                          <h2>CMPS 112</h2>
+                          <p>Comparative <br>Prog. Languages</p>
+                        </li></a>
+                        <a href=""><li id="cmps_130">
+                          <h2>CMPS 130</h2>
+                          <p>Computational <br>Models</p>
+                        </li></a>
+                      </ul>
+                    </div>
+
+                    <div class="lessons">
+                      <h1>Capstone</h1>
+                      <ul>
+                        <a href=""><li id="cmps_181">
+                          <h2>CMPS 181</h2>
+                          <p>Database System II<br><div style="visibility:hidden; margin-top:-7px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="cmps_117">
+                          <h2>CMPS 117</h2>
+                          <p>Software Design Project II<br><div style="visibility:hidden; margin-top:-7px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="cmps_104_b">
+                          <h2>CMPS 104B</h2>
+                          <p>Fundamentals of Compiler Design II<br><div style="visibility:hidden; margin-top:-7px">filler</div></p>
+                        </li></a>
+                        <a href=""><li id="cmps_161_l">
+                          <h2>CMPS 161/L</h2>
+                          <p>Intro to Data Visualization and Lab<br><div style="visibility:hidden; margin-top:-7px">filler</div></p>
+                        </li></a>
+                      </ul>
+                    </div> 
+              </div>
+
+<br>
+
+
+            <div id="about">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <h2>CMPS 165 Fall 2016<br><small>Data Programming for Visualization</small></h2>
+
+                        <ul id="students">
+                            <li>Lon Blauvelt</li>
+                            <li>Conner Powell</li>
+                            <li>Viktor Yankoff</li>
+                            <li>Suresh Lodha</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xs-8">
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse" data-target="#collapse-files">
+                                    <h4 class="panel-title">Files</h4>
+                                </div>
+
+                                <div class="panel-collapse collapse" id="collapse-files">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">index.html</li>
+
+                                        <li class="list-group-item">src/css/lib/bootstrap.min.css</li>
+                                        <li class="list-group-item">src/css/lib/d3.tip.css</li>
+                                        <li class="list-group-item">src/css/main.css</li>
+
+                                        <li class="list-group-item">src/img/*/*.png</li>
+                                        <li class="list-group-item">src/img/plate.svg</li>
+
+                                        <li class="list-group-item">src/js/lib/bootstrap.min.js</li>
+                                        <li class="list-group-item">src/js/lib/d3.tip.js</li>
+                                        <li class="list-group-item">src/js/lib/d3.v3.min.js</li>
+                                        <li class="list-group-item">src/js/lib/jquery.min.js</li>
+                                        <li class="list-group-item">src/js/main.js</li>
+
+                                        <li class="list-group-item">src/json/classes.json</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse" data-target="#collapse-data-sources">
+                                    <h4 class="panel-title">Data Sources</h4>
+                                </div>
+
+                                <div class="panel-collapse collapse" id="collapse-data-sources">
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><a href="https://ua.soe.ucsc.edu/sites/default/files/CS_BS_16-17.pdf" target="_blank">Computer Science B.S. Degree, 2016-2017 Curriculum Chart</a></li>
+                                        <li class="list-group-item"><a href="https://courses.soe.ucsc.edu/" target="_blank">UCSC Jack Baskin, School of Engineering Courses</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse" data-target="#collapse-code-sources">
+                                    <h4 class="panel-title">Code Sources</h4>
+                                </div>
+
+                                <div class="panel-collapse collapse" id="collapse-code-sources">
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 API Reference</a></li>
+                                        <li class="list-group-item"><a href="http://chimera.labs.oreilly.com/books/1230000000345/index.html" target="_blank">Interactive Data Visualization for the Web</a></li>
+                                        <li class="list-group-item"><a href="https://getbootstrap.com/" target="_blank">Bootstrap: The world&apos;s most popular mobile-first and responsive front-end framework</a></li>
+                                        <li class="list-group-item"><a href="http://labratrevenge.com/d3-tip/" target="_blank">d3.tip: Tooltips for d3.js visualizations</a></li>
+                                        <li class="list-group-item"><a href="https://bl.ocks.org/mbostock/1095795" target="_blank">Modifying a Force Layout</a></li>
+                                        <li class="list-group-item"><a href="http://www.freepik.com/" target="_blank">Icons designed by Freepik</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse" data-target="#collapse-visualization-sources">
+                                    <h4 class="panel-title">Visualization Sources</h4>
+                                </div>
+
+                                <div class="panel-collapse collapse" id="collapse-visualization-sources">
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><a href="https://github.com/ryanbrounley/d3.js_projects/tree/master/foods" target="_blank">How Many Calories are in your Breakfast?</a></li>
+                                        <li class="list-group-item"><a href="http://sureshlodha.github.io/FruitsAndVegetables/" target="_blank">Inside Fruits and Vegetables</a></li>
+                                        <li class="list-group-item"><a href=" http://sureshlodha.github.io/CMPS165Examples/" target="_blank">Previous Students Work</a></li>
+                                        <li class="list-group-item"><a href="http://sureshlodha.github.io/Projects_Spring16/projects/breakfast/index.html" target="_blank">Choose Your Breakfast</a></li>
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="src/js/lib/d3.v3.min.js"></script>
+        <script src="src/js/lib/d3.tip.js"></script>
+        <script src="src/js/lib/jquery.min.js"></script>
+        <script src="src/js/lib/bootstrap.min.js"></script>
+        <script src="src/js/main.js"></script>
+    </body>
+</html>

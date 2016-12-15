@@ -1,0 +1,33 @@
+Format fire name (upper-to-lower case): 
+http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
+
+Cause codes:
+http://frap.fire.ca.gov/projects/fire_data/fire_perimeters_data_description
+
+Github Repo:
+https://github.com/neuroslice/California-Wildfires
+
+GitHub Page:
+https://neuroslice.github.io/California-Wildfires/
+
+Slider thing (added to source files):
+http://sujeetsr.github.io/d3.slider/
+https://github.com/sujeetsr/d3.slider
+
+Range Slider
+https://github.com/MasterMaps/d3-slider
+http://thematicmapping.org/playground/d3/d3.slider/
+
+Maybe Example of changing values as the min and max changes along the slider:
+https://plot.ly/javascript/range-slider/
+https://bl.ocks.org/mbostock/6452972
+http://bl.ocks.org/d3noob/10632804
+
+With Json, changing value depending on the slider:
+http://stackoverflow.com/questions/13147805/changing-json-property-value-with-jquery-slider
+
+Filter map with slider in d3.js
+http://bl.ocks.org/mtaptich/d07fe9ac3f33b03963517d6b2c17467d
+
+D3: Map Timeline
+http://bl.ocks.org/cmdoptesc/fc0e318ce7992bed7ca8

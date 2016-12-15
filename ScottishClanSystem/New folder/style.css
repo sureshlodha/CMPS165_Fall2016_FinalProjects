@@ -1,0 +1,228 @@
+body {
+  font: 12px sans-serif;
+}
+
+path {
+  stroke-width: 1px;
+  stroke: white;
+  cursor: pointer;
+}
+
+.key {
+    fill: none;
+    stroke: black;
+    stroke-width: .5px;
+} 
+.key text {
+    fill: black;
+    stroke: none;
+    font-family: Arial;
+    font-size: 10px
+}
+
+.caption {
+    fill: white;
+}
+
+.county0 {
+    fill: #aaa;
+    background-color: #aaa;
+}
+
+.county1 {
+    fill: #a8d5ff;
+    background-color: #a8d5ff;
+}
+
+.county2 {
+    fill: #7eb7ed;
+    background-color: #7eb7ed;
+}
+
+.county3 {
+    fill: #5499db;
+    background-color: #5499db;
+}
+
+.county4 {
+    fill: #2a7bc9;
+    background-color: #2a7bc9;
+}
+
+.county5 {
+    fill: #005eb8;
+    background-color: #005eb8;
+}
+
+.hover_over {
+    fill: rgba(255, 99, 71, .5);
+}
+
+.selected {
+    fill: tomato;
+}
+
+.crest-image {
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+.county-tooltip {
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    display: block;
+    visibility: hidden;
+}
+
+.county-tooltip>p {
+    text-align: center;
+    margin: 0;
+    padding: 5px 0;
+}
+
+.nav>li>i {
+    display: block;
+    position: relative;
+    padding-top: 19px;
+    line-height: 20px;
+    font-size: 20px;
+    padding-bottom: 15px;
+}
+
+.navbar-header>h3 {
+    margin-top: 15px;
+}
+
+#information {
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-style: none solid;
+}
+
+#information:hover {
+    background-color: rgba(0, 0, 0, .1);
+    color: black;
+}
+
+#map-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#clan-container {
+    padding: 0;
+    overflow-y: auto;
+}
+
+#clan-container>ul {
+    padding-left: 30px;
+}
+
+#clan-container>ul>li {
+    padding-bottom: 2px;
+}
+
+.list_item {
+    font-size: 15px;
+    color: dodgerblue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#clan-name {
+    color: white;
+}
+
+#clan-name>h2, #clan-name>h4 {
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: black;
+}
+
+#clan-name>h4 {
+    padding-left: 5px;
+}
+
+#county-name {
+    color: white;
+    height: 75px;
+}
+
+#county-name>h2 {
+    margin-top: 20px;
+}
+
+#clan-content, #county-content {
+    padding: 10px 5px 5px 5px;
+    font-size: 15px;
+}
+
+#county-content>div {
+    padding-bottom: 5px;
+}
+
+#clan-content>li, #county-content>li {
+    padding-left: 10px;
+}
+
+
+#back-button {
+    position:absolute;
+    bottom:0;
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+.tt-menu {
+    width: 196px;
+    margin: -4px 0;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+    margin-left: 5px;
+    font-size: 13px;
+    padding-bottom: 2px;
+}
+
+#clan-rundown {
+    background-color: #2a7bc9;
+    color: white;
+    padding-top: 20px;
+}
+
+#clan-rundown>h1 {
+    margin-top: 10px;
+    font-size: 40px;
+    text-align: center;
+}
+
+#sources-right {
+    color: white; 
+    margin-top: 15px;
+    border-left-width: 2px;
+    border-left-color: white;
+    border-left-style: solid;
+}
+
+#sources-right>a {
+    padding-top:5px;
+    font-size: 50px;
+    color: white;
+}
+
+#sources-left {
+    font-size: 5px;
+    color: white;
+}
+
+#sources-left>div>a {
+    padding-top:5px;
+    color: white;
+}

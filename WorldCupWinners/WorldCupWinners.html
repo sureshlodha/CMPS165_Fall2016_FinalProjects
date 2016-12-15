@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <!-- Meta Tag -->
+    <meta charset="utf-8">
+    <title>D3 Scatterplot</title>
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="WorldCupWinner.css">
+    <!-- D3.js Source -->
+    <script type= "text/javascript" src="https://d3js.org/d3.v3.min.js"></script>       
+  </head>
+  <body>
+    <h1 style = "text-align:center; color:steelblue"><bold>How Effective Are The Top Attackers?</bold></h1>
+    <h2 style = "text-align:center; color:steelblue">A Study on the Best Players' Statistics from 2015-2016</h2>
+    <!-- Your D3.js code for making a Scatterplot -->
+    <script type="text/javascript" src="WorldCupWinner.js"></script>
+    
+    <div class="selector">
+        <select id="xSelect" onchange="xSelector(scatterdataset)">
+            <option hidden>Please Choose Axes Info</option>
+            <option value="1" >x = age, y = goals</option>
+            <option value="2" >x = assists, y = goals</option>
+            <option value="3" >x = shots, y = shots on target</option>
+            <option value="4" >x = shots on target, y = goals</option>
+            <option value="5" >x = games, y = goals</option>
+            <option value="6" >x = games, y = assists</option>
+        </select>
+    </div>
+    
+    <div class="button">
+        <button type="button" onclick="update(mode, scatterdataset, xAxis, yAxis, xAxisData, yAxisData)">Update</button>
+        <button type="button" onclick="hideNames()">Hide Player Names</button>
+    </div>
+    <!-- Description -->
+    <p style="text-align: center">The radii of the circles depend on the players' 2016 yearly earnings</p>
+    <!-- Submission Info -->
+    <div class="attribution">
+        <div class="columns">
+            <div class="column-left">
+                <!--<h4>Created by "Your Name" </h4>-->
+                <p>Created by Emmett Greenberg in collaboration with Suresh K Lodha,<br/> Shobhit Maheshwari and Stephen <br/>Thomas</p>
+            </div>
+            <div class="column-center">
+                <div class="docs">
+                    <!--<h4>Files Submitted:</h4>-->
+                    <ul>
+                        <li>WorldCupWinners.html</li>
+                        <li>WorldCupWinners.css</li>
+                        <li>WorldCupWinners.js</li>
+                        <li>WorldCupWinners.csv</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column-right">
+                <div class="sources">
+                    <!--<h4>Files Submitted:</h4>-->
+                    <ul>
+                        <li><a href="http://espnfc.us/">ESPN</a></li>
+                        <li><a href="http://forbes.com">Forbes</a></li>
+                        <li><a href="http://wikipedia.org">Wikipedia</a></li>
+                        <li><a href="https://google.com">Google</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

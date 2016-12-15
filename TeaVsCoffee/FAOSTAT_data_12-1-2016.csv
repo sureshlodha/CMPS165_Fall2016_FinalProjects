@@ -1,0 +1,88 @@
+Domain Code,Domain,Country Code,Country,Element Code,Element,Item Code,Item,Year Code,Year,Unit,Value,Flag,Flag Description
+CC,Food Supply - Crops Primary Equivalent,2,Afghanistan,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,62.34,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,2,Afghanistan,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,106583.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,4,Algeria,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,129328.82,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,4,Algeria,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,12992.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,7,Angola,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,13117.25,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,7,Angola,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,596.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,16,Bangladesh,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,665.09,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,16,Bangladesh,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,75659.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,23,Belize,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,1880.22,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,23,Belize,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,99.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,21,Brazil,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,660185.11,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,21,Brazil,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,455371.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,233,Burkina Faso,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,4289.61,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,233,Burkina Faso,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,5985.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,39,Chad,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,18.72,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,39,Chad,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,257.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,96,"China, Hong Kong SAR",641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,27921.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,96,"China, Hong Kong SAR",641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,10563.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,128,"China, Macao SAR",641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,2200.32,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,128,"China, Macao SAR",641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,720.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,41,"China, mainland",641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,63013.08,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,41,"China, mainland",641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,1560001.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,214,"China, Taiwan Province of",641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,22087.56,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,214,"China, Taiwan Province of",641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,41006.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,44,Colombia,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,81831.8,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,44,Colombia,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,1733.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,107,Côte d'Ivoire,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,14980.56,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,107,Côte d'Ivoire,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,2156.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,116,Democratic People's Republic of Korea,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,900.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,56,Dominican Republic,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,12665.42,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,56,Dominican Republic,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,73.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,238,Ethiopia,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,66043.94,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,238,Ethiopia,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,7129.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,89,Guatemala,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,47476.4,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,89,Guatemala,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,1658.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,93,Haiti,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,17062.38,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,93,Haiti,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,28.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,100,India,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,2526.84,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,100,India,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,961409.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,101,Indonesia,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,50570.21,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,101,Indonesia,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,94744.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,109,Jamaica,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,7362.09,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,109,Jamaica,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,104.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,114,Kenya,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,3369.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,114,Kenya,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,81257.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,129,Madagascar,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,46901.67,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,129,Madagascar,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,519.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,138,Mexico,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,92689.8,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,138,Mexico,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,1683.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,144,Mozambique,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,2775.75,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,144,Mozambique,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,20745.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,28,Myanmar,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,58008.72,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,28,Myanmar,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,32403.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,149,Nepal,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,932.49,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,149,Nepal,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,9609.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,159,Nigeria,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,6874.83,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,159,Nigeria,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,922.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,221,Oman,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,7623.47,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,221,Oman,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,4603.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,165,Pakistan,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,1046.56,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,165,Pakistan,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,116272.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,166,Panama,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,9585.47,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,166,Panama,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,1637.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,169,Paraguay,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,2665.88,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,169,Paraguay,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,80299.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,170,Peru,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,18690.54,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,170,Peru,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,5311.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,171,Philippines,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,283723.21,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,171,Philippines,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,2430.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,195,Senegal,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,3035.67,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,195,Senegal,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,3795.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,38,Sri Lanka,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,6240.33,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,38,Sri Lanka,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,27623.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,216,Thailand,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,20163.85,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,216,Thailand,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,78084.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,215,United Republic of Tanzania,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,8783.6,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,215,United Republic of Tanzania,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,6824.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,237,Viet Nam,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,623.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,237,Viet Nam,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,72866.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,249,Yemen,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,17082.45,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,249,Yemen,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,13402.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,251,Zambia,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,6819.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,251,Zambia,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,2014.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,181,Zimbabwe,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,1918.22,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,181,Zimbabwe,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,7687.0,S,Standardized data
+CC,Food Supply - Crops Primary Equivalent,351,China,641,Food supply quantity (tonnes),2630,Coffee and products,2013,2013,tonnes,115221.96,A,"Aggregate, may include official, semi-official, estimated or calculated data"
+CC,Food Supply - Crops Primary Equivalent,351,China,641,Food supply quantity (tonnes),2635,Tea (including mate),2013,2013,tonnes,1612290.0,A,"Aggregate, may include official, semi-official, estimated or calculated data"

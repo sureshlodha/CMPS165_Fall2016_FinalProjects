@@ -1,0 +1,89 @@
+/*Background color*/
+html, body {
+    background-color: #ffffff;
+	padding:0px;
+	margin:0px;
+}
+
+
+/* Tooltip definition*/
+div.tooltip {	
+    position: absolute;
+    width: 150px;
+    height: auto;
+    padding: 10px;
+    font-size: 11px;
+	font-family: "Helvetica";
+    font-weight:lighter;
+    background-color: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 0px;
+    -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    pointer-events: none;		
+}
+   
+
+/* Key Style */
+.key {
+    font-size: 12px;
+    font-family: Helvetica;
+    font-weight: lighter;
+}
+
+
+/*Grey function - fill grey when data is undefined*/
+.grey { fill:rgb(209, 209, 209); }
+    
+
+/*Color schemes for TEA and COFFEE respectively*/
+.t0-9 { fill:#f7fcf6; }
+.t1-9 { fill:#e5f5e1; }
+.t2-9 { fill:#c7e9c1; }
+.t3-9 { fill:#a1d99a; }
+.t4-9 { fill:#74c477; }
+.t5-9 { fill:#41ab5e; }
+.t6-9 { fill:#238b46; }
+.t7-9 { fill:#006d2b; }
+.t8-9 { fill:#00441a; }
+
+
+.c0-9 { fill:#fff0dc; }
+.c1-9 { fill:#f8e3c3; }
+.c2-9 { fill:#fdd49e; }
+.c3-9 { fill:#fdbb84; }
+.c4-9 { fill:#fc8d59; }
+.c5-9 { fill:#ef6548; }
+.c6-9 { fill:#d7301f; }
+.c7-9 { fill:#b31111; }
+.c8-9 { fill:#7f1111; }
+
+
+/*Columns for Files/Data/References*/
+.column-left{ float: left; width: 33%; }
+.column-right{ float: right; width: 33%; }
+.column-center{ display: inline-block; width: 33%; }
+
+/*Button Definition*/
+.button {
+	height: 42px;
+	width: 150px;
+	background: #ebebeb;
+	border:2px solid #ffffff;
+
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Helvetica;
+	font-size:12px;
+}
+
+/*Button hover - color change*/
+.button:hover {
+  background: #e0dbdb;
+  text-decoration: none;
+}
+
+

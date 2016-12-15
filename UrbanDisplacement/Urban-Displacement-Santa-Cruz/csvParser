@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+
+# a bash script for parsing csvs to another csv
+# in this format:
+#
+# FIRSTLINE
+# id,column
+#
+# Description:
+#
+# Goes to each directory YEAR and parses one or multiple columns based on which directory it's in.
+# If it has multiple columns to parse it is store in COLUMNS and loops through each column and assigns it to COLUMN.
+# Based on IDCOLUMN and COLUMN, it  gets those two columns taking 
+# out quotes from both columns. The awk command uses ',' as a File separator, and takes 
+# out up until the  9th character of the IDCOLUMN. It adds '06087' to the beginning
+# of IDCOLUMN. It then strips all extraneous '06087,' (due to lines not following
+# the format expected). After of which the FIRSTLINE is inserted at the beginning 
+# of the line. It creates a few temp files that get removed and the final draft
+# is save in FINALDRAFT which could be an array of names.
+#
+
+YEAR=''
+FACTOR=''
+NUMBER_COLUMNS=()
+COLUMNS=()
+FIRSTLINE="id"
+
+function loopThroughYears {
+	for x in *; do
+		echo "YEAR START: "$x
+		YEAR=$x
+		cd $x
+		loopThroughFactors
+		echo "YEAR DONE: "$YEAR
+	done		
+}
+
+function loopThroughFactors {
+	IFS=$'\n'       # make newlines the only separator
+	for x in *; do
+		echo "FACTOR START: "$x
+		FACTOR=$x
+		cd $x
+		rm *.txt
+		generic $FACTOR
+		echo "FACTOR DONE: "$FACTOR
+		FIRSTLINE="id"
+	done
+	cd ..
+
+}
+
+function getColumnNumbers {
+	# loop through the string, if the string is found in a column find out
+	# the column's number and add it to the array, at the end return the array
+	# of column numbers
+	COUNTER=0
+	NUMBER_COLUMNS=()
+	for x in "${COLUMNS[@]}"; do
+		awk -F'|' ' FNR == 2{
+			printf("%s", $0);
+		}' $1 > temp.txt
+		line=$(head -n 1 temp.txt)
+		echo $line | awk '{ gsub (" ", "_", $0); gsub (",", ", ", $0); print}' > temp2.txt
+		awk '{
+			FS=",";
+			for(i=1;i<=NF;i++) {
+				# $i returning whole line
+				if( $i ~ "'$x'" || $i == "'$x'" ) {
+					printf("%d", i+2);
+					break;
+				}
+			}
+
+		}' temp2.txt > temp3.txt
+		awk '{
+			FS=",";
+			for(i=1;i<=NF;i++) {
+				# $i returning whole line
+				if( $i ~ "'$x'" || $i == "'$x'" ) {
+					printf("%s", $i);
+					break;
+				}
+			}
+
+		}' temp2.txt > temp4.txt
+		NUMBER_COLUMNS[$COUNTER]=$(head -n 1 temp3.txt)
+		if [ $COUNTER >= ${#NUMBER_COLUMNS[@]} ]; then
+			FIRSTLINE=$FIRSTLINE$(head -n 1 temp4.txt)
+		else
+			FIRSTLINE=$FIRSTLINE$(head -n 1 temp4.txt)","
+		fi
+		rm temp.txt temp2.txt temp3.txt temp4.txt
+		(( COUNTER++ ))	
+	done
+}
+
+function generic {
+	for x in *; do # only one iteration
+		IDCOLUMN='1'
+		COLUMN=0
+	    FRONT='6087'
+		FACTOR=$1	
+		FINALDRAFT=$1'_'$COLUMN'.txt'
+		# we want from that factor
+		CSVFILE=$x
+		COLUMNS=()
+		if [[ $FACTOR =~ "Housing Unit" ]]; then # Housing Unit
+			COLUMNS=( 'Total' )
+			getColumnNumbers $x
+		elif [[ $FACTOR =~ "Median Income" ]]; then # Median Income 5-Year estimate
+			COLUMNS=( 'Median Household Income' )
+			getColumnNumbers $x
+		elif [[ $FACTOR =~ "Median Year" ]]; then # Median Year householder moved into unit
+			COLUMNS=( 'Total' )
+			getColumnNumbers $x
+		elif [[ $FACTOR =~ "Price Asked" ]]; then # Price asked
+			COLUMNS=( 'to' 'Total' )
+			getColumnNumbers $x
+		elif [[ $FACTOR =~ "Rent Asked" ]]; then # rent Asked
+			COLUMNS=( 'to' 'Total' )
+			getColumnNumbers $x
+		elif [[ $FACTOR =~ "Tenure" ]]; then # Tenure
+			COLUMNS=( 'Owner occupied' 'Renter occupied' 'Total' )
+			getColumnNumbers $x
+		else # factor not read
+			echo "FACTOR DONE: "$FACTOR
+			continue
+		fi
+
+		for i in "${NUMBER_COLUMNS[@]}"; do
+				awk '{FS=",";split($'$IDCOLUMN',a,"\""); id=('0' '$FRONT'substr(a[2],9) "," $'$i'); if ( $7 ~ "Santa Cruz" ) { print id } }' $CSVFILE > tempCsv.txt
+			cat tempCsv.txt
+			awk  '!/^06087,/' tempCsv.txt > $FINALDRAFT
+			sed 's/\"//' $FINALDRAFT > tempCsv.txt
+			printf '%s\n' 0a $FIRSTLINE . x | ex $FINALDRAFT
+			rm tempCsv.txt
+		done
+	done
+	cd ..
+}
+
+cd ./ud_final_data/ud_data_by_year
+loopThroughYears

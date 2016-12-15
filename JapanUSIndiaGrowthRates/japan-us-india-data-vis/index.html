@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <!-- Meta Tag -->
+    <meta charset="utf-8">
+    <!-- CSS Stylesheet -->
+    <style type="text/css">
+        svg {
+    	   font: 10px sans-serif;
+    	}
+    	.caption {
+    	  font-weight: bold;
+    	}
+    	.IND_adm1-border {
+    	  fill: none;
+    	  stroke: #000;
+    	  stroke-opacity: .4;
+    	}
+        .USA_adm1-border {
+    	  fill: none;
+    	  stroke: #000;
+    	  stroke-opacity: .4;
+    	}
+        .JPN_adm1-border {
+    	  fill: none;
+    	  stroke: #000;
+    	  stroke-opacity: .4;
+    	}
+        .pathIND {
+            fill: none;
+            stroke: #000;
+            stroke-linejoin: round;
+        }
+        .pathJPN {
+            fill: none;
+            stroke: #000;
+            stroke-linejoin: round;
+        }
+        .pathUSA {
+            fill: none;
+            stroke: #000;
+            stroke-linejoin: round;
+        }
+        .container {
+            width: 100%;
+            background-color: #f5f5f5;
+        }
+        .legend {
+            font-size: 12px;
+        }
+        .y-axis {
+            font: 9px sans-serif;
+        }
+      
+        .hidden {
+            display: none;
+        }
+        .tooltip {
+            position: absolute;
+            width: auto;
+            height: auto;
+            border: 2px solid #000000;
+            border-radius: 5px;
+            padding: 3px 6px;
+            background-color: antiquewhite;
+            pointer-events: none;
+        }
+    </style>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1 style = "text-align:center; color:black"><bold>Population Growth in India, Japan and the United States (2010-2020) </bold></h1>
+    <p style = "text-align:center; color:black">Visualization on the change in population 
+      of the United States, India, and Japan based on state population 
+        growth from the years 2010-2020. </p>
+    <svg width="1250" height="500"></svg>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="https://d3js.org/d3-array.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript">
+      
+      var svg = d3.select("svg"),
+          width = 1250;
+          height = 500;
+        
+      var projectionIND = d3.geoMercator()
+          .scale(600)
+          .center([120, 26])
+          .translate([width / 2, height / 2]);
+      
+      var projectionUSA = d3.geoMercator()
+          .scale(400)
+          .center([-100, 45])
+          .translate([width / 2, height / 2]);
+    
+      var projectionJPN = d3.geoMercator()
+          .scale(700)
+          .center([105, 39])
+          .translate([width / 2, height / 2]);
+      
+      var pathIND = d3.geoPath(projectionIND);
+      var pathUSA = d3.geoPath(projectionUSA);
+      var pathJPN = d3.geoPath(projectionJPN);
+      
+      var ext_color_domain = [0, 50, 150, 350, 750, 1500]
+      var legend_labels = ["0.97", "0.98", "0.99", "1", "1.1", "1.2", "1.3", "1.4", "1.5+"];
+      
+      var color = d3.scaleThreshold()
+          .domain([ .97,.98,.99, 1, 1.1, 1.2, 1.3, 1.4, 1.5])
+          .range(["A81305","BE2A1F","D44139", "EA5853","6CEB6B","51C352","369B3A","1B7322","014B0A","01410D"]);
+      var g = svg.append("g")
+          .attr("class", "key")
+          .attr("transform", "translate(0,40)");
+      
+      d3.json("India.json", function(error, map) {
+        if (error) throw error;
+        var tracts = topojson.feature(map, map.objects.IND_adm1);
+        
+        var tooltip = d3.select("#context").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+        
+          svg.append("g")
+          .attr("class", "tract")
+          .attr("clip-path", "url(#clip-land)")
+          .selectAll("path")
+          .data(d3.nest()
+          .key(function(d) { return d.properties.name; })
+          .entries(tracts.features.filter(function(d) { return d.properties.percentage; })))
+          .enter().append("path")
+          .on("mouseover", function(d) {
+              tooltip.style("opacity", .9)
+                    .style("background-color", this.style.fill)
+                    .html("<div style='text-align:center'>" +d.key+ "</div><div style=''><span style='text-align:left; margin-right:5px;'>Population 2011:</span><span style='float:right; margin-left:5px;'>" +(d.values["0"].properties[2011] / 1000000).toFixed(2)+ "M" +"</span></div><div style=''><span style='text-align:left; margin-right:5px;'>Population 2020:</span><span style='float:right; margin-left:5px;'>" +(d.values["0"].properties[2020] / 1000000).toFixed(2)+ "M" +"</span></div><div style=''><span style='text-align:left; margin-right:5px;'>Percentage Growth:</span><span style='float:right; margin-left:5px;'>" +d.values["0"].properties.percentage+ "%" +"</span></div>")
+                    .style("left", (d3.event.pageX + 5) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+          })
+          .on("mouseout", function(d) {
+              
+              tooltip.style("opacity", 0);
+          })
+          .style("fill", function(d) { return color(d.values[0].properties.percentage); })
+          .attr("d", function(d) { return pathIND({type: "FeatureCollection", features: d.values}); });
+          svg.append("path")
+              .datum(topojson.mesh(map, map.objects.IND_adm1))
+              .attr("class","IND_adm1-border")
+              .attr("d", pathIND)
+      });
+      d3.json("USA.json", function(error, map) {
+        if (error) throw error;
+        var tracts = topojson.feature(map, map.objects.USA_adm1);
+        
+        var tooltip = d3.select("#context").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+        
+          svg.append("g")
+          .attr("class", "tract")
+          .attr("clip-path", "url(#clip-land)")
+          .selectAll("path")
+          .data(d3.nest()
+          .key(function(d) { return d.properties.name; })
+          .entries(tracts.features.filter(function(d) { return d.properties.percentage; })))
+          .enter().append("path")
+          .on("mouseover", function(d) {
+              
+              tooltip.style("opacity", .9)
+                    .style("background-color", this.style.fill)
+                    .html("<div style='text-align:center'>" +d.key+ "</div><div style=''><span style='text-align:left; margin-right:5px;'>Population 2010:</span><span style='float:right; margin-left:5px;'>" +(d.values["0"].properties[2010] / 1000000).toFixed(2)+ "M" +"</span></div><div style=''><span style='text-align:left; margin-right:5px;'>Population 2020:</span><span style='float:right; margin-left:5px;'>" +(d.values["0"].properties[2020] / 1000000).toFixed(2)+ "M" +"</span></div><div style=''><span style='text-align:left; margin-right:5px;'>Percentage Growth:</span><span style='float:right; margin-left:5px;'>" +d.values["0"].properties.percentage+ "%" + "</span></div>")
+                    .style("left", (d3.event.pageX + 5) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+          })
+          .on("mouseout", function(d) {
+              
+              tooltip.style("opacity", 0);
+          })
+          .style("fill", function(d) { return color(d.values[0].properties.percentage); })
+          .attr("d", function(d) { return pathUSA({type: "FeatureCollection", features: d.values}); });
+        svg.append("path", ".graticule")
+            .datum(topojson.mesh(map, map.objects.USA_adm1 ))
+            .attr("class","USA_adm1-border")
+            .attr("d", pathUSA);
+      });
+      
+      d3.json("Japan.json", function(error, map) {
+        if (error) throw error;
+        var tracts = topojson.feature(map, map.objects.JPN_adm1);
+        
+        var tooltip = d3.select("#context").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+        
+          svg.append("g")
+          .attr("class", "tract")
+          .attr("clip-path", "url(#clip-land)")
+          .selectAll("path")
+          .data(d3.nest()
+          .key(function(d) { return d.properties.name; })
+          .entries(tracts.features.filter(function(d) { return d.properties.percentage; })))
+          .enter().append("path")
+          .on("mouseover", function(d) {
+              
+              tooltip.style("opacity", .9)
+                    .style("background-color", this.style.fill)
+                    .html("<div style='text-align:center'>" +d.key+ "</div><div style=''><span style='text-align:left; margin-right:5px;'>Population 2010:</span><span style='float:right; margin-left:5px;'>" +(d.values["0"].properties[2010] / 1000000).toFixed(2)+ "M"+"</span></div><div style=''><span style='text-align:left; margin-right:5px;'>Population 2020:</span><span style='float:right; margin-left:5px;'>" +(d.values["0"].properties[2020] / 1000000).toFixed(2)+ "M"+"</span></div><div style=''><span style='text-align:left; margin-right:5px;'>Percentage Growth:</span><span style='float:right; margin-left:5px;'>" +d.values["0"].properties.percentage+ "%" +"</span></div>")
+                    .style("left", (d3.event.pageX + 5) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+          })
+          .on("mouseout", function(d) {
+              
+              tooltip.style("opacity", 0);
+          })
+          .style("fill", function(d) { return color(d.values[0].properties.percentage); })
+          .attr("d", function(d) { return pathJPN({type: "FeatureCollection", features: d.values}); });
+        svg.append("path", ".graticule")
+            .datum(topojson.mesh(map, map.objects.JPN_adm1 ))
+            .attr("class","JPN_adm1-border")
+            .attr("d", pathJPN);
+      });
+      
+      var legend = svg.selectAll("g.legend")
+          .data([ .97,.98,.99, 1, 1.1, 1.2, 1.3, 1.4, 1.5])
+          .enter().append("g")
+          .attr("class", "legend");
+      
+      var ls_w = 20, ls_h = 20;
+      
+      legend.append("rect")
+        .attr("x", 20)
+        .attr("y", function(d, i){ return height - (i*ls_h) - 2*ls_h;})
+        .attr("width", ls_w)
+        .attr("height", ls_h)
+        .style("fill", function(d) { return color(d); })
+        .style("opacity", 0.8);
+      
+      legend.append("text")
+        .attr("x", 50)
+        .attr("y", function(d, i){ return height - (i*ls_h) - ls_h - 4;})
+        .text(function(d, i){ return legend_labels[i]; });
+      
+      legend.append("text")
+        .attr("class", "y-axis")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -((height - ls_h - 175)))
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Percentage Change of Growth (2010-2020)");
+      
+    </script>
+    
+    
+    <!-- Submission Info -->
+    <div id="context"></div>
+    <div class="container">
+    <p>Created by Karl Cassel and Amado Rubalcava in collaboration with Suresh K Lodha and Ryan Brounley for CMPS 165.</p>
+      
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Files Submitted:</h4>
+          <ul>
+                <li>index.html</li>
+                <li>Pop_USA.csv</li>
+                <li>Pop_Japan.csv</li>
+                <li>Pop_India.csv</li>
+                <li>USA.json</li>
+                <li>Japan.json</li>
+                <li>India.json</li>
+
+            </ul>
+        </div>
+        <div class="col-md-4">
+          <h4>Data Sources:</h4>
+          <ul>
+                <li><a href="http://www.census.gov/2010census/data/apportionment-pop-text.php">USA</a></li>
+                <li><a href="http://www.stat.go.jp/english/data/nenkan/">Japan</a></li>
+                <li><a href="http://www.census2011.co.in/">India</a></li>
+                
+          </ul>
+       </div>
+        <div class="col-md-4">
+          <h4>Sources:</h4>
+            <ul>
+            <li> <a href="http://learnjsdata.com/read_data.html">Reading multiple pieces of data.</a></li>
+            <li> <a href="http://bl.ocks.org/KoGor/5685876">Legend creation</a></li>
+            <li> <a href="http://stackoverflow.com/questions/31892129/d3-js-rotate-text-to-vertical">Putting text for the legend.</a></li>
+            <li> <a href="http://getbootstrap.com/getting-started/#examples">Bootstrap examples for style.</a></li>
+            <li> <a href="http://bl.ocks.org/phoebebright/3176159">Using d3.nest</a></li>
+            <li> Tristan Iverson </li>
+            
+        </ul>
+        </div>
+      </div>
+
+        
+    </div>
+  </body>
+</html>

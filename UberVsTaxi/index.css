@@ -1,0 +1,133 @@
+#map{
+    text-align: center;
+    width: 1350px;
+    height: 650px;
+}
+ul{
+    text-align: left;
+    position: relative;
+    clear: both;
+    width: 1450px;
+    height: 950px;
+    left: px;
+    top: 650px;
+    padding-left:50px;
+    padding-right:50px;
+    background-color:lightgray;   
+    margin-bottom: 10px;
+    margin-left:0px;
+}
+
+p{
+    text-align: center;
+    font-size: 18px;
+    font-family: "Times New Roman";
+    color: black;
+    background-color: bisque
+}
+h1{
+    font-size: 36px;
+    text-align: center;
+    font-family: "Lucida Console";
+    color: firebrick;
+    background-color: bisque;
+}
+h2{
+    text-align:center;
+    position: relative;
+    clear: both;
+    width: 1500px;
+    height: 120px;
+    top: 650px;
+    padding: 0;
+    padding-left:50px;
+    padding-right:0px;
+    background-color: grey;   
+    margin-bottom: 10px;
+    margin-left:0px;
+    font-family: "Times New Roman";
+    color: blue;
+}
+
+.circle{
+    "stroke", "black";
+    "opacity", .6;
+    "fill", "blue"; 
+}
+
+.feature1{
+    "stroke", "black"; 
+    "opacity", .6;
+    "fill", "purple";
+}
+
+.container{
+    float:left;
+    position:absolute;
+}
+
+.container1{
+    float:right;
+    position:absolute;
+}
+
+.container2{
+    float:left;
+    position: absolute;
+}
+
+.tooltip {
+				position: absolute;
+				width: 150px;
+				height: auto;
+				padding: 0px;
+				background-color: yellow;
+				-webkit-border-radius: 10px;
+				-moz-border-radius: 10px;
+				border-radius: 10px;
+				-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				pointer-events: none;
+    
+			}
+			
+#tooltip.hidden {
+    display: none;
+}
+			
+#tooltip p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+/**  Styling for our Differene Chart **/
+
+text.shadow {
+  stroke: white;
+  stroke-width: 2px;
+  opacity: 0.9;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path { display: none; }
+
+.area.above { fill: rgb(255,0,255); }
+.area.below { fill: rgb(255,0,0); }
+
+.area.below1 { fill: rgb(199,21,133); }
+.area.above1 { fill: rgb(0,255,0); }
+
+.line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}

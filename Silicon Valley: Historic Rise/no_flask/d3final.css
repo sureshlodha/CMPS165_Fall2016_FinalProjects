@@ -1,0 +1,33 @@
+.attr {
+	width: 1150px;
+	height: 675px;
+	background-color: lightgray;
+}
+
+.container {
+	display: inline-block;
+	height: 400px;
+	vertical-align: top;
+	margin: 0px 7px 0px 7px
+}
+
+.city-border {
+  	fill: none;
+  	stroke: #000;
+  	stroke-opacity: .175;
+}
+
+.hidden {
+        display: none;
+    }
+    
+div.tooltip {
+		width: 150px;
+		height: 100px;
+        color: #222;
+        background-color: #fff;
+        text-shadow: #f5f5f5 0 1px 0;
+        border-radius: 2px;
+        opacity: 0.9;
+        position: absolute;
+}

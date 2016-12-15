@@ -1,0 +1,70 @@
+.bubble{
+    background-color: white;
+
+    margin: 0.1em;
+    padding: 1em;
+
+    border-width: 2px;
+    border-radius: 5px;
+}
+
+.left{
+    text-align: left;
+}
+.center{
+    text-align: center;
+}
+.right{
+    text-align: right;
+}
+
+body{
+    background-color: rgb(51, 204, 255);
+    padding: 1em;
+}
+
+hr{
+    margin: 0.4em 0 0.4em 0;
+}
+
+ul{
+    margin: 0.2em;
+}
+ul li{
+    list-style-position: inside;
+    text-indent: -1em;
+    padding-left: 1em;
+}
+
+p{
+    text-align: left;
+}
+
+#canvas{
+    display: flex;
+}
+
+.toolTip {
+  position: absolute;
+  display: none;
+  min-width: 80px;
+  height: auto;
+  background: none repeat scroll 0 0 #ffffff;
+  border: 1px solid #6F257F;
+  padding: 14px;
+  text-align: center;
+}
+
+.nodeLabel{
+    pointer-events: none;
+    text-anchor: middle;
+    fill: white;
+    font-family: Helvetica;
+    font-size: 12;
+}
+
+circle.node{
+    transition: fill 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: stroke-width 600ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: r 1s ease;
+}

@@ -1,0 +1,51 @@
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+    
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 4px;
+}
+
+        
+    
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+}
+.grid path {
+      stroke-width: 0;
+}    
+     
+
+p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height:1.7;
+}
+
+
+div.page-header{
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-size: 4.0rem;
+    line-height: 1.12;
+    letter-spacing: -0.9px;
+    margin-bottom: .5em;
+    margin-top: 0;
+    color: #222;
+    text-align: center;
+}

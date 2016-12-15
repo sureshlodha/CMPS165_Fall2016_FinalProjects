@@ -1,0 +1,121 @@
+svg {
+  font: 10px sans-serif;
+}
+
+.neighborhood {
+    stroke: #777;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+}
+
+.neighborhood:hover{
+  fill: black;
+}
+
+.neighborhood.active{
+  fill: black;
+}
+
+#neighborhood-label{
+   font: 35px sans-serif;
+   fill: rgba(128, 128, 128, 0.86);
+}
+
+.bars{
+  
+}
+
+.bars:hover{
+  fill: brown;
+}
+
+area{
+  fill:black;
+}
+
+.key path {
+  display: none;
+}
+
+.caption {
+  font-weight: bold;
+}
+
+hideText{
+    visibility: hidden;
+}
+
+div#help{
+  position: relative;
+  left: 50px;
+  bottom: -3px;
+  font-size: 10px;
+  
+
+}
+
+em{
+  font-style: normal;
+  float: right;
+}
+
+#container{
+  background: rgb(241, 241, 241);
+  border-top: 1px solid rgb(222, 222, 222);
+  margin-top: -2px;
+  padding-top: 0px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+  margin-left: 85px;
+  margin-right: 85px;
+  margin-bottom: 25px;
+}
+
+#column-left{
+  float: left;
+  width: 333px;
+}
+
+#column-center{
+  float: left;
+  width: 333px;
+}
+
+#column-right{
+  float: left;
+  width: 333px;
+}
+
+#legend{
+  font: Times;
+}
+
+
+.tooltip {
+    position: absolute;				
+    width: auto;
+    height: auto;
+    font: 14px sans-serif;
+    background: white;		
+    border-radius: 5px;			
+    pointer-events: none;
+    
+}
+
+.axis path,
+  .axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text{
+    font: Times;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+
+
+

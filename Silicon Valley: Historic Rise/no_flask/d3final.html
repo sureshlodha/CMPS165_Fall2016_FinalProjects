@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <title>Final Project</title>    
+	  <link rel="stylesheet" href="d3final.css">
+	  <script type= "text/javascript" src="https://d3js.org/d3.v4.js"></script>
+	  <script src="https://d3js.org/topojson.v1.min.js"></script>
+	  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  </head>
+  <body>
+	  <h1 style = "font-size: 300%; margin-bottom: 20px;" align="left">The Growth of Silicon Valley</h1>
+	  
+	  <div style = "width: 1000px; margin-bottom: 3px">
+		  <p align="left" style = "margin: 5px 0px 8px 0px; display: inline;">Visualized through historic median house sales prices by month from 1996-2016</p>
+	  
+	  </div>
+	  
+
+	  <script type= "text/javascript" src="d3final.js"></script>
+	  
+	  <p style="margin-bottom: 5px;">Data taken from Zillow's historic housing research data - <a href="http://www.zillow.com/research/data/">Link</a></p>
+	  
+	  
+	  <div class="attr">
+		
+		
+		<div style="margin-top: 10px;">
+			<h3>Created By:</h3>
+			<p>Stephen Thomas in collaberaton with Suresh K. Lodha and Ryan Brounley</p>
+	  
+	  		<h3>Created For:</h3>
+	  		<p>CMPS165, Data Programming for Visualization, Fall 2016</p>
+		</div>
+		  
+	  	<div class="container"  style="width: 275px; margin-right: 0px">  
+			<div class="data">
+				<p>Files Submitted (Main Applicaton):</p>
+			</div>
+			<div class ="data">
+				<ol>
+					<li>d3final.html</li>
+					<li>d3final.css</li>
+					<li>d3final.js</li>
+					<li>valleyZipFinal.json</li>
+				</ol>
+			</div>
+			
+			<div class="data">
+				<p>Files Submitted (Data Proccessing):</p>
+			</div>
+			<div class ="data">
+				<ol>
+					<li>topojsonBash</li>
+					<li>transposeCSV.py</li>
+					<li>createQuarter.py</li>
+					<li>houseObjects.json</li>
+					<li>zipData.csv</li>
+				</ol>
+			</div>
+			
+			<div class="data">
+				<p>Files Submitted (.shp files):</p>
+			</div>
+			<div class ="data">
+				<ol>
+					<li>caCounty.shp</li>
+					<li>SF.shp</li>
+					<li>SanJose.shp</li>
+					<li>SanJose.shp</li>
+					<li>Freemont.shp</li>
+					<li>Hayward.shp</li>
+					<li>Oakland.shp</li>
+					<li>PaloAlto.shp</li>
+					<li>SanMateo.shp</li>
+					<li>ZillowNeighborhoodsCA.shp</li>
+				</ol>
+			</div>
+		</div>
+		  
+		<div class="container" style="margin-right: 50px; margin-left: 0px">  
+			<p>Data Sources:</p>
+			<dl>
+  			<dt>1. Zillow Historic Housing Research Data: <a href="http://www.zillow.com/research/data/">Link</a></dt>
+  				<dd>-Under section "Other Metrics"</dd>
+				<dd>-Used Median List and Sales Price Data</dd>
+				
+				<dt>2. US County shapefiles: <a href="https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html">Link</a>
+			</dt>
+				<dd>-Created California county shapefile using QGIS</dd>
+				
+				<dt>3. Zillow neighborhood boundries: <a href="http://www.zillow.com/howto/api/neighborhood-boundaries.htm">Link</a>
+			</dt>
+				<dd>-Used to create neighborhood files<dd>
+				
+				<dt>4. US Census zip code shapefile: <a href="https://www.census.gov/geo/maps-data/data/cbf/cbf_zcta.html">Link</a>
+			</dt>
+				<dd>-Used 10m resolution download link<dd>
+				<dd>-Created outlines of Bay Area using QGIS</dd>
+				
+				<dt>5. CSV to JSON converter: <a href="http://www.convertcsv.com/csv-to-json.html">Link</a>
+			</dt>
+				<dd>-Used to clean data in python easier<dd>
+				<dd>-Used for both CSV->Json and Json->CSV	</dd>
+				
+				
+			</dl>
+			
+			
+		  	
+		  </div>
+		  
+		<div class="container">  
+			<p>Code Sources:</p>
+			<dl>
+			
+  			<dt>1. Mike Bostock's California Population Density: <a href="https://bl.ocks.org/mbostock/5562380">Link</a></dt>
+  				<dd>-Main source for creating topographic maps and binding data"</dd>
+				<dd>-My Legend is taken directly from this visualzation</dd>
+			
+			<dt>2. Mike Bostock's Let's Make a Map (UK): <a href="https://bost.ocks.org/mike/map/">Link</a></dt>
+  				<dd>-Main source for fundamentals of projections</dd>
+				
+			<dt>3. Human Trafficking: Sex Trade and Forced Labor: <a href="http://bradcardello.github.io/human-trafficking-visualization/">Link</a></dt>
+  				<dd>-Used as guideline for attribution block</dd>
+				
+			<dt>4. How to color oceans blue (stackoverflow): <a href="http://stackoverflow.com/questions/26663982/how-can-i-color-ocean-with-topojson-in-d3-when-i-have-coordinate-info-for-land">Link</a></dt>
+				
+			<dt>5. How to tranpose a CSV file in python (3 stackoverflow links)</dt>
+				<dd>-<a href="http://stackoverflow.com/questions/23214814/python-csv-transpose-data-in-one-column-to-rows">Link 1</a>  -<a href="http://stackoverflow.com/questions/10507104/row-to-column-transposition-in-python">Link 2</a>  -<a href="http://stackoverflow.com/questions/4869189/how-to-pivot-data-in-a-csv-file">Link 3</a></dd>
+			
+			<dt>6. topojson 1.x command line reference: <a href="https://github.com/topojson/topojson-1.x-api-reference/blob/master/Command-Line-Reference.md">Link</a></dt>
+			<dt>7. Palleton Colorscheme picker: <a href="http://paletton.com/#uid=1000u0kllllaFw0g0qFqFg0w0aF">Link</a>
+			</dt>
+				<dd>-Used for monochromatic color scale design<dd>
+				
+				<dt>7. Color brewer geomap color scheme picker: <a href="http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3">Link</a>
+			</dt>
+				<dd>-Also used for monochromatic color scale design<dd>
+				
+			</dl>
+	
+		  </div>
+		  
+	  </div>
+  </body>
+</html>

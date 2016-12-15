@@ -1,0 +1,57 @@
+text {
+font: 10px sans-serif;
+}
+
+.dot {
+stroke: #000;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.label {
+    fill: #777;
+}
+
+.year.label {
+    font: 500 196px "Helvetica Neue";
+    fill: #ddd;
+}
+
+.year.label.active {
+    fill: #aaa;
+}
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+    cursor: ew-resize;
+}
+
+#allTen, #biggestOnly, #smallestOnly{
+    display: inline-block;
+}
+
+h2 {
+	font-family: 'Sans-Serif';
+	font-size: 50px;
+	margin: 0 0 0 30px;
+	color: #333;
+}
+
+.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    width: auto;					
+    height: auto;					
+    padding: 6px;				
+    font: 12px sans-serif;		
+    background: lightgrey;	
+    border: 0px;		
+    border-radius: 10px;
+    opacity: 0.4;
+    pointer-events: none;			
+}

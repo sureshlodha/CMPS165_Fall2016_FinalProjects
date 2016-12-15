@@ -1,0 +1,208 @@
+header{
+    background-color: black;
+}
+
+#project_name{
+    background-color: black;
+    text-align: center;
+    color: white;
+    font-family: 'TradeGothic', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    
+}
+
+body{
+    background-color: white;
+    text-align: center;
+    font-family: 'TradeGothic', sans-serif;
+    font-weight: bold;
+    margin: 0;
+}
+
+#Stan-Lee{
+    position:relative;
+    width: 250px;
+    height: auto;
+}
+
+div.tooltip{
+    position:fixed;
+    width: 150px;
+    height: auto;
+    padding: 10px;
+    background-color: lightgrey;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+    -webkit-box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+    -moz-box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+    pointer-events: none;
+}
+
+#tooltip.hidden{
+    display:none;
+}
+
+#tooltip p{
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+
+tooltip2.tooltip2{
+     position:fixed;
+    width: 450px;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+}
+
+#tooltip2 p{
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+#tooltip2.hidden{
+    display:none;
+}
+
+tooltip3.tooltip3{
+     position:fixed;
+    width: 300px;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+}
+
+#tooltip3 p{
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+#tooltip3.hidden{
+    display:none;
+}
+
+
+tooltip4.tooltip4{
+    position:fixed;
+    width: 450px;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+}
+
+#tooltip4 p{
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+#tooltip4.hidden{
+    display:none;
+}
+
+#eventDescription{
+    font-size: 12px;
+}
+
+
+svg {
+  font: 10px sans-serif;
+  shape-rendering: crispEdges;  
+}
+rect {
+  fill: #e60000;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: white;
+}
+
+.navBar {
+  fill: #9C9393;
+}
+
+#logo{
+    text-align: center;
+    margin: 0;
+    text-decoration: none;
+}
+
+#timeline{
+    background-color: white;
+}
+footer{
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-family: 'TradeGothic', sans-serif;
+    font-weight: bold;
+}
+
+h1{
+    margin: 0;
+    text-align: center;
+    font-family: 'TradeGothic', sans-serif;
+    font-weight: bold;
+    padding: 25px;
+}
+
+#contact_info{
+    text-align: center;
+    color: black;
+    font-family: 'TradeGothic', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#contact_names{
+    text-align: center;
+    color: black;
+    font-family: 'TradeGothic', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navigator .data {
+    fill: lightgrey;
+    stroke-width: 0px;
+}
+
+.navigator .line {
+    fill: none;
+    stroke: darkgrey;
+    stroke-width: 1px;
+}
+
+
+.navigator .viewport {
+    stroke: grey;
+    fill: #e60000;
+    fill-opacity: 0.6;
+}
+
+.chart .overlay {
+    stroke-width: 0px;
+    fill-opacity: 0;
+}
+
+#storyline{
+    background-color: white;
+    top: 175px;
+    max-width: 850px;
+    margin: auto;
+    height: auto;
+    padding: 10px;
+    
+}

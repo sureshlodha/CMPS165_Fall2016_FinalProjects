@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+svg {
+  font: 10px sans-serif;
+}
+
+.caption {
+  font-weight: bold;
+}
+
+.key path {
+  display: none;
+}
+
+.key line {
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.county-border {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .3;
+}
+
+/*div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    width: 150px;					
+    height: 50px;					
+    padding: 2px;				
+    font: 12px sans-serif;		
+    background: black;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;	
+    color: white;*/
+}
+
+</style>
+<head>
+    <h1 style="text-align:center; color:#081d58"><bold>Australia Topography </bold></h1>
+    <h2 style="text-align:center; color:#081d58"><text>StoryLine: Illustrates Australias varied elevation levels using basic contour lines </text></h2>
+</head>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var width = 1300,
+    height = 790;
+    scale0 = (width - 1) / 2 / Math.PI;
+
+var formatNumber = d3.format(",d");
+    
+var projection = d3.geo.mercator()
+    .center([132.5, -26.49])/*
+    .rotate([7, 7])
+    .parallels([-4, 10])*/
+    .scale(1000)
+    .translate([width / 2, height / 2]);
+
+  
+var div = d3.select("body").append("div")	
+        .attr("class", "tooltip")				
+        .style("opacity", 0)    
+    
+    
+var path = d3.geo.path()
+    .projection(projection);
+    
+var color = d3.scale.ordinal()
+    .domain([0, 200, 500, 1000, 1500, 2000, 3000])
+    .range(['#ffffd4','#fee391','#fec44f','#fe9929','#ec7014','#cc4c02','#8c2d04']);    
+    
+    
+// A position encoding for the key only.
+var x = d3.scale.linear()
+    .domain([0, 3000])
+    .range([0, 480]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickSize(13)
+    .tickValues(color.domain())
+    .tickFormat(function(d) { return d >= 100 ? formatNumber(d) : null; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g");
+    
+
+var g = svg.append("g")
+    .attr("class", "key")
+    .attr("transform", "translate(440,40)");
+    
+   
+g.selectAll("rect")
+    .data(color.range().map(function(d, i) {
+      return {
+        x0: i ? x(color.domain()[i - 1]) : x.range()[0],
+        x1: i < color.domain().length ? x(color.domain()[i]) : x.range()[1],
+        z: d
+      };
+    }))
+  .enter().append("rect")
+    .attr("height", 8)
+    .attr("x", function(d) { return d.x0; })
+    .attr("width", function(d) { return d.x1 - d.x0; })
+    .style("fill", function(d) { return d.z; });
+    
+g.call(xAxis).append("text")
+    .attr("class", "caption")
+    .attr("y", -6)
+    .text("Elevation in meters");
+
+g.call(xAxis).append("text")
+    .attr("class", "colorButton")
+    .attr("y", 50)
+    //.text("Different Color")
+    .on("click", function()
+        {color.range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
+        d3.selectAll("path").data.style("fill",function(d){return d.key})
+                           });
+
+d3.json("simple-aus.json", function(error, simple) {
+  if (error) throw error;
+
+  var tracts = topojson.feature(simple, simple.objects.aus25cgd_r);
+
+ // Clip tracts to land.
+  svg.append("defs").append("clipPath")
+      .attr("id", "clip-land")
+    .append("path")
+      .datum(topojson.feature(simple, simple.objects.aus25cgd_r))
+      .attr("d", path);
+
+  // Group tracts by color for faster rendering.
+  svg.append("g")
+      .attr("class", "tract")
+      .attr("clip-path", "url(#clip-land)")
+    .selectAll("path")
+      .data(d3.nest()
+        .key(function(d) { return color(d.properties.elevation); })
+        .entries(tracts.features.filter(function(d) { return d.properties.elevation; })))
+  
+  
+    .enter().append("path")
+      .style("fill", function(d) { return d.key; })
+      .attr("d", function(d) { return path({type: "FeatureCollection", features: d.values}); })
+  
+   
+  /*.on("mouseover", function(d) {		
+            div.transition()		
+                .duration(100)		
+                .style("opacity", .9);		
+            div.html(tooltip(d.n, data[d.elevation])) + "<br>" + "Elevation: " + d.scale	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px")
+            })					
+     .on("mouseout", function(d) {		
+            div.transition()		
+                .duration(500)		
+                .style("opacity", 0)	
+        });*/
+ 
+        
+  // Draw county borders.
+  svg.append("path")
+      .datum(topojson.mesh(simple, simple.objects.aus25cgd_r, function(a, b) { return a !== b; }))
+      .attr("class", "county-border")
+      .attr("d", path);
+    
+});
+
+d3.select(self.frameElement).style("height", height + "px");
+
+
+</script>
+    
+<h3>Created by:  <br/>
+Richa Goyal and Miriam Ali in collaboration with Suresh K Lodha and Ryan Brounley <br/>
+<br/>
+Created For: <br/>
+CMPS165, Data programming for Visualization, Fall 2016 <br/>
+<br/>   
+Files:<br/>
+index.html<br/>
+Simple-aus.json<br/>   
+README<br/>
+<br/>
+Data Source:<br/>  git
+<a href="https://data.gov.au/dataset?q=topology&tags=geology&res_format=SHP&sort=extras_harvest_portal+asc%2C+score+desc%2C+metadata_modified+desc&page=1">data.gov.au</a> <br/>
+<br/>
+Code Source:<br/>
+<a href="https://bost.ocks.org/mike/map/">https://bost.ocks.org/mike/map/</a>  <br/>
+<a href="https://bl.ocks.org/mbostock/5562380">https://bl.ocks.org/mbostock/5562380/</a> <br/>
+<a
+href="http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html">http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html</a>
+</h3>     
+    
+
+    
+    
+    
+    

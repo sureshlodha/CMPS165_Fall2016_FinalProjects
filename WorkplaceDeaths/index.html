@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html> 
+    
+  <head>
+    <!-- Meta Tag -->
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" href="stackedchart.css">  
+    <!-- D3.js Source -->
+    <script type= "text/javascript" src="https://d3js.org/d3.v3.min.js"></script> 
+  </head>
+    
+  <body>
+    <hgroup style="text-align:center;">
+        <h1><bold>Death in the Workplace</bold></h1>
+        
+        <h5>Data provided by the Occupational Safety and Health Administration shows that over 1,000 deaths occur<br> in OSHA-approved workplaces each year, with falling and getting crushed being the top two offenders.</h5>
+    </hgroup>
+    
+
+    <script type="text/javascript" src="stackedchart.js"></script> 
+      
+    <svg width="205" height="200" class="legend">
+      <text x="45" y="25" font-family="sans-serif" font-size="20px" fill="black">Cause of Death</text>
+      <text x="45" y="49" font-family="sans-serif" font-size="15px" fill="black">Falling</text>
+      <ellipse cx="25" cy="45" rx="8" ry = "8" fill= "#8c510a"stroke="black"/>
+      <text x="45" y="74" font-family="sans-serif" font-size="15px" fill="black">Crushed/Struck</text>
+      <ellipse cx="25" cy="70" rx="8" ry = "8" fill= "#d8b365"stroke="black"/>
+      <text x="45" y="99" font-family="sans-serif" font-size="15px" fill="black">Asphysciated/Drowned</text>
+      <ellipse cx="25" cy="95" rx="8" ry = "8" fill= "#f6e8c3"stroke="black"/>
+      <text x="45" y="124" font-family="sans-serif" font-size="15px" fill="black">Electrocuted</text>
+      <ellipse cx="25" cy="120" rx="8" ry = "8" fill= "#c7eae5"stroke="black"/>
+      <text x="45" y="149" font-family="sans-serif" font-size="15px" fill="black">Vehicle Related</text>
+      <ellipse cx="25" cy="145" rx="8" ry = "8" fill= "#5ab4ac"stroke="black"/>
+      <text x="45" y="174" font-family="sans-serif" font-size="15px" fill="black">Other</text>
+      <ellipse cx="25" cy="170" rx="8" ry = "8" fill= "#01665e"stroke="black"/>
+    </svg>
+      
+      <span class="industry_background">
+        <h3 class="scooch">INDUSTRY</h3>
+        <button style="width: 150px;" class="industry_buttons" id="construction" onclick="highlightCON()">CONSTRUCTION</button>
+        <button style="width: 150px;" class="industry_buttons" id="maintenance" onclick="highlightMAI()">MAINTENANCE</button>
+        <button style="width: 150px;" class="industry_buttons" id="manufacturing" onclick="highlightMAN()">MANUFACTURING</button>
+        <button style="width: 150px;" class="industry_buttons" id="service" onclick="highlightSER()">SERVICE</button>
+        <button style="width: 150px;" class="industry_buttons" id="food_production" onclick="highlightFOO()">FOOD PRODUCTION</button>
+        <button style="width: 150px;" class="industry_buttons" id="other" onclick="highlightOTH()">OTHER</button>
+    </span>
+      
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      
+      <span class="footer_background">
+      <div style='float:left; width:25%'>
+      <strong>Created by:</strong> Daniel Rooney and Michael Crane
+      in collaboration with Suresh K Lodha
+      </div>
+      <div style='float:right; width:25%'>
+      <strong>Files submitted:</strong> index.html, stackedchart.js, stackedchart.css, data.csv
+      </div>
+      <div style='float:right; width:25%'>
+      <strong>Other sources:</strong> <a href="http://bl.ocks.org/d3noob/a22c42db65eb00d4e369">d3Noob</a>, <a href="https://d3js.org/">D3.js</a>, <a href="http://bl.ocks.org/mbostock/1849162">MBostock</a>
+      </div>
+      <div style='float:right; width:25%'>
+      <strong>Data sources:</strong> <a href="https://www.osha.gov/">OSHA</a>
+      </div>
+      </span>
+      
+  </body>
+    
+</html>

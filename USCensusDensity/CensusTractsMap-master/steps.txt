@@ -1,0 +1,31 @@
+get census data:
+	visit http://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml
+	click 'Geographies' to select the necessary geographies
+	click the 'Name' tab and search for "All Census Tracts"
+	click 'Check All' and then 'Add', this will add the first 24 states and DC (requesting all tracts for 50 states at once exceeds the built in limits)
+	click 'Close' in the top right corner of the Geographies selection window
+	find the relavent data using the filtering options, and click the link in the results
+	click 'Download' and then 'OK' to request the download
+	when the download is ready, click 'Download' to begin
+	click 'Advanced Search' at the top of the pagee to return to the search results
+	click the 'x' next to '25 selected' under 'Census Tract' to clear the geography selection
+	click 'Geographies' again, once more heading to the 'Name' tab
+	search for "All Census Tracts" again, but this time move to page 2
+	click 'Check All' once more to select the next 25 states, then click 'Add'
+	move to the third page to select the final state, WY, and click 'Add'.
+	repeat the steps for locating and downloading the data for these 26 states.
+merge census data:
+	extract both .zip files, ensuring that files with the same name are renamed or placed in separate directories
+	copy data rows from one of the two _with_ann.csv files to the end of the other, all other files are identical
+	if the header row contains labels with a '.' character, remove such characters so that topojson will parse it correctly
+get shape files:
+	visit https://www.census.gov/geo/maps-data/data/tiger-cart-boundary.html
+	download Counties shapefile, under Nation-based Files
+	download each census tract with the following url pattern, where ss is the 2 digit state FIPS code and rr is the resolution level (500k, 5m, or 20m):
+		http://www2.census.gov/geo/tiger/GENZ2015/shp/cb_2015_ss_tract_rr.zip
+	the sequence 01-02,04-06,08-13,15-51,53-56,60,66,69,72,78 covers all available 2015 tracts
+create topojson file:
+	extract .zip files
+	optionally rename shapefiles with more readable names (this also can be done later with other methods)
+	run topojson to combine the counties and tracts .shp files and the combined .csv into a topojson file
+	note: 1 tract in Alaska and 3 tracts in South Dekota have differing IDs between the shapefiles and the census data, manual correction is required

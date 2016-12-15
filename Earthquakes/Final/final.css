@@ -1,0 +1,251 @@
+body { 
+  color: #666; 
+  background: white; 
+  font: normal 10px "Helvetica Neue", Helvetica, sans-serif; 
+  margin:auto;
+  position: relative;
+  text-align: center;	
+}
+
+#map {
+  border:2px solid #000;
+  width:1160px;
+  height:480px;
+  margin: 5em; 	
+}
+
+
+.tooltip {
+	width: 221px;
+    height: auto;
+    font: 14px sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 3px 3px 3px 3px;
+	position:absolute;			
+    background: SeaGreen;	
+  	border: solid black 2px;
+    border-radius: 8px;			
+    pointer-events: none;
+    margin-left: 15px;
+    color:white;
+}
+
+.tooltip b{
+  /* padding:5px;
+*/
+}
+
+.tooltip tr td{
+ /* padding:5px;
+*/
+}
+
+
+.country {
+  fill: #41ae76;
+  stroke: #fff;
+  stroke-width: .5px;
+  stroke-linejoin: round;
+  cursor: pointer;
+}
+
+.country:hover{
+	fill:lightgreen;
+}
+
+.hidden { 
+  display: none; 
+}
+
+
+path {
+  fill: none;
+  stroke: #333;
+  stroke-width: .5px;
+}
+
+.land-boundary {
+  stroke-width: 1px;
+}
+
+.county-boundary {
+  stroke: #ddd;
+}
+
+.site {
+	fill: red;
+    stroke-width: 0.7px;
+    stroke: black;
+	opacity: 0.9;
+}
+
+
+.site:hover {
+  fill: black ;
+}
+
+#slider3 {
+  margin: 15px 0px 10px 50px;
+  width: 1150px;
+}
+
+
+
+.tectonic {
+  fill: none;
+  stroke: red;
+  opacity: 0.9;
+}
+
+
+svg {
+    margin: 0 auto;
+    display: block;
+}
+
+
+.sphere {
+    fill: #bbb;
+}
+
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+
+.water {
+  fill: #ccece6;
+}
+
+
+.land {
+  fill: #41ae76;
+  stroke: green;
+  stroke-width: 0.7px;
+}
+
+
+.focused {
+  fill: lightgreen;
+}
+
+
+
+
+.countryTooltip {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  background: #fff;
+  padding: 5px;
+  text-align: left;
+  border: solid #ccc 1px;
+  color: #666;
+  font-size: 14px;
+  font-family: sans-serif;
+}
+
+
+
+
+.foot-links a, .foot-links p{
+    display: block;
+    color: rgb(63, 63, 63);
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: OpenSansRegular, Arial, sans-serif;
+    font-size: 13px;
+    color: rgb(63, 63, 63);
+    padding-bottom: 5px;
+    text-shadow: rgb(255, 255, 255) 1px 1px 0px;
+
+  }
+
+a:link {
+    color: blue;
+  }
+
+
+.foot-links{
+    padding-top: 5px;
+    text-align: left;
+  }
+
+
+#footer{
+    background: rgb(241, 241, 241);
+    border-top: 1px solid rgb(222, 222, 222);
+    margin-top: -2px;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    padding-left: 25px;
+    margin-left: 85px; 
+    margin-right: 85px;
+    margin-bottom: 25px;
+  }
+
+h1{
+    font-family: gandhi_serifregular,"Georgia",Times New Roman,serif;
+    font-style: normal;
+    font-size: 4.0em;
+    line-height: 1.12 ;
+    letter-spacing: -0.9px;
+    margin-bottom: .5em;
+    margin-top: 0;
+    color: #222;
+    text-align: center;
+}
+
+
+
+ h3 {
+    font-size: 15px;
+     text-align: left;
+  }
+
+
+.col-sm-3 {
+  
+    text-decoration: none;   
+}
+
+p{
+     border-top: 1px solid rgb(222, 222, 222);
+    font-size: 15px;
+    padding-left: 10px;
+    line-height: 1.7;
+}
+
+p2{
+    font-size: 12px;
+}
+.row-1{
+    text-align: left;
+}
+
+
+
+
+a:link {
+    color: green;
+}
+
+/* visited link */
+a:visited {
+    color: blue;
+}
+
+/* mouse over link */
+a:hover {
+    color: red;
+}
+
+/* selected link */
+a:active {
+    color: darkred;
+}
+

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+svg {
+  display: block;
+  margin: auto;
+  font: 10px sans-serif;
+}
+
+.caption {
+  font-weight: bold;
+  text-align: center;
+}
+
+.key path {
+  display: none;
+}
+
+.key line {
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+  
+.country {
+  stroke: #999;
+  stroke-opacity: .9;
+}
+  
+.title {
+  font: 36px sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.bar {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.story {
+  font: 12px sans-serif;
+  text-align: center;
+
+}
+  
+.buttons {
+  font: 16px sans-serif;
+  float:left;
+}
+  
+.tooltip {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  margin-top: 30px;
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  pointer-events: none;
+  font-weight: bold;
+  font: 16px sans-serif;
+  opacity: 1 !important;
+}
+
+</style>
+<body>
+  <div class=title>HIV Rates in Sub-Saharan Africa, 2011</div>
+  <hr class="bar" width="720">
+  <div class="story">Sub-Saharan Africa accounts for 69% of all people living with HIV.<a href="http://files.unaids.org/en/media/unaids/contentassets/documents/epidemiology/2012/gr2012/20121120_FactSheet_Global_en.pdf"><sup>1</sup></a> Despite an overall decrease of HIV infection in the region<a href="http://www.avert.org/global-hiv-and-aids-statistics"><sup>2</sup></a>, Southern Africa still suffers from high infection rates.
+  </div>
+  <div id="mySVG"></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4 text-center" >
+        <button type="button" class="btn btn-success" onclick="drawHiv()">Percent with HIV</button> 
+        <button type="button" class="btn btn-primary" onclick="drawDeaths()">Deaths from AIDS</button>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12" >
+        <br>
+        Created by Tal Robison for CMPS 165: Data programming for Visualization, Fall 2016<br>
+        Instructor: Suresh Lodha
+      </div>
+    </div>
+    <div class="row text-muted">
+      <div class="col-xs-4" >
+        Files:<br><li><a href="https://github.com/talmrobinson/HIVSSA2011/blob/master/index.html">index.html</a></li><li><a href="https://github.com/talmrobinson/HIVSSA2011/blob/master/hiv.json">hiv.json</a></li>
+      </div>
+      <div class="col-xs-4" >
+        Data Sources:<br><li><a href="https://www.arcgis.com/home/item.html?id=16da193d9bcd4ae0b74febe39730658a">Africa SHP file</a></li><li><a href="https://africaopendata.org/dataset/avert-hiv-and-aids-statistics">HIV dataset</a></li>
+    </div>
+      <div class="col-xs-4" >
+        Code Sources:<br><li><a href="http://bl.ocks.org/mbostock/1087001">ToolTip Help</a></li><li><a href="https://bl.ocks.org/john-guerra/43c7656821069d00dcbc">GeoJSON Help</a></li>
+    </div>
+  </div>
+    <div id="tooltip">
+        <strong><span id="country"></span></strong><br>
+        <span id="percent"></span><br>
+        <span id="deaths"></span>
+    </div>
+  </div>
+    
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/topojson.v1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+<script>
+
+var colorSet = ["#f7fcf5","#e5f5e0","#c7e9c0","#a1d99b","#74c476","#41ab5d","#238b45","#006d2c","#00441b"];
+var colorSet2 =["#f7fbff","#deebf7","#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#08519c","#08306b"];
+  
+var state = 0;
+var width = 720,
+    height = 600;
+
+var formatNumber = d3.format(",d");
+
+var path = d3.geo.path()
+    .projection(null);
+
+var color = d3.scale.threshold()
+    .domain([1, 2, 4, 6, 8, 12, 16, 25])
+    .range(colorSet);
+
+// A position encoding for the key only.
+var x = d3.scale.linear()
+    .domain([0, 26])
+    .range([-100, 200]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickSize(13)
+    .tickValues(color.domain())
+    .tickFormat(function(d) { return d >= 1 ? formatNumber(d) : null; });
+
+var svg = d3.select("#mySVG").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var g = svg.append("g")
+    .attr("class", "key")
+    .attr("transform", "translate(440,40)");
+
+g.selectAll("rect")
+    .data(color.range().map(function(d, i) {
+      return {
+        x0: i ? x(color.domain()[i - 1]) : x.range()[0],
+        x1: i < color.domain().length ? x(color.domain()[i]) : x.range()[1],
+        z: d
+      };
+    }))
+  .enter().append("rect")
+    .attr("height", 8)
+    .attr("x", function(d) { return d.x0; })
+    .attr("width", function(d) { return d.x1 - d.x0; })
+    .style("fill", function(d) { return d.z; });
+
+g.call(xAxis).append("text")
+    .attr("class", "caption")
+    .attr("y", -6)
+    .text("Percentage of Adults (15-49) with HIV");
+
+  
+drawHiv();
+
+d3.select(self.frameElement).style("height", height + "px");
+
+// this code is a modified version of code by Mike Bostock
+// http://bl.ocks.org/mbostock/1087001
+var div = d3.select("#tooltip")
+    .attr("class", "tooltip")
+    .style("display", "none");  
+  
+  
+  
+function mouseover() {
+  div.style("display", "inline");
+}
+function mouseout() {
+  div.style("display", "none");
+}
+  
+  
+  
+  
+function drawDeaths() {
+  
+  // clear svg
+  svg.append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", width)
+    .attr("height", height)
+    .style("fill", "white");
+  
+  //setup
+  var color = d3.scale.threshold()
+    .domain([.1, .2, .3, .4, .5, .6, .7, .8])
+    .range(colorSet2);
+
+  // A position encoding for the key only.
+  var x = d3.scale.linear()
+  .domain([0, 1])
+  .range([-100, 200]);
+  
+  var xAxis = d3.svg.axis()
+  .scale(x)
+  .orient("bottom")
+  .tickSize(13)
+  .tickValues(color.domain())
+  .tickFormat(function(d) { return d >= 0 ? d : null; });
+  
+  var g = svg.append("g")
+  .attr("class", "key")
+  .attr("transform", "translate(440,40)");
+  
+  g.selectAll("rect")
+    .data(color.range().map(function(d, i) {
+    return {
+      x0: i ? x(color.domain()[i - 1]) : x.range()[0],
+      x1: i < color.domain().length ? x(color.domain()[i]) : x.range()[1],
+      z: d
+    };
+  }))
+    .enter().append("rect")
+    .attr("height", 8)
+    .attr("x", function(d) { return d.x0; })
+    .attr("width", function(d) { return d.x1 - d.x0; })
+    .style("fill", function(d) { return d.z; });
+  
+  g.call(xAxis).append("text")
+    .attr("class", "caption")
+    .attr("y", -6)
+    .text("Deaths from AIDS as Percentage of Pop.");
+  
+  
+  
+  //draw countries
+  d3.json("hiv.json", function(error, hiv) {
+  if (error) throw error;
+  console.log(hiv);
+
+  var countries = topojson.feature(hiv, hiv.objects.Countries);
+
+  // this code is a modified version of code by John Alexis Guerra Gómez
+  // https://bl.ocks.org/john-guerra/43c7656821069d00dcbc
+  svg.append("g")
+  .attr("class", "country")
+  .selectAll('path')
+  .data(countries.features)
+.enter().append('path')
+  .attr('d', path)
+  .attr('vector-effect', 'non-scaling-stroke')
+  .style('fill', function(d) { return typeof d.properties.deaths === "undefined"? '#eee':color(d.properties.deaths);})
+  // tooltip
+  .on("mouseover", mouseover)
+    .on("mousemove", function(d) {
+    
+    d3.select("#tooltip")
+         .style("left", (d3.event.pageX) + "px")
+         .style("top", (d3.event.pageY - 12) + "px")
+         .select("#country")
+         .text(d.id);
+          
+          if ( !(typeof d.properties.percent === "undefined") ){
+          d3.select("#percent")
+         .text("Population with HIV: " + d.properties.percent +"%");
+          
+          d3.select("#deaths")
+         .text("Deaths due to AIDS: " + d.properties.deaths +"%");
+          }else {
+            d3.select("#percent")
+         .text("");
+          
+          d3.select("#deaths")
+         .text("");
+          }
+
+    })
+    .on("mouseout", mouseout);
+});
+  
+}
+  
+function drawHiv(){
+  // clear svg
+  svg.append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", width)
+    .attr("height", height)
+    .style("fill", "white");
+  
+  var color = d3.scale.threshold()
+    .domain([1, 2, 4, 6, 8, 12, 16, 25])
+    .range(colorSet);
+
+// A position encoding for the key only.
+var x = d3.scale.linear()
+    .domain([0, 26])
+    .range([-100, 200]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickSize(13)
+    .tickValues(color.domain())
+    .tickFormat(function(d) { return d >= 1 ? formatNumber(d) : null; });
+
+var g = svg.append("g")
+    .attr("class", "key")
+    .attr("transform", "translate(440,40)");
+
+g.selectAll("rect")
+    .data(color.range().map(function(d, i) {
+      return {
+        x0: i ? x(color.domain()[i - 1]) : x.range()[0],
+        x1: i < color.domain().length ? x(color.domain()[i]) : x.range()[1],
+        z: d
+      };
+    }))
+  .enter().append("rect")
+    .attr("height", 8)
+    .attr("x", function(d) { return d.x0; })
+    .attr("width", function(d) { return d.x1 - d.x0; })
+    .style("fill", function(d) { return d.z; });
+
+g.call(xAxis).append("text")
+    .attr("class", "caption")
+    .attr("y", -6)
+    .text("Percentage of Adults (15-49) with HIV");
+  
+  d3.json("hiv.json", function(error, hiv) {
+  if (error) throw error;
+  console.log(hiv);
+
+  var countries = topojson.feature(hiv, hiv.objects.Countries);
+
+  // this code is a modified version of code by John Alexis Guerra Gómez
+  // https://bl.ocks.org/john-guerra/43c7656821069d00dcbc
+  svg.append("g")
+  .attr("class", "country")
+  .selectAll('path')
+  .data(countries.features)
+.enter().append('path')
+  .attr('d', path)
+  .attr('vector-effect', 'non-scaling-stroke')
+  .style('fill', function(d) { return typeof d.properties.percent === "undefined"? '#eee':color(d.properties.percent);})
+  // tooltip
+  .on("mouseover", mouseover)
+    .on("mousemove", function(d) {
+    
+    d3.select("#tooltip")
+         .style("left", (d3.event.pageX) + "px")
+         .style("top", (d3.event.pageY - 12) + "px")
+         .select("#country")
+         .text(d.id);
+          
+          if ( !(typeof d.properties.percent === "undefined") ){
+          d3.select("#percent")
+         .text("Population with HIV: " + d.properties.percent +"%");
+          
+          d3.select("#deaths")
+         .text("Deaths due to AIDS: " + d.properties.deaths +"%");
+          }else {
+            d3.select("#percent")
+         .text("");
+          
+          d3.select("#deaths")
+         .text("");
+          }
+
+    })
+    .on("mouseout", mouseout);
+});
+  
+  
+}
+</script>
+<body>

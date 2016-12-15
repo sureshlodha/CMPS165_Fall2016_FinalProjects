@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+
+    <meta charset="utf-8">
+   
+
+      
+      
+  <!-- For Columns -->  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <!-- END OF NEW CODE --> 
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="language.css">
+    <!-- D3.js Source -->
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+         <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+   <link rel="shortcut icon" type="image/png" href="http://eg.com/favicon.png"/>
+  </head>
+    
+  <body>
+      
+    <div class="title">
+         <img src="banner.png" width=535px height="100px" />
+    </div>
+      
+ <div style="width: 535px; float: left;" class="tabPanel-widget">
+          
+    <label for="tab-1" tabindex="0"></label>
+      <input id="tab-1" type="radio" name="tabs" checked="true" aria-hidden="true">
+    <h2>Description</h2>
+    <div>
+      <p>Over the last three generations, the number of learned languages has grown dramatically and become more diverse across Europe. There is a higher percentage of younger people are learning secondary languages than older generations, and they are learning more types of languages. Not surprisingly, the English language is dramatically increasing in prevalence.</p><br><br><br>
+      <p><br><br><br><br><br></p>
+    </div>
+    <label for="tab-2" tabindex="0"></label>
+    <input id="tab-2" type="radio" name="tabs" aria-hidden="true">
+    <h2>Authors</h2>
+    <div>
+      <h3>Created by: </h3>
+      <p>Alexander Henry, Kes Harper, Adam Fischer <br>in collaboration with Suresh K Lodha and Ryan Brounley</p>
+      <h3>Created for:</h3>
+      <p>CMPS165, Data Programming for Visualization, Spring 2016</p>
+      <br><br>
+      <p><br><br><br><br><br><br></p>
+    </div>
+    <label for="tab-3" tabindex="0"></label>
+    <input id="tab-3" type="radio" name="tabs" aria-hidden="true">
+    <h2>Sources</h2>
+    <div>
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Files Submitted:</h3>
+                    <p>language.html</p>
+                    <p>language.js</p>
+                    <p>language.css</p>
+                    <p>EU.json</p>
+                    <p>data.csv</p>
+            </div>
+    
+            <div class="col-sm-4">
+            <h3>Data Sources:</h3>
+                    <p><a href="http://languageknowledge.eu/">Language data</a></p>
+            </div>
+        
+            <div class="col-sm-4">
+            <h3>Code Sources:</h3>
+                <p><a href="http://bl.ocks.org/NPashaP/a74faf20b492ad377312">US map hover color transition</a></p>
+                <p><a href="https://bost.ocks.org/mike/map/">Mike Bostock topojson</a></p>
+                <p><a href="http://codepen.io/thierry/pen/gPoWxj">Tab Functionality</a></p>
+                <p><a href="http://codepen.io/thierry/pen/gPoWxj">Buttons</a><br>
+            <p><br><br><br><br><br></p>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    
+     <div>
+     <div class="dropdown" style="float:right";>
+        <button id = "buttonLanguage" class="dropbtn">Language</button>
+        <div class="dropdown-content">
+            <a id="All">All</a>
+            <a id="English">English</a>
+            <a id="French">French</a>
+            <a id="German">German</a>
+            <a id="Italian">Italian</a>
+            <a id="Russian">Russian</a>
+            <a id="Spanish">Spanish</a>
+        </div>
+         
+          <script type="text/javascript" src="language.js" style="float:left"></script>
+         
+         </div>
+         
+            <div class="tooltip2"><button id = "buttonOld" class="button">Old</button>
+                <span class="tooltiptext2">Above the age of 55</span>
+            </div>
+            <div class="tooltip2"><button id = "buttonMiddle" class="button">Middle</button>
+                <span class="tooltiptext2">Between ages 35 and 54</span>
+            </div>
+             <div class="tooltip2"><button id = "buttonYoungest" class="button">Young</button>
+                <span class="tooltiptext2">Between ages 15 and 34</span>
+            </div>
+            <div class="tooltip2"><button id = "buttonAll" class="button">All</button>  
+                <span class="tooltiptext2">All adults above the age of 15</span>
+            </div>
+         
+          </div>
+          
+      </div>
+
+     
+  
+      
+          
+ 
+
+    
+      
+  </body>
+      
+  
+</html>

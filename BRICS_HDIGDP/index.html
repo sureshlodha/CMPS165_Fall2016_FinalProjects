@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+  <title>BRICS: GDP and Human Development</title>
+  <link href="TimeChart.css" rel="stylesheet"/>
+  <script type= "text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+</head>
+
+<h1 id="titles">BRICS: GDP and Human Development 1970-2050</h1>
+<p>Out of all the BRICS nations, Russia dominated both GDP and HDI up until the 1980s. However, the collapse of the Soviet Union in 1991 weakened Russia's GDP
+    and HDI growth significantly, and with primarily consistent rises to economic growth, Brazil, China, and India to catch up in
+    terms of GDP by 1996. Since then, Russia's development in GDP and HDI has been severely lagging behind that of the other BRICS nations, and in the
+    near future, projections indicate that Brazil, China, and South Africa will catch up to Russia's HDI as early on as 2023, with India on track to catching up some
+    time after 2050.
+</p>
+    <div id="HDIcomp">
+      <p>There are 3 components of HDI:
+        <ul>
+        <li>Life Expectancy</li>
+        <li>Eduction</li>
+        <li>GNI per Capita <ul><li>data not available</li></ul></li>
+      </ul>
+      </p></div>
+  <div id="chart" style="margin:0px"> 
+    <!--<div id="HDIcomp">
+      <p>There are 3 components of HDI:
+      <br>Life Expectancy
+      <br>Eduction Index
+      <br>GNI per Capita
+      </p> -->
+    </div></div>
+<div id="controls">
+<span id="min-time">1970</span> 
+<input type="range" name="points" min="1970" max="2050" step="1" value="0" id="slider-time" style="width:900px" 
+       onchange="updateData(this.value);" oninput = "updateData(this.value);">
+<span id="max-time">2050</span><br>
+  &nbsp &nbsp &nbsp &nbsp &nbsp|________________________________________________________________|
+  |_________________________________________________|
+
+<!--<div id="projected">&nbsp </div> -->
+  <div id="projectedLabel1">Historical Data</div>
+
+<div id="projectedLabel2">Projected Data</div>
+  <div id="buttons">
+<button id="start" onclick="drawHDI();" class="btn">HDI</button>
+<button id="start" onclick="drawLE();"class="btn">Life Expectancy</button>
+<button id="start" onclick="drawEdu();"class="btn">Education</button>
+<!--<button id="start" onclick="drawHouse();"class="btn">Total Household Consumption</button>-->
+  </div>
+</div>
+  <br>
+<div id="credits">
+<p style="position:relative;right:0px; font-size:16px; text-align:center;"><br>Created by: Christopher Bui and Janesh Chhabra in collaboration with Suresh K Lodha
+<br>CMPS 165: Data Programming for Visualizations, Fall 2016</p>
+<table>
+  <tr id = "header">
+    <td class="firstcolumn">Files:</td>
+    <td class="secondcolumn">Data Sources:</td>
+    <td class = "lastcolumn">Code Sources:</td>
+  </tr>
+  <tr>
+    <td class="firstcolumn"> </td>
+    <td class="secondcolumn"> </td>
+    <td class = "lastcolumn"> </td>
+  </tr>
+  <tr>
+    <td class="firstcolumn"><a href = "https://github.com/cbui505/BRICS_TimeChart">index.html</a></td>
+    <td class="secondcolumn"> <a href = "http://databank.worldbank.org/data/home.aspx">The World Bank: General Country Data</a> </td>
+    <td class = "lastcolumn"> <a href = "https://romsson.github.io/dragit/example/nations.html">Romain Vuillemot: Motion Chart</a> </td>
+  </tr>
+  <tr>
+    <td class="firstcolumn"><a href = "https://github.com/cbui505/BRICS_TimeChart">TimeChart.css</a></td>
+      <td class="secondcolumn"><a href = "http://www.ifs.du.edu/assets/documents/hdi-forcasting-v2-2.pdf"> Barry B. Hughes: Forcasting HDI</a> </td>
+      <td class="lastcolumn"><a href = "http://www.cssportal.com/style-input-range/">CSS Portal: Range Slider Styling</a></td>
+  </tr>
+  <tr>
+    <td class="firstcolumn"><a href = "https://github.com/cbui505/BRICS_TimeChart">TimeChart.js</a></td>
+    <td class="secondcolumn"><a href = "https://esa.un.org/unpd/wpp/Download/Probabilistic/Population/"> United Nations: Department of Economics and Social Affairs</a> </td>
+  </tr>
+  <tr>
+    <td class="firstcolumn"><a href = "https://github.com/cbui505/BRICS_TimeChart">BRICS_HDI.csv</a></td>
+        <td class="secondcolumn"><a href = "http://unstats.un.org/unsd/snaama/Introduction.asp"> United Nations: National Accounts Main Aggregates Database</a> </td>
+  </tr>
+  <tr>
+    <td class="firstcolumn"><a href = "https://github.com/cbui505/BRICS_TimeChart">BRICS_LE.csv</a></td>
+        <td class="secondcolumn"><a href = "https://data.oecd.org/gdp/gdp-long-term-forecast.htm">The Organisation for Economic Co-operation and Development</a> </td>
+  </tr>
+  <tr>
+    <td class="firstcolumn"><a href = "https://github.com/cbui505/BRICS_TimeChart">BRICS_EDU.csv</a></td>
+        <td class="secondcolumn"><a href = "https://esa.un.org/unpd/wpp/publications/files/key_findings_wpp_2015.pdf">United Nations: World Population Prospects</a></td>
+  </tr>
+  <tr>
+    <td class="firstcolumn"><a href = "https://github.com/cbui505/BRICS_TimeChart">BRICS_Household.csv</a></td>
+    <td class="secondcolumn"><a href = "https://ourworldindata.org/global-rise-of-education">Our World in Data (Ortiz-Ospina and Roser): Education</a></td>
+  </tr>
+  <tr>
+    <td class="firstcolumn"><a href = "https://github.com/cbui505/BRICS_TimeChart">README.md</a></td>
+  </tr>
+</table>    
+</div>
+    
+<script type="text/javascript" src="TimeChart.js"></script>
+</body>
+</html>

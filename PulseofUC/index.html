@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>  
+    <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">  
+
+    <link href="main.css" rel="stylesheet">
+        <h1>The Pulse of the UCs!</h1>
+        <p style = "font-style: italic">
+            Ever wonder what the people around you wanted to say, but didn't because they feared judgement?
+
+        </p>
+        <p>Yik-Yak, an anonymous social media app, allows users to post and view "Yaks" within a 10-mile radius.  We analyzed the top words that UC students yakked over the past week (11/27-12/3) /br
+        Perhaps to nobody's surprise, when veiled by anonymity, UC students collectively scream into the void about how lonely, horny, and anxious they are.</p>
+  </head>
+  <body>
+          <div id="tooltip" class="hidden">
+		<p><strong>Day of the Week: <span id="value">Sun</span></strong></p>
+        <p><strong>School:<span id="schoolID"> UCB </span></strong></p>
+	</div>  
+    <div class="slider"></div>  
+      
+        <div id="cloud"></div>  
+    <div id="UCs" style="text-align:center;">
+            
+    <svg width="900" height="100">
+        
+        <image xlink:href="logos/UCB.png" x="0" y="20" height="75px" width="75px"/>
+         <circle id="circle1" cx="36" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('1')"/>
+        <image xlink:href="logos/UCI.png" x="100" y="20" height="75px" width="75px"/>
+         <circle id="circle2" cx="136" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('2')"/>
+        <image xlink:href="logos/UCD.png" x="200" y="20" height="75px" width="75px"/>
+         <circle id="circle3" cx="236" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('3')"/>
+        <image xlink:href="logos/UCLA.png" x="300" y="20" height="75px" width="75px"/>
+         <circle id="circle4" cx="336" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('4')"/>
+        <image xlink:href="logos/UCM.png" x="400" y="20" height="75px" width="75px"/>
+         <circle id="circle5" cx="436" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('5')"/>
+        <image xlink:href="logos/UCR.png" x="500" y="20" height="75px" width="75px" />
+         <circle id="circle6" cx="536" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('6')"/>
+        <image xlink:href="logos/UCSB.png" x="600" y="20" height="75px" width="75px"/>
+         <circle id="circle7" cx="636" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('7')"/>
+        <image xlink:href="logos/UCSC.png" x="700" y="20" height="75px" width="75px"/>
+         <circle id="circle8" cx="736" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('8')"/>
+        <image xlink:href="logos/UCSD.png" x="800" y="20" height="75px" width="75px"/>
+         <circle id="circle9" cx="836" cy="55" r="35" fill="purple" opacity="0" onmouseover="updateData('9')" />
+        
+    </svg>
+
+    </div>
+
+    <script type="text/javascript" src="main.js"></script>
+
+  <script type="text/javascript">
+loadData("CSVs/1_0.csv");
+
+  </script>
+<h2>CMPS 165 Fall 2016</h2>
+<ul>
+    <li>Nicholas Meddin and Matthew Cruz</li>
+    <li>Instructor: Suresh Lodha</li>
+    <li>TA: Ryan Brounley</li>
+</ul>
+<h3>Data Sources</h3>
+<ul>
+    <li><a href="https://www.yikyak.com/home" target="_blank">Yik Yak</a></li>
+    <li><a href="http://www.wordcounter.com/" target="_blank">Word Counter</a></li>
+</ul>      
+<h4>Code Sources</h4>
+<ul>
+    <li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 API Reference</a></li>
+    <li><a href="http://chimera.labs.oreilly.com/books/1230000000345/index.html" target="_blank">Interactive Data Visualization for the Web</a></li>
+    <li><a href="http://bl.ocks.org/shancarter/5979700" target="_blank">HTML Slider</a></li>
+</ul>
+
+  </body>
+</html>

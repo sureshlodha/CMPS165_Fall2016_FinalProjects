@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="chosen_v1.6.2/chosen.min.css">
+<style>
+
+svg {
+  font: 10px sans-serif;
+  display: block;
+  margin: auto;
+}
+.caption {
+  font-weight: bold;
+}
+.key path {
+  display: none;
+}
+
+.key line {
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.state-border {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .4;
+}
+
+.county-border {
+  stroke: none;
+  fill: #d7d7d7;
+}
+
+.tooltip {
+    position: absolute;
+    width: 350px;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+/*    got this style from the book */
+}
+p{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+</style>
+</head>
+<body>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/topojson.v1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>\
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.13.0/d3-legend.min.js"></script>
+<script src="chosen_v1.6.2/chosen.jquery.min.js"></script>
+<h1 style="text-align:center;">Suicide Rate, Population Density, and Income</h1>
+<div style="text-align: center;">
+	<p>"Suicide rates tend to be high in rural areas in part because there is greater access to firearms, high rates of drug and alcohol use and few health-care providers and emergency medical facilities."</p>
+	<p>-Julie Goldstein Grumet PhD</p>
+	<p>Director of Prevention and Practice at Suicide Prevention Resource Center, Washington, D.C.</p>
+	<br/>
+	<p>"Researchers have documented a connection between low socioeconomic status (low SES, or those who are poor) and the likelihood of also being diagnosed with a mental illness or having attempted suicide."</p>
+	<p>"Poverty, Mental Illness and Suicide Linked"</p>
+	<p>-Psych Central News Editor</p>
+</div>
+
+<h2 style="text-align:center; font: 12px; font-weight:normal;" id = "title">Suicide Rate per Capita</h2>
+<div style = "text-align:center;">
+	<button id = "rate">Suicide Rate</button>
+	<button id = "pop">Population Density</button>
+	<button id = "income">Median Income</button>
+	<button id = "poverty">Poverty rate</button>
+</div>
+<select id="countySelect" class="chosen-select" data-placeholder="Search for County">
+	<option value=""></option>
+</select>
+<select id="sortSelect" class="chosen-select" data-placeholder="Sort counties">
+	<option value=""></option>
+	<option value="AZ">A-Z Alphabetical</option>
+	<option value="ZA">Z-A Alphabetical</option>
+	<option value="SR">High-Low Suicide Rate</option>
+	<option value="RS">Low-High Suicide Rate</option>
+	<option value="POPH">High-Low Population Density</option>
+	<option value="POPL">Low-High Population Density</option>
+	<option value="IN">High-Low Median Income</option>
+	<option value="NI">Low-High Median Income</option>
+	<option value="POV">High-Low Poverty</option>
+	<option value="VOP">Low-High Poverty</option>
+</select>
+<svg id = "svgid"></svg>
+<br/>
+<svg id = "svgScatter" height= 960></svg>
+<script>
+
+var rateBtn = document.getElementById("rate"),
+	popBtn = document.getElementById("pop"),
+	incomeBtn = document.getElementById("income"),
+	povertyBtn = document.getElementById("poverty");
+var mapType = "rate";
+var tooltip = d3.select("body").append("div")
+	.attr("class","tooltip")
+	.style("opacity",0);
+var optionHtml = d3.select("body").append("div")
+	.attr("class","tooltip")
+	.style("top","475px")
+	.style("left","5px")
+	.style("opacity",0);
+var width = 1200,
+    height = 600;
+
+var formatIncome = d3.format("$,.0f");
+var formatPoverty = d3.format(".2%");
+var formatPop = d3.format(",.2r");
+
+var projection = d3.geo.albersUsa()
+			.scale(1100);
+			
+var path = d3.geo.path().projection(projection);
+
+var popcolor = d3.scale.linear()
+    .domain([1, 10, 50, 100, 500, 1000, 2000, 5000])
+    .range(["#fff","#fff7ec", "#fee8c8", "#fdd49e", "#ef6548", "#d7301f", "#b30000", "#7f0000","#000"]);
+var srcolor = d3.scale.linear()
+    .domain([1, 20])
+	.range(["#AFB4DB","#00004c"]);
+var incomecolor = d3.scale.linear()
+    .domain([25000, 80000])
+	.range(["#77f175","#084000"]);
+var povertycolor = d3.scale.linear()
+    .domain([.01, .05])
+	.range(["#FF7AE4","#500040"]);
+
+
+var svg = d3.select("#svgid")
+    .attr("width", width)
+    .attr("height", height);
+	
+function draw(){
+	if (mapType === "pop"){
+		document.getElementById("title").innerHTML = "Population per Square Mile";
+		format = formatPop;
+		scale = popcolor;
+	}else if (mapType === "rate"){
+		document.getElementById("title").innerHTML = "Suicide Deaths per 100,000";
+		format = d3.format(".01f");
+		scale = srcolor;
+	}else if (mapType === "income"){
+		document.getElementById("title").innerHTML = "Median Income";
+		format = formatIncome;
+		scale = incomecolor;
+	}else if (mapType === "poverty"){
+		document.getElementById("title").innerHTML = "Poverty Rate";
+		format = formatPoverty;
+		scale = povertycolor;
+	}
+	svg.append("g")
+	  .attr("class", "legendLinear");
+	var legendLinear = d3.legend.color()
+	  .shapeWidth(30)
+	  .labelFormat(format)
+	  .orient("vertical")
+	  .scale(scale);
+	
+	svg.select(".legendLinear")
+  	  .call(legendLinear);
+
+	d3.json("us.json", function(error, us) {
+	  if (error) throw error;
+
+	  console.log(Object.getOwnPropertyNames(us.objects));
+	  var counties = topojson.feature(us, us.objects.counties);
+
+	  // Clip states to land.
+	  svg.append("defs").append("clipPath")
+		  .attr("id", "clip-land")
+		.append("path")
+		  .datum(topojson.feature(us, us.objects.states))
+		  .attr("d", path);
+
+	  // determine map type first
+	  if (mapType === "rate"){
+	  svg.append("g")
+		  .attr("class", "county")
+		  .attr("clip-path", "url(#clip-land)")
+		.selectAll("path")
+		  .data(d3.nest()
+			.key(function(d) {return d.id;}) //unique id for each county
+			.entries(counties.features.filter(function(d) { return d.properties.area; })))
+		.enter().append("path")
+		  .style("fill", function(d) { if(d.values[0].properties.rate == 0){d.values[0].properties.rate = "N/A"; return "#d7d7d7";}else{return srcolor(d.values[0].properties.rate);} })//color each county
+	  	  .style("stroke", function(d) { if(d.values[0].properties.rate == 0){d.values[0].properties.rate = "N/A"; return "#d7d7d7";}else{return srcolor(d.values[0].properties.rate);} })
+	  	  .attr("class","county-border")
+	  	  .attr("id", function(d) {return "id" + d.key;})
+	  	  .attr("area", function(d) { return d.values[0].properties.area;}) //associate area with each county for use later in computing pop density
+		  .attr("d", function(d) { return path({type: "FeatureCollection", features: d.values}); })
+		  .on("mouseover", function(d){
+				d3.select(this)
+					.style("fill","yellow")
+		  			.style("stroke","yellow");
+		  		if(typeof d.values[0].properties.state == "undefined"){
+					tooltip.transition()
+					.duration(500)
+					.style("opacity", .9);
+					tooltip.html("N/A");
+				}else{
+				if(d.values[0].properties.rate == 0||d.values[0].properties.rate == "N/A"){
+					var rate = "N/A";
+				}else {
+					var rate = d.values[0].properties.rate.toFixed(2);
+				}
+				tooltip.transition()
+				.duration(500)
+				.style("opacity", .9);
+				tooltip.html(d.values[0].properties.county+ ", " + d.values[0].properties.state + "<br/>Population Density: " + formatPop(d.values[0].properties.population/d.values[0].properties.area * 2.58999e6) +
+						" persons per square mile<br/>Suicide Rate: " + rate + " deaths per 100,000<br/>Median Income: " +
+						formatIncome(d.values[0].properties.income) + "<br/>Poverty: " + formatPoverty(d.values[0].properties.poverty/d.values[0].properties.population));
+				tooltip.style("top",(d3.event.pageY - 28) + "px")
+				.style("left", (d3.event.pageX + 20) + "px");
+				}
+			  })
+			  .on("mouseout", function(){
+				d3.select(this)
+					.transition()
+					.duration(500)
+					.style("fill",function(d) { if(typeof d.values[0].properties.rate == "undefined"|| d.values[0].properties.rate == "N/A"){return "#d7d7d7";}else{ return srcolor(d.values[0].properties.rate);} })
+					.style("stroke",function(d) { if(typeof d.values[0].properties.rate == "undefined"|| d.values[0].properties.rate == "N/A"){return "#d7d7d7";}else{ return srcolor(d.values[0].properties.rate);} });
+				tooltip.transition()
+					.duration(200)
+					.style("opacity",0);
+			  });
+	  }else if(mapType === "pop"){
+		svg.append("g")
+		  .attr("class", "county")
+		  .attr("clip-path", "url(#clip-land)")
+		.selectAll("path")
+		  .data(d3.nest()
+			.key(function(d) {return d.id;})
+			.entries(counties.features.filter(function(d) { return d.properties.area; })))
+		.enter().append("path")
+		  .style("fill", function(d) { return popcolor(d.values[0].properties.population/d.values[0].properties.area * 2.58999e6);})
+		  .style("stroke", function(d) { return popcolor(d.values[0].properties.population/d.values[0].properties.area * 2.58999e6);})
+	  	  .attr("class","county-border")
+		  .attr("id", function(d) {return "id" + d.key;})
+		  .attr("area", function(d) { return d.values[0].properties.area;})
+		  .attr("d", function(d) { return path({type: "FeatureCollection", features: d.values}); })
+		  .on("mouseover", function(d){
+				d3.select(this)
+					.style("fill","yellow")
+					.style("stroke","yellow");
+				if(typeof d.values[0].properties.state == "undefined"){
+					tooltip.transition()
+					.duration(500)
+					.style("opacity", .9);
+					tooltip.html("N/A");
+				}else{
+				if(d.values[0].properties.rate == 0){
+					var rate = "N/A";
+				}else {
+					var rate = d.values[0].properties.rate.toFixed(2);
+				}
+				tooltip.transition()
+				.duration(500)
+				.style("opacity", .9);
+				tooltip.html(d.values[0].properties.county+ ", " + d.values[0].properties.state + "<br/>Population Density: " + formatPop(d.values[0].properties.population/d.values[0].properties.area * 2.58999e6) +
+						" persons per square mile<br/>Suicide Rate: " + rate + " deaths per 100,000<br/>Median Income: " +
+						formatIncome(d.values[0].properties.income) + "<br/>Poverty: " + formatPoverty(d.values[0].properties.poverty/d.values[0].properties.population));
+				tooltip.style("top",(d3.event.pageY - 28) + "px")
+				.style("left", (d3.event.pageX + 20) + "px");
+				}
+			  })
+			  .on("mouseout", function(){
+				d3.select(this)
+					.transition()
+					.duration(500)
+					.style("fill",function(d) { if(typeof d.values[0].properties.population == "undefined"){return "#d7d7d7";}else{ return popcolor(d.values[0].properties.population/d.values[0].properties.area * 2.58999e6);} })
+					.style("stroke",function(d) { if(typeof d.values[0].properties.population == "undefined"){return "#d7d7d7";}else{ return popcolor(d.values[0].properties.population/d.values[0].properties.area * 2.58999e6);} });
+				tooltip.transition()
+					.duration(200)
+					.style("opacity",0);
+			  });
+	  }else if(mapType === "income"){
+		svg.append("g")
+		  .attr("class", "county")
+		  .attr("clip-path", "url(#clip-land)")
+		.selectAll("path")
+		  .data(d3.nest()
+			.key(function(d) { return d.id;}) 
+			.entries(counties.features.filter(function(d) { return d.properties.area; })))
+		.enter().append("path")
+		  .style("fill", function(d) { return incomecolor(d.values[0].properties.income); })
+		  .style("stroke", function(d) { return incomecolor(d.values[0].properties.income); })
+	  	  .attr("class","county-border")
+		  .attr("id", function(d) {return "id" + d.key;})
+		  .attr("area", function(d) { return d.values[0].properties.area;})
+		  .attr("d", function(d) { return path({type: "FeatureCollection", features: d.values}); })
+		  .on("mouseover", function(d){
+				d3.select(this)
+					.style("fill","yellow")
+					.style("stroke","yellow");
+				if(typeof d.values[0].properties.state == "undefined"){
+					tooltip.transition()
+					.duration(500)
+					.style("opacity", .9);
+					tooltip.html("N/A");
+				}else{
+				if(d.values[0].properties.rate == 0){
+					var rate = "N/A";
+				}else {
+					var rate = d.values[0].properties.rate.toFixed(2);
+				}
+				tooltip.transition()
+				.duration(500)
+				.style("opacity", .9);
+				tooltip.html(d.values[0].properties.county+ ", " + d.values[0].properties.state + "<br/>Population Density: " + formatPop(d.values[0].properties.population/d.values[0].properties.area * 2.58999e6) +
+						" persons per square mile<br/>Suicide Rate: " + rate + " deaths per 100,000<br/>Median Income: " +
+						formatIncome(d.values[0].properties.income) + "<br/>Poverty: " + formatPoverty(d.values[0].properties.poverty/d.values[0].properties.population));
+				tooltip.style("top",(d3.event.pageY - 28) + "px")
+				.style("left", (d3.event.pageX + 20) + "px");
+				}
+			  })
+			  .on("mouseout", function(){
+				d3.select(this)
+					.transition()
+					.duration(500)
+					.style("fill",function(d) { if(typeof d.values[0].properties.income == "undefined"){return "#d7d7d7";}else{ return incomecolor(d.values[0].properties.income);} })
+					.style("stroke",function(d) { if(typeof d.values[0].properties.income == "undefined"){return "#d7d7d7";}else{ return incomecolor(d.values[0].properties.income);} });
+				tooltip.transition()
+					.duration(200)
+					.style("opacity",0);
+			  });
+	  }else if(mapType === "poverty"){
+		svg.append("g")
+		  .attr("class", "county")
+		  .attr("clip-path", "url(#clip-land)")
+		.selectAll("path")
+		  .data(d3.nest()
+			.key(function(d) {return d.id;})
+			.entries(counties.features.filter(function(d) { return d.properties.area; })))
+		.enter().append("path")
+		  .style("fill", function(d){ return povertycolor(d.values[0].properties.poverty/d.values[0].properties.population);})
+		  .style("stroke", function(d){ return povertycolor(d.values[0].properties.poverty/d.values[0].properties.population);})
+	  	  .attr("class","county-border")
+		  .attr("id", function(d) {return "id" + d.key;})
+		  .attr("area", function(d) { return d.values[0].properties.area;})
+		  .attr("d", function(d) { console.log(d.values); return path({type: "FeatureCollection", features: d.values}); })
+		  .on("mouseover", function(d){
+				d3.select(this)
+					.style("fill","yellow")
+					.style("stroke","yellow");
+				if(typeof d.values[0].properties.state == "undefined"){
+					tooltip.transition()
+					.duration(500)
+					.style("opacity", .9);
+					tooltip.html("N/A");
+				}else{
+				if(d.values[0].properties.rate == 0){
+					var rate = "N/A";
+				}else {
+					var rate = d.values[0].properties.rate.toFixed(2);
+				}
+				tooltip.transition()
+				.duration(500)
+				.style("opacity", .9);
+				tooltip.html(d.values[0].properties.county+ ", " + d.values[0].properties.state + "<br/>Population Density: " + formatPop(d.values[0].properties.population/d.values[0].properties.area * 2.58999e6) +
+						" persons per square mile<br/>Suicide Rate: " + rate + " deaths per 100,000<br/>Median Income: " +
+						formatIncome(d.values[0].properties.income) + "<br/>Poverty: " + formatPoverty(d.values[0].properties.poverty/d.values[0].properties.population));
+				tooltip.style("top",(d3.event.pageY - 28) + "px")
+				.style("left", (d3.event.pageX + 20) + "px");
+				}
+			  })
+			  .on("mouseout", function(){
+				d3.select(this)
+					.transition()
+					.duration(500)
+					.style("fill",function(d) { if(typeof d.values[0].properties.poverty == "undefined"){return "#d7d7d7";}else{ return povertycolor(d.values[0].properties.poverty/d.values[0].properties.population);} })
+					.style("stroke",function(d) { if(typeof d.values[0].properties.poverty == "undefined"){return "#d7d7d7";}else{ return povertycolor(d.values[0].properties.poverty/d.values[0].properties.population);} });
+				tooltip.transition()
+					.duration(200)
+					.style("opacity",0);
+			  });
+	  }
+
+	  // Draw state borders.
+	  svg.append("path")
+		  .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+		  .attr("class", "state-border")
+		  .attr("d", path);		
+	});
+	
+}//end of draw function
+	
+svg.style("opacity",0);
+draw();
+setTimeout(function(){
+svg.transition()
+	.duration(500)
+	.style("opacity",1);},500);
+//import csv file
+var dataset;
+setTimeout(function(){
+d3.csv("data.csv", function( error, data ){
+    dataset = data.map(function(d) {
+		var code = "#id" + d.code;
+		var svgelement = d3.select(code);
+			if (svgelement.empty()){
+				var area ="NaN";
+			}else{
+				var area = svgelement.attr("area");
+			}
+        return {
+			state: d.ST,
+            county: d.county,
+            code: d.code,
+			rate: +d.rate,
+            population: +d.pop,
+			income: +d.income,
+            poverty: +d.poverty,
+			area: area
+        };
+ 	});
+	var sel = document.getElementById("countySelect");
+	dataset.forEach(function(county){
+		var opt = document.createElement("option");
+		opt.innerHTML = county.county + ", " + county.state;
+		opt.value = county.code;
+		sel.appendChild(opt);
+	});
+		// create scatter plot
+		
+var margin = {left: 80, right: 80, top: 50, bottom: 50 }, 
+	width = 960 - margin.left -margin.right,
+	height = 500 - margin.top - margin.bottom;
+
+//Define svgScatter
+var svgScatter = d3.select("#svgScatter")
+	.attr("width", width + margin.left + margin.right)
+	.attr("height", height + margin.top + margin.bottom)
+	.append("g")
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+//Define Scales   
+var xScale = d3.scale.linear()
+	.domain([4,40]) 
+	.range([0, width]);
+
+var yScale = d3.scale.linear()
+	.domain([-1500,130000]) 
+	.range([height, 0]);
+
+//Define Axis
+var xAxis = d3.svg.axis().scale(xScale).orient("bottom");//.tickPadding(1);
+var yAxis = d3.svg.axis().scale(yScale).orient("left");//.tickPadding(1);
+var svgelement;
+var color;
+//Draw Scatterplot
+ svgScatter.selectAll(".dot")
+	.data(dataset)
+	.enter().append("circle")
+	.attr("class", "dot")
+	.attr("r", 5 )
+	.attr("cx", function(d) {return xScale(d.rate);})
+	.attr("cy", function(d) {if (d.area=="NaN"){return yScale(0);}else{return yScale(d.population/d.area*2.58999e6);}})
+	.style("fill", "#414693")
+	.on("mouseover", function(d){
+	 	if (mapType == "rate"){ //define map colors
+			if (d.rate == "N/A" || d.rate == 0){
+				color = "#d7d7d7"
+			}else{
+				color = srcolor(d.rate)
+			}
+		}else if(mapType == "pop"){
+			color = popcolor(d.population/d.area * 2.58999e6);
+		}else if(mapType == "income"){
+			color = incomecolor(d.income);
+		}else if(mapType == "poverty"){
+			color = povertycolor(d.poverty/d.population);
+		}
+		if(d.rate == 0){
+			var rate = "N/A";
+		}else {
+			var rate = d.rate.toFixed(2);
+		}
+	 	svgelement = d3.select("#id" + d.code);
+	 	svgelement.style("fill","yellow")
+			.style("stroke","yellow");
+		tooltip.transition()
+		.duration(500)
+		.style("opacity", .9);
+		tooltip.html(d.county+ ", " + d.state + "<br/>Population Density: " + formatPop(d.population/d.area * 2.58999e6) +
+					" persons per square mile<br/>Suicide Rate: " + rate + " deaths per 100,000<br/>Median Income: " +
+					formatIncome(d.income) + "<br/>Poverty: " + formatPoverty(d.poverty/d.population));
+		tooltip.style("top",(d3.event.pageY - 28) + "px")
+		.style("left", (d3.event.pageX + 5) + "px");
+	})
+	.on("mouseout", function(){
+	 	svgelement.transition()
+			.duration(750)
+			.style("fill",color)
+			.style("stroke",color);
+		tooltip.transition()
+			.duration(500)
+			.style("opacity",0);
+	});
+//Add .on("mouseover", .....
+//Add Tooltip.html with transition and style
+//Then Add .on("mouseout", ....
+
+//Scale Changes as we Zoom
+// Call the function d3.behavior.zoom to Add zoom
+	svgScatter.call(d3.behavior.zoom().x(xScale).y(yScale)
+		.on("zoom", function(){
+			svgScatter.selectAll(".dot")
+				.attr("cx", function(d) { return xScale(d.rate); })
+				.attr("cy", function(d) {if (d.area=="NaN"){return yScale(0);}else{return yScale(d.population/d.area*2.58999e6);}})
+			d3.select(".x.axis").call(xAxis);
+			d3.select(".y.axis").call(yAxis);
+	}));
+
+//x-axis
+svgScatter.append("g")
+	.attr("class", "x axis")
+	.attr("transform", "translate(0," + height + ")")
+	.call(xAxis)
+	.append("text")
+	.attr("class", "label")
+	.attr("y", 40)
+	.attr("x", width/2)
+	.style("text-anchor", "middle")
+	.attr("font-size", "12px")
+	.text("Suicide Deaths per 100,000");
+
+
+//Y-axis
+svgScatter.append("g")
+	.attr("class", "y axis")
+	.call(yAxis)
+	.append("text")
+	.attr("class", "label")
+	.attr("transform", "rotate(-90)")
+	.attr("y", -60)
+	.attr("x", -60)
+	.attr("dy", ".71em")
+	.style("text-anchor", "end")
+	.attr("font-size", "12px")
+	.text("Persons per Square Mile");
+	
+svgScatter.append("text")
+	.attr("y", 0)
+	.attr("x", width/2)
+	.attr("font-size", "16px")
+	.style("text-anchor", "middle")
+	.text("Suicide Rate v. Population Density");
+});
+},200);
+
+
+$(document).ready(function(){
+	setTimeout(function(){
+		$(".chosen-select").chosen();
+	},4000);
+	$("#countySelect").change(function() {
+		var code = $(this).val();
+		var rate = "N/A";
+		var chosenCounty = dataset.find(function(county){
+			if (county.code == code) {return county;}
+		});
+		code = "#id" + code;
+		var svgelement = d3.select(code);
+		if (svgelement.empty()){
+			chosenCounty.area ="NaN";
+		}else{
+		chosenCounty.area = svgelement.attr("area");
+		}
+		svgelement.style("fill","yellow");
+		if (chosenCounty.rate == "N/A" || chosenCounty.rate == 0){
+			rate = "N/A";
+		}else{
+			console.log(chosenCounty.rate);
+			rate = chosenCounty.rate.toFixed(2);
+		}
+		optionHtml.style("opacity",0);
+		optionHtml.html(chosenCounty.county+ ", " + chosenCounty.state + "<br/>Population Density: " + formatPop(chosenCounty.population/chosenCounty.area * 2.58999e6) +
+						" persons per square mile<br/>Suicide Rate: " + rate + " deaths per 100,000<br/>Median Income: " +
+						formatIncome(chosenCounty.income) + "<br/>Poverty: " + formatPoverty(chosenCounty.poverty/chosenCounty.population));
+		optionHtml.transition()
+			.duration(500)
+			.style("opacity", 1);
+		if (mapType == "rate"){
+			if (chosenCounty.rate == "N/A" || chosenCounty.rate == 0){
+				var color = "#d7d7d7"
+			}else{
+			var color = srcolor(chosenCounty.rate)
+			}
+		}else if(mapType == "pop"){
+			var color = popcolor(chosenCounty.population/chosenCounty.area * 2.58999e6);
+		}else if(mapType == "income"){
+			var color = incomecolor(chosenCounty.income);
+		}else if(mapType == "poverty"){
+			var color = povertycolor(chosenCounty.poverty/chosenCounty.population);
+		}
+		svgelement.transition()
+			.delay(1500)
+			.duration(750)
+			.style("fill", color);
+    });
+	$("#sortSelect").change(function() {
+		var opt = $(this).val();
+		var compare;
+		optionHtml.transition()
+			.duration(750)
+			.style("opacity", 0);
+		switch(opt){
+			case "AZ":
+				compare = function(a,b){
+					id1 = a.state + a.county;
+					id2 = b.state +b.county;
+					if (id1 < id2){
+						return -1;
+					}else if(id1 > id2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+				break;
+			case "ZA":
+				compare = function(a,b){
+					id2 = a.state + a.county;
+					id1 = b.state +b.county;
+					if (id1 < id2){
+						return -1;
+					}else if(id1 > id2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+				break;
+			case "SR":
+				compare = function(a,b){
+					id2 = a.rate;
+					id1 = b.rate;
+					if(id1 == 0||id1 == "N/A"){ return -1;}
+					if(id2 == 0||id2 == "N/A"){ return 1;}
+					if (id1 < id2){
+						return -1;
+					}else if(id1 > id2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+				break;
+			case "RS":
+				compare = function(a,b){
+					id1 = a.rate;
+					id2 = b.rate;
+					if(id1 == 0||id1 == "N/A"){ return 1;}
+					if(id2 == 0||id2 == "N/A"){ return -1;}
+					if (id1 < id2){
+						return -1;
+					}else if(id1 > id2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+				break;
+			case "POPH":
+				compare = function(a,b){
+					code1 = "#id" + a.code;
+					code2 = "#id" + b.code;
+					if (d3.select(code1).empty()){ return 1;}
+					if (d3.select(code2).empty()){ return -1;} // put elements that dont have county data at bottom of list
+					area1 = d3.select(code1).attr("area");
+					area2 = d3.select(code2).attr("area");
+					id2 = a.population/area1;
+					id1 = b.population/area2;
+					
+					if (id1 < id2){
+						return -1;
+					}else if(id1 > id2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+				break;
+			case "POPL":
+				compare = function(a,b){
+					code1 = "#id" + a.code;
+					code2 = "#id" + b.code;
+					if (d3.select(code1).empty()){ return 1;}
+					if (d3.select(code2).empty()){ return -1;} // put elements that dont have county data at bottom of list
+					area1 = d3.select(code1).attr("area");
+					area2 = d3.select(code2).attr("area");
+					id1 = a.population/area1;
+					id2 = b.population/area2;
+					
+					if (id1 < id2){
+						return -1;
+					}else if(id1 > id2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+				break;
+			case "IN":
+				compare = function(a,b){
+					id2 = a.income;
+					id1 = b.income;
+					if(id1 == 0){return -1;}
+					if(id2 == 0){return 1;}
+					if (id1 < id2){
+						return -1;
+					}else if(id1 > id2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+				break;
+			case "NI":
+				compare = function(a,b){
+					id1 = a.income;
+					id2 = b.income;
+					if(id2 == 0){return -1;}
+					if(id1 == 0){return 1;}
+					if (id1 < id2){
+						return -1;
+					}else if(id1 > id2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+				break;
+			case "POV":
+				compare = function(a,b){
+					id2 = a.poverty/a.population;
+					id1 = b.poverty/b.population;
+					if(id1 == 0){return -1;}
+					if(id2 == 0){return 1;}
+					if (id1 < id2){
+						return -1;
+					}else if(id1 > id2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+				break;
+			case "VOP":
+				compare = function(a,b){
+					id1 = a.poverty/a.population;
+					id2 = b.poverty/b.population;
+					if(id2 == 0){return -1;}
+					if(id1 == 0){return 1;}
+					if (id1 < id2){
+						return -1;
+					}else if(id1 > id2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+				break;
+			default: //default A-Z
+				compare = function(a,b){
+					id1 = a.state + a.county;
+					id2 = b.state +b.county;
+					if (id1 < id2){
+						return -1;
+					}else if(id1 > id2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+				break;
+		}
+		dataset.sort(compare);
+		$("#countySelect").empty();
+		var placeholder = $('<option value=""></option>');
+        $("#countySelect").append(placeholder);
+		dataset.forEach(function(county){
+			var opt = document.createElement('option');
+			opt.innerHTML = county.county + ", " + county.state;
+			opt.value = county.code;
+			$("#countySelect").append(opt);
+		})
+		$("#countySelect").trigger("chosen:updated");
+	});
+});
+	   
+rateBtn.addEventListener("click", function(){
+	mapType = "rate";
+	svg.transition()
+		.duration(500)
+		.style("opacity",0);
+	setTimeout(function(){
+		$("#svgid").empty();
+		draw();
+	},500);
+	setTimeout(function(){
+	svg.transition()
+		.duration(500)
+		.style("opacity",1);},700);
+	}, false);
+
+popBtn.addEventListener("click", function(){
+	mapType = "pop";
+	svg.transition()
+		.duration(500)
+		.style("opacity",0);
+	setTimeout(function(){
+		$("#svgid").empty();
+		draw();
+	},500);
+	setTimeout(function(){
+	svg.transition()
+		.duration(500)
+		.style("opacity",1);},700);
+	}, false);
+	
+incomeBtn.addEventListener("click", function(){
+	mapType = "income";
+	svg.transition()
+		.duration(500)
+		.style("opacity",0);
+	setTimeout(function(){
+		$("#svgid").empty();
+		draw();
+	},500);
+	setTimeout(function(){
+	svg.transition()
+		.duration(500)
+		.style("opacity",1);},700);
+	}, false);
+povertyBtn.addEventListener("click", function(){
+	mapType = "poverty";
+	svg.transition()
+		.duration(500)
+		.style("opacity",0);
+	setTimeout(function(){
+		$("#svgid").empty();
+		draw();
+	},500);
+	setTimeout(function(){
+	svg.transition()
+		.duration(500)
+		.style("opacity",1);},700);
+	}, false);
+	
+d3.select(self.frameElement).style("height", height + "px");
+
+
+</script>
+<br/>
+<div style = "text-align: center">
+	<p>If you or someone you know is having a crisis call 911 immediately.</p>
+	<p>If you need to reach out you can call the National Suicide Hotline at 1-800-273-8255</p>
+</div>
+<br/>
+<br/>
+<div style="display: inline-block; float: left;">
+	<span>Created by: Chris Evans in collaboration with Suresh Lodha, Ryan Brounley, and Shobhit Maheshwari</span><br/>
+	<span>CMPS 165: Data programming for Visualization</span><br/>
+	<span>Fall 2016</span>
+</div>
+<div style="display: inline-block; float: right;">
+	<span>Code and Data Sources:</span><br/>
+	<a href="https://bl.ocks.org/mbostock">https://bl.ocks.org/mbostock</a><br/>
+	<a href= "https://github.com/d3/d3-3.x-api-reference">https://github.com/d3/d3-3.x-api-reference</a><br/>
+	<a href="http://d3-legend-v3.susielu.com/">http://d3-legend-v3.susielu.com/</a><br/>
+	<a href="https://harvesthq.github.io/chosen/">https://harvesthq.github.io/chosen/</a><br/>
+	<a href="http://stackoverflow.com/">http://stackoverflow.com/</a><br/>
+	<a href="https://wisqars.cdc.gov:8443/cdcMapFramework/">2010 CDC Suicide Rate Statistics</a><br/>
+	<a href= "https://www.census.gov/did/www/saipe/data/statecounty/data/2010.html">2010 US Census Poverty and Income Statistics</a><br/>
+	<a href="https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html">2010 US Census County Cartographic</a><br/>
+</div>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <title>For-Hire Vehicles on the Fourth of July in New York</title>
+        <meta charset="utf-8"/>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <!-- Leaflet Source loader -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
+        <!-- CSS Stylesheet -->
+        <link rel="stylesheet" type="text/css" href="index.css">
+        
+        
+    </head>  
+     
+  <body>
+    <h1>
+            <bold>For-Hire Vehicles in New York For The  Month of September, 2014</bold> </h1>
+      <p>See a comparrison of the most popular For-Hire Vehicles Services in the Big Apple!  Despite contrary belief the taxi industry remains a behemoth and the number of rides new technology like Uber/Lyft provide only make up a fraction of what the Taxi Industry provides per day.</p>
+      
+      <select id = "json_sources">
+          <option value = "blank.json"> </option>
+          <option value = "uber.json">Uber Rides</option>
+          <option value = "lyft.json">Lyft Rides</option>
+          <option value = "greentaxi.json">Green Taxis</option>
+          <option value = "fhv.json">All Vehicles For Hire</option>
+      </select>
+      
+      
+      <input type="button" value="Reset Map" onClick="window.location.reload()">
+      
+      <input type="button" value="Green Taxis Rides versus Uber and Lyft Rides Combined" onclick="change_page()"/>
+          
+     <script>
+         function change_page(){
+             window.location.href = "index1.html";
+         } 
+      </script>
+    
+      <div class = "container2" id="d"></div> 
+      <div class = "container" id="map1"></div>
+      <div class = "container1" id="map"></div>
+      
+      
+      
+      
+    
+
+    <!-- Your D3.js code -->
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" id="script" src="data.js"></script>
+
+            
+
+    <!-- Submission Info -->
+    <!--<h4>Created by "Your Name" </h4>-->
+      
+   <h2>Technology companies like Uber and Lyft need substantially more users to provide innovative   reasearch and development in areas that could advance services in our daily lives.  Though the Taxi Industry exerts a lot of pressure against the expansion of FHV services, they clearly reign supreme in New York for amount of riders per day.</h2>
+    
+      
+    <!--<h4>Description</h4>-->
+   
+    <!-- Create a list using <ul> and <li> tag -->   
+    <!--<h4>Files Submitted:</h4>-->
+    
+    <ul>
+        <b style="font-size:150%">Created By:</b>
+        <br>Dylan Ma <br>
+        
+        <br>
+        <b style="font-size:150%">Created For:</b>
+        <br>CMPS 165: Data Programming for Visualization, Fall 2016 <br>
+        <br><b style="font-size:150%" >Submitted Files:</b><br><br>
+        <i style="font-size:125%">HTML and .js Files</i> <br>
+        <br>
+    
+      <li>index.html</li>
+      <li>index1.html</li>
+      <li>index.css</li>
+      <li>index.js</li>
+      <li>data.js</li>
+      <li>fhv.csv</li>  
+        <br>
+        <i style="font-size:125%">JSON and CSV Files</i> <br>
+        <br>
+        <li>blank.json</li>
+        <li>uber.json</li>
+        <li>lyft.json</li>
+        <li>greentaxi.json</li>
+        <li>fhv.json</li>
+        <li>hails.csv</li>
+        <li>fhv.csv</li>
+        <br><b style="font-size:150%">Sources:</b><br>
+        <br><i style="font-size:125%">Data Sources:</i><br> 
+        <br>
+        <li>Uber Trip Data: <a href = "https://github.com/fivethirtyeight/uber-tlc-foil-response/tree/master/uber-trip-data">https://github.com/fivethirtyeight/uber-tlc-foil-response/tree/master/uber-trip-data</a></li>
+        <li>Taxi Trip Data: <a href="http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml"> http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml</a></li>
+        <li>Other FHV Trip Data: <a href= "https://github.com/fivethirtyeight/uber-tlc-foil-response/tree/master/other-FHV-data">https://github.com/fivethirtyeight/uber-tlc-foil-response/tree/master/other-FHV-data</a></li>
+        <li>Aggregate Number of Rides: <a href = "https://github.com/fivethirtyeight/uber-tlc-foil-response/blob/master/Aggregate%20FHV%20Data.xlsx">https://github.com/fivethirtyeight/uber-tlc-foil-response/blob/master/Aggregate%20FHV%20Data.xlsx</a></li>
+        <br>
+        <br><i style="font-size:125%">Code Sources:</i><br>
+        <br>
+        <li>Map using Leaflet.js and d3.js: <a href = "http://bl.ocks.org/d3noob/9267535">http://bl.ocks.org/d3noob/9267535</a> </li>
+        <li>Mike Bostock Difference Chart: <a href = "http://bl.ocks.org/mbostock/3894205">http://bl.ocks.org/mbostock/3894205</a></li>
+        <li>Full Difference Chart Example: <a href="http://bl.ocks.org/d3noob/f6d8588a0aa3a7503f57">http://bl.ocks.org/d3noob/f6d8588a0aa3a7503f57</a></li>
+        <li>Full Difference Chart Explained: <a href ="http://www.d3noob.org/2015/07/difference-charts-with-d3js-science-vs.html">http://www.d3noob.org/2015/07/difference-charts-with-d3js-science-vs.html</a></li>
+        <li>Switching between JSON files: <a href="https://stackoverflow.com/questions/11157806/specifying-the-json-file-for-some-visualization-via-a-dropdown-box">http://stackoverflow.com/questions/11157806/specifying-the-json-file-for-some-visualization-via-a-dropdown-box</a></li>
+        <li>csv to JSON: <a href = "https://jsfiddle.net/sturtevant/AZFvQ/">https://jsfiddle.net/sturtevant/AZFvQ/</a></li>
+        <br>
+        
+        
+        
+    </ul>
+      
+      
+    <!--<h4> Sources: </h4>-->
+      
+      
+      
+  </body>
+</html>
+

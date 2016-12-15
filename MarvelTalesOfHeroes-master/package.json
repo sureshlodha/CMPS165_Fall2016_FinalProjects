@@ -1,0 +1,26 @@
+{
+  "name": "marveltalesofheroes",
+  "version": "1.0.0",
+  "description": "An Interactive Timeline Visualization of Marvel's Popular Heroes",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edalrami/MarvelTalesOfHeroes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edalrami/MarvelTalesOfHeroes/issues"
+  },
+  "homepage": "https://github.com/edalrami/MarvelTalesOfHeroes#readme",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
+    "express-validator": "^3.0.0"
+  }
+}

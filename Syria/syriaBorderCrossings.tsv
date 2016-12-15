@@ -1,0 +1,30 @@
+Country	Crossing	LAT_DD	LON_DD	BorderCountry	BorderCountryCrossing	fips	iso_alpha2	iso_alpha3	iso_num	stanag	tld	BC_fips	BC_iso_alpha2	BC_iso_alpha3	BC_iso_num	BC_stanag	BC_tld
+Syria	Abu Kamal	34.398	40.976	Iraq	Al Qaim	SY	SY	SYR	760	SYR	.sy	IZ	IQ	IRQ	368	IRQ	.iq
+Syria	At Tanf 	33.434	38.921	Iraq	Waleed	SY	SY	SYR	765	SYR	.sy	IZ	IQ	IRQ	368	IRQ	.iq
+Syria	Peshkapor	37.09	42.348	Iraq	Faysh Khabur	SY	SY	SYR	780	SYR	.sy	IZ	IQ	IRQ	368	IRQ	.iq
+Syria	Sahela	37.0403693	42.33928284	Iraq	Sahela	SY	SY	SYR	783	SYR	.sy	IZ	IQ	IRQ	368	IRQ	.iq
+Syria	Tall Kujik	36.806	42.076	Iraq	Rabiah	SY	SY	SYR	785	SYR	.sy	IZ	IQ	IRQ	368	IRQ	.iq
+Syria	Dara	32.603	36.081	Jordan	Ar Ramtha	SY	SY	SYR	772	SYR	.sy	JO	JO	JOR	400	JOR	.jo
+Syria	Hadallat (Tower 30/31)	32.85626819	37.82102492	Jordan	Hadallat	SY	SY	SYR	774	SYR	.sy	JO	JO	JOR	400	JOR	.jo
+Syria	Nasib	32.543	36.202	Jordan	Jabir	SY	SY	SYR	779	SYR	.sy	JO	JO	JOR	400	JOR	.jo
+Syria	Tower 22	33.32482335	38.70139483	Jordan	Tower 22	SY	SY	SYR	787	SYR	.sy	JO	JO	JOR	400	JOR	.jo
+Syria	Ash Shaykh Jabir	34.636	35.976	Lebanon	Al Aridah	SY	SY	SYR	764	SYR	.sy	LE	LB	LBN	422	LBN	.lb
+Syria	Judaydat Yabus	33.66	35.977	Lebanon	Al Masna	SY	SY	SYR	777	SYR	.sy	LE	LB	LBN	422	LBN	.lb
+Syria	Riblah	34.423	36.544	Lebanon	Al Qa 	SY	SY	SYR	782	SYR	.sy	LE	LB	LBN	422	LBN	.lb
+Syria	Tallkalakh	34.668012	36.303241	Lebanon	Tallkalakh	SY	SY	SYR	786	SYR	.sy	LE	LB	LBN	422	LBN	.lb
+Syria	Al Abbudiyah	34.642	36.12	Lebanon	Al Abbudiyah	SY	SY	SYR	788	SYR	.sy	LE	LB	LBN	422	LBN	.lb
+Syria	Ad Darbasiyah	37.078	40.645	Turkey	Senyurt 	SY	SY	SYR	761	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Al Qamishli	37.061	41.219	Turkey	Nusaybin	SY	SY	SYR	762	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Ar Ra'-ee	36.63512071	37.47578066	Turkey	Çobanbey	SY	SY	SYR	763	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Atmeh	36.32548349	36.66188551	Turkey	Atmeh	SY	SY	SYR	766	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Ayn al Arab	36.9	38.35	Turkey	Mursitpinar	SY	SY	SYR	767	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Bab al Hawa	36.23	36.692	Turkey	Cilvegozu	SY	SY	SYR	768	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Bab al Kasab	35.905	36.009	Turkey	Yayladagi	SY	SY	SYR	769	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Bab al-Salam	36.646	37.085	Turkey	Oncupinar	SY	SY	SYR	770	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Cizre	37.308672	42.194966	Turkey	Cizre	SY	SY	SYR	771	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Hacipasa	36.22756079	36.55766006	Turkey	Hacipasa	SY	SY	SYR	773	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Harem	36.0057964	36.37155587	Turkey	Harem	SY	SY	SYR	775	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Jarabulus	36.831	37.999	Turkey	Kargamis RR Yard	SY	SY	SYR	776	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Meidan Ekbis	36.82806948	36.67492401	Turkey	İslahiye	SY	SY	SYR	778	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Ras al Ain	36.843	40.053	Turkey	Ceylanpinar	SY	SY	SYR	781	SYR	.sy	TU	TR	TUR	792	TUR	.tr
+Syria	Tall Al Abyad	36.703	38.959	Turkey	Akcakale Customs	SY	SY	SYR	784	SYR	.sy	TU	TR	TUR	792	TUR	.tr

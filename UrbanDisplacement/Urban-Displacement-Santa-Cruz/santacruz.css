@@ -1,0 +1,107 @@
+h1.title{
+  font-weight: 300; 
+  font-size: 38px;
+  text-align: center;
+  line-height: 120%; 
+  font-family: 'Open sans', sans-serif;
+}
+
+h2.by{
+  font-weight: 300; 
+  text-align: center;
+  padding-left: 80px;
+  padding-right: 80px; 
+  font-size: 15px;
+  line-height: 120%; 
+  font-family: 'Open sans', sans-serif; 
+}
+
+h4{
+  font-weight: 300; 
+  padding-left: 40px;
+  font-size: 15px;
+  line-height: 120%; 
+  font-family: 'Open sans', sans-serif; 
+}
+
+div.container{
+    display: flex;
+
+}
+
+div.row{
+  display: flex;
+}
+
+svg {
+  font: 10px sans-serif;
+  margin-left: 200px;
+}
+.caption {
+  font-weight: bold;
+}
+.key path {
+  display: none;
+}
+.key line {
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.county-border {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .3;
+}
+input{
+  position:relative;
+  top: 700px;
+}
+
+.tooltip {   
+  position: absolute;           
+            
+  width: 175x;                                   
+  padding: 10px;             
+  font: 12px sans-serif;        
+  background: rgba(176,196,222,0.85);   
+  border: 0px;      
+  border-radius: 8px;
+  pointer-events: none;         
+}
+
+hideText{
+  visibility: hidden;
+}
+
+select.myList{
+  position: relative;
+  left: 900px;
+  top: 150px;
+}
+
+div.bar{
+  position: relative;
+  left: 900px;
+  top: 200px;
+}
+
+div.year{
+  position: relative;
+  bottom: 5px;
+  left:50px;
+  font-weight: 300; 
+  font-size: 20px;
+  line-height: 120%; 
+  font-family: 'Open sans', sans-serif; }
+}
+
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    -webkit-border-radius: 15px;
+    background-color: #bbb;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#888));
+    border: 1px solid #000;
+    height: 25px;
+    width: 25px;
+}

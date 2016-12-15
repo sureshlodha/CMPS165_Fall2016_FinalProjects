@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<link rel="stylesheet" type="text/css" href="style.css">
+<body>
+    <body style="background-color:#78AB46;">
+    <br><br>
+    <div class = "title">
+        Total Crime on Women in India, 2015
+        <br><br>
+        </div>
+    <div class = "storyline">
+   In 2015, the crimes against women reported by official statistics had increased by approximately 20%, compared to those reported in 2014. These crimes ranged from reported rape, cruelty by husband and relatives, harassment for dowry, as well as kidnapping and abduction. With increased visibility of these various crimes, it is clear that there is an urgent need to address this problem at multiple levels in India.
+        </div>
+    <br><br>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script>
+
+
+    
+    
+var width = 960,
+    height = 1100;
+
+var formatNumber = d3.format(",d");
+    
+/*20.5937*/
+var projection = d3.geo.albers()
+    .center([9, 28.5937])
+    .rotate([-78.9629, 0,0])
+    .parallels([20, 78])
+    .scale(1500)
+    //.translate([width / 2, height / 2]);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var color = d3.scale.threshold()
+    //.domain([1, 50, 2000, 5000, 10000, 15000, 20000, 50000])
+    .domain([1, 500, 4000, 10000, 15000, 20000, 30000, 40000])
+    .range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
+
+// A position encoding for the key only.
+var x = d3.scale.linear()
+    .domain([0, 50000])
+    .range([0, 480]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickSize(13)
+    .tickValues(color.domain())
+    .tickFormat(function(d) { return d >= 100 ? formatNumber(d) : null; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+    //.attr("class", "county-border");
+
+var g = svg.append("g")
+    .attr("class", "key")
+    .attr("transform", "translate(400,140)");
+
+g.selectAll("rect")
+    .data(color.range().map(function(d, i) {
+      return {
+        x0: i ? x(color.domain()[i - 1]) : x.range()[0],
+        x1: i < color.domain().length ? x(color.domain()[i]) : x.range()[1],
+        z: d
+      };
+    }))
+  .enter().append("rect")
+    .attr("height", 8)
+    .attr("x", function(d) { return d.x0; })
+    .attr("width", function(d) { return d.x1 - d.x0; })
+    .style("fill", function(d) { return d.z; });
+    
+g.call(xAxis).append("text")
+    .attr("class", "caption")
+    .attr("y", -6)
+    .text("Total Crimes Against Women");
+
+var div = d3.select("body").append("div")	
+        .attr("class", "tooltip")				
+        .style("opacity", 0);    
+
+    
+d3.json("india-tc.json", function(error, ca) {
+  if (error) throw error;
+  //console.log(ca);
+
+  //var tracts = topojson.feature(ca, ca.objects.tracts);  
+   var tracts = topojson.feature(ca, ca.objects.Admin2);  
+    
+  //console.log(tracts);
+    
+  // Clip tracts to land.
+  svg.append("defs").append("clipPath")
+      .attr("id", "clip-land")
+    .append("path")
+      .datum(topojson.feature(ca, ca.objects.Admin2))
+      .attr("d", path);
+
+    var nest = d3.nest()
+        .key(function(d) {return color(d.properties.population) /*/ d.properties.area * 2.58999e6)*/ })
+        .entries(tracts.features.filter(function(d) {/*console.log(d);*/ return d.properties.population; }));
+  // Group tracts by color for faster rendering.
+  svg.append("g")
+      .attr("class", "tract")
+      .attr("clip-path", "url(#clip-land)")
+    .selectAll("path")
+      .data(tracts.features)
+        //.style("border", "1px solid black")
+    .enter().append("path")
+      .style("fill", function(d) { /* console.log(d.id + ': ' + d.properties.population);*/ return color(d.properties.population); })
+      .attr("d", function(d) { return path(d) /*({type: "FeatureCollection", features: d.values /*was d.values})*/; })
+      .on("mouseover", function(d) {
+            console.log(d);
+            //console.log(tracts.features.entries(tracts.features.filter(function(d) {/*console.log(d);*/ return d.properties.population; })));
+            //console.log(d.values[0].properties.population);
+            div.transition()		
+                .duration(200)		
+                .style("opacity", .9);	
+            //console.log(d3.event.pageX);
+            //console.log(d3.event.pageY);
+            if(d.properties.population == 75){
+              div.html("<div align=center>" + d.id + "<br/>" + "<br/>" + "There is no data for this state" + "</div>")
+                 .style("left", (d3.event.pageX) + "px")		
+                 .style("top", (d3.event.pageY - 28) + "px");
+            }else{
+            div.html("<div align=center>" + d.id + "</div>" + "<br/>" + "Total Crimes: " + "<span class=right>" + d.properties.population + "</span>" + "<br/>" +"<br/>"+ "Dowry Deaths: " + "<span class=right>" + d.properties.dowry + "</span>" + "<br/>" + "Cruelty by Husband and Relatives: " + "<span class=right>" + d.properties.husbandCruelty + "</span>" + "<br/>" + "Rape: " + "<span class=right>" + d.properties.rape + "</span>" + "<br/>" + "Kidnapping and Abductions: " + "<span class=right>" + d.properties.kidnap + "</span>" + "<br/>" + "Other: " + "<span class=right>" + d.properties.other + "</span>" + "<br/>")
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");
+            }
+            //div.html(d.country + "<br/>"  + "Population: " + d.population + " Million" + "<br/>" + "GDP: $" + d.gdp + " Trillion" + "<br/>" + "EPC: " + d.epc + " Million BTUs" + "<br/>" + "Total: " + d.total + " Trillion BTUs")	
+            })					
+        .on("mouseout", function(d) {		
+            div.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+        })
+      
+      //.style("border", "1px solid black");
+      .attr("class", "county-border");  //HERE IT IS
+      //.attr("d", path);
+    //ADD STYLE OUTLINE HERE?
+
+  // Draw county borders.
+//  svg.append("path")
+//      .datum(topojson.mesh(ca, ca.objects.Admin2, function(a, b) { return a !== b; }))
+//      .attr("class", "county-border")
+//      .attr("d", path);
+});
+
+d3.select(self.frameElement).style("height", height + "px");
+    
+    
+   
+    
+    
+    
+
+</script>
+     <div style="position: relative">
+         <table bgcolor=#98FF98 style="position: absolute; bottom: 50px">
+             
+        <tr>
+           <td>
+            <b>Created By:</b>
+            <br>Sidharth Gilela and Sejal Chadha in collaboration<br>
+            with Professor Lodha, Shobit M, and Ryan B
+           </td>
+           <td>
+            <b>Data Sources:</b>
+            <br>Data: <a href="https://gigadom.wordpress.com/2015/01/16/a-crime-map-of-india-in-r-crime-against-women/" target="_blank" >gigadom.wordpress.com</a><br>
+            Shape file: <a href="https://github.com/datameet/maps" >github.com/datameet/maps</a>
+            </td>
+        </tr>
+             
+        <tr>
+           <td>
+            <b>Created For:</b>
+            <br>CMPS 165: Data Programming for Visualization<br>     
+           </td>
+           <td>
+            <b>Code Sources:</b>
+            <br>Tooltip: <a href="http://bl.ocks.org/Caged/6476579" >bl.ocks.org/Caged</a><br>
+            Map Positioning: <a href="https://bost.ocks.org/mike/map/" >bost.ocks.org/mike/map</a>
+            <br>Geomapping: <a href="https://bl.ocks.org/mbostock/5562380" >bl.ocks.org/mbostock</a><br>
+            </td>
+        </tr>
+             
+        <tr>
+           <td>
+            <b>Files:</b>
+            <br>1) index.html<br>
+            2) india-tc.json
+            <br>3) README<br>
+            4) style.css
+            </td>
+            <td>
+            
+            </td>
+        </tr>         
+        </table> 
+         
+    </div>
+</body>
+</html>

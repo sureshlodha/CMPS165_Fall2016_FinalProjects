@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>  
+  <head>
+    <!-- Meta Tag -->
+    <meta charset="utf-8">
+    <title>Top 10 National Park Visitor Count</title>
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="NPvisitors.css">  
+    <!-- D3.js Source -->
+    <script type= "text/javascript" src="https://d3js.org/d3.v3.min.js"></script> 
+    <script src="//d3js.org/topojson.v1.min.js"></script>
+  </head>
+    
+  <body>
+    <h1 style="text-align:center; color:green;"><bold>Top 10 National Park Visitor Count</bold></h1>
+    <h3 style="text-align:center; font-style:italic; font-size: 150%;">National Parks are invaluable assets to the US Government for their reliable source and income, and analyzing tourism plays an important role in upholding that structure by giving insight so that the Department of the Interior can determine where to divert resources to.</h3>
+    <p style="text-align:center; font-size: 150%;" >Hover over a park name to get more information, and click on it to make the data for visitors appear on the line graph on the right.</p>
+    <!-- D3.js code -->
+    <script type="text/javascript" src="NPvisitors.js"></script>
+    <!-- Submission Info -->
+    <div id="logistics">
+    <h4>Created by: Curtis Lee and Mengguang Zou in collaboration with Ryan Brounley, Suresh Lodha, and Shobhit Maheshwari</h4>
+    <h4>Created for: CMPS165, Data Programming for Visualization, Fall 2016</h4>
+    <h4>Description:</h4>
+    <p> A geomapping of National Parks and a graph to display visitor data.</p>
+    <table style="text-align: left;">
+      <tr>
+        <th>Files Submitted:</th>
+        <th>Data Sources:</th>
+        <th>Code Sources:</th>
+      </tr>
+      <tr>
+        <th>index.html</th>
+        <th><a href="https://irma.nps.gov/Stats/">US Government National Park Statistics</a></th>
+        <th><a href="https://github.com/d3/d3/blob/master/API.md">D3 API Reference, Mike Bostock</a></th>
+      </tr> 
+      <tr>
+        <th>NPvisitors.js</th>
+        <th><a href="https://bl.ocks.org/pdbartsch/d4f05d9c65d80f8d4dfb">US National Park Topojson, Paul Bartsch</a></th>
+        <th><a href="http://chimera.labs.oreilly.com/books/1230000000345/index.html">Interactive Data Visualization for the Web, Scott Murray</a></th>
+      </tr>    
+      <tr>
+        <th>NPvisitors.css</th>
+        <th><a href="https://www.arcgis.com/home/item.html?id=f7f805eb65eb4ab787a0a3e1116ca7e5">ArcGIS US 50 states + DC shapefile</a></th>
+        <th><a href="https://bost.ocks.org/mike/map/">Let's Make a Map, Mike Bostock</a></th>
+      </tr>
+      <tr>
+        <th>parks.json</th>
+        <th>Descriptions: Courtesy of <a href="https://www.google.com/">Google</a></th>
+        <th><a href="http://bl.ocks.org/d3noob/e99a762017060ce81c76">Multiline Toggle, d3noob</a></th>
+      </tr>
+      <tr>
+        <th>visitors.csv</th>
+        <th>Photos: Courtesy of <a href="https://www.nps.gov/index.htm">National Park Service</a> and <a href="http://www.pachd.com/">pachd Free Image Service</a></th>
+        <th><a href="http://bl.ocks.org/d3noob/a22c42db65eb00d4e369">Simple d3.js tooltips, d3noob</a></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <th><a href="http://isda.ncsa.illinois.edu/~mpsimeon/projects/maps/www/farms.html">Independent Farms in the USA, mpsimeon</a></th>
+      </tr>    
+    </table>
+    </div>
+  </body>
+    
+</html>

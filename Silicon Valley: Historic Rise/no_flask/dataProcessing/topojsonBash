@@ -1,0 +1,3 @@
+#!/bin/bash
+topojson -o siliconValley.json -e hoodData.csv --id-property=RegionID,REGIONID -p -- SF.shp SanMateo.shp SanJose.shp PaloAlto.shp Oakland.shp Hayward.shp Freemont.shp caCounty.shp valleyZIP.shp
+

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <title>Occupational Info</title>
+    <style>
+
+        #chart {
+            margin-left: 0px;
+        }
+
+        text {
+            font: 10px sans-serif;
+        }
+
+        .bar {
+            fill: steelblue;
+        }
+        .bar:hover {
+            fill: brown;
+        }
+
+        .dot {
+            stroke: #000;
+        }
+
+        .axis path, .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .label {
+            fill: #777;
+        }
+
+        .country {
+            font: 500 48px "Helvetica Neue";
+            text-anchor:center;
+            fill: #ddd;
+        }
+
+        .year.label {
+            font: 500 48px "Helvetica Neue";
+            fill: #ddd;
+        }
+
+        .year.label.active {
+            fill: #aaa;
+        }
+
+        .hidden {
+            color: #f00;
+        }
+
+        .visible {
+            color: #0f0;
+        }
+
+        .overlay {
+            fill: none;
+            pointer-events: all;
+            cursor: ns-resize;
+        }
+
+        div.tooltip {
+            position: absolute;
+            text-align: center;
+            width: 225px;
+            height: 0px;
+            padding: 1px;
+            font: 10px sans-serif;
+            font-weight: bold;
+            background: whitesmoke;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+            display: table;
+
+        }
+        .citation {
+            font-weight: bold;
+            background-color: gainsboro;
+            border-radius: 8px;
+        }
+
+        .legend circle {
+            fill: none;
+            stroke: #ccc;
+        }
+    </style>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<body style="background-color: #FCFCFA">
+
+<h1 style="text-align: center; font-size: 3em">Employment and Income by Industry</h1>
+
+
+<div id="chart" style="margin: 0 auto; width: 75%; height: 506px;"></div>
+<div id="tooltip" class="hidden" style="float: left;"><p><span id="value"></span></p></div>
+
+
+<div style="width: 20%; margin: 0 auto; margin-top: 10px; margin-left: 45%">
+    <button style="background-color: transparent; border: none" id="pause"><span class="glyphicon glyphicon-pause"></span></button>
+    <button style="background-color: transparent; border: none" id="play"><span class="glyphicon glyphicon-play"></span></button>
+    <button style="background-color: transparent; border: none" id="restart"><span class="glyphicon glyphicon-repeat"></span></button>
+</div>
+<div class="col-sm-4" style="word-wrap: break-word; background: gainsboro; border-radius: 12px; margin-top: 8%; margin-left: 15%; margin-bottom: 5%; width: 60%">
+        <h4 style="padding: 10px; font-weight: bold; text-align: center">Created By:</h4>
+        <h5 style="padding-left: 10px; text-align: center">Ryan Reeves in collaboration with Suresh K. Lodha</h5>
+        <h5 style="padding-left: 10px; text-align: center">UCSC CMPS 165: Data Programming and Visualization</h5>
+    <div class="col-sm-6" style="font-weight: bold; float: left">
+        <h5 style="padding: 10px; font-weight: bold">Files:</h5>
+        <p style="padding-left: 10px;">index.html</p>
+        <p style="padding-left: 10px;">motion_chart.js</p>
+        <p style="padding-left: 10px;">params.js</p>
+        <p style="padding-left: 10px;">occupations.json</p>
+
+    </div>
+    <div class="col-sm-6" style="font-weight: bold; float: left">
+        <h5 style="font-weight: bold">Sources:</h5>
+        <p style="padding-left: 10px;">D3Noob - (Tooltip) <a href="http://bl.ocks.org/d3noob/a22c42db65eb00d4e369">
+            http://bl.ocks.org/d3noob/a22c42db65eb00d4e369</a></p>
+        <p style="padding-left: 10px;">Tony Hirst - (Motion Chart Starter Code) <a href="http://bl.ocks.org/psychemedia/7337488">
+            http://bl.ocks.org/psychemedia/7337488</a></p>
+        <p style="padding-left: 10px;">ZJONSSON - (Legend) <a href="https://gist.github.com/ZJONSSON/3918369">
+            https://gist.github.com/ZJONSSON/3918369</a></p>
+        <p style="padding-left: 10px;">Mike Bostock - (Bubble Legend) <a href="https://bost.ocks.org/mike/bubble-map/">
+            https://bost.ocks.org/mike/bubble-map/</a></p>
+        <p style="padding-left: 10px;">Bureau of Labor Statistics <a href="http://data.bls.gov/cgi-bin/surveymost?ce">
+            http://data.bls.gov/cgi-bin/surveymost?ce</a></p>
+        <p style="padding-left: 10px;">Department of Labor <a href="http://beta.bls.gov/dataQuery/find?st=0&r=20&more=0">
+            http://beta.bls.gov/dataQuery/find?st=0&r=20&more=0</a></p>
+    </div>
+
+</div>
+
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="params.js" ></script>
+<script src="motion_chart.js"></script>
+
+
+
+</body>
+</html>

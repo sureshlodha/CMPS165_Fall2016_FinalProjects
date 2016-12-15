@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+
+svg {
+  font: 10px sans-serif;
+}
+
+.caption {
+  font-weight: bold;
+  fill: #000;
+}
+
+.key path {
+  display: none;
+}
+
+.key line {
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.state-border {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: 0.9;
+}
+
+.county-border {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: 0.3;
+}
+
+.tract {
+  stroke: transparent;
+}
+
+</style>
+</head>
+<body style="width:960px">
+<div style="text-align:center"><h1>USA Population Density, 2014</h1></div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script>
+// based heavily on https://bl.ocks.org/mbostock/5562380, updated for d3.js version 4.
+var width = 960,
+    height = 720;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+var path = d3.geoPath();
+// original thresholds used by California Population Density map
+/*
+var colors = d3.scaleThreshold()
+	.domain([1, 10, 50, 100, 500, 1000, 2000, 5000])
+	.range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
+*/
+// more reasonable thresholds for nation wide population density
+var colors = d3.scaleThreshold()
+	.domain([1, 10, 25, 50, 250, 750, 1500, 2000])
+	.range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
+var x = d3.scaleLinear()
+	.domain([0, 2100])
+	.range([0, 640]);
+var g = svg.append("g")
+	.attr("class", "key")
+	.attr("transform", "translate(440,40)");
+g.selectAll("rect")
+	.data(colors.range().map(function(d, i) {
+	  return {
+		x0: i ? x(colors.domain()[i - 1]) : x.range()[0],
+		x1: i < colors.domain().length ? x(colors.domain()[i]) : x.range()[1],
+		z: d
+	  };
+	}))
+  .enter().append("rect")
+	.attr("height", 8)
+	.attr("x", function(d) { return d.x0; })
+	.attr("width", function(d) { return d.x1 - d.x0; })
+	.style("fill", function(d) { return d.z; });
+var xAxis = d3.axisBottom()
+	.scale(x)
+	.tickSize(13)
+	.tickValues(colors.domain())
+	.tickFormat(function(d, i) { return d >= 100 ? formatNumber(colors.domain()[i]) : null; });
+var formatNumber = d3.format(",d");
+g.call(xAxis)
+	.attr("transform", "translate(150,600)")
+	.append("text")
+	.attr("transform", "translate(320,50)")
+	.attr("class", "caption")
+	.text("Population per square mile");
+	
+d3.json("albersUsa.json", function(error, usa) {
+  if (error) return console.error(error);
+	// fill in tracts with appropriate color based on population density for each object in 'usa' ending in "_tracts"
+	Object.keys(usa.objects).filter(k => ~k.indexOf('_tracts')).forEach(function(key){
+		tracts = topojson.feature(usa, usa.objects[key]);
+		svg.append("g")
+			.attr("class", "tract")
+			.attr("clip-path", "url(#clip-land)")
+			.selectAll("path")
+			.data(d3.nest()
+				.key(function(d) { return +d.properties.area >= 0 ? colors(+d.properties.population / +d.properties.area * 2.58999e6) : "#333333"; })
+				.entries(tracts.features.filter(function(d) { return d.properties.area; })))
+			.enter().append("path")
+			.style("fill", function(d) { return d.key; })
+			.attr("d", function(d) { return path({type: "FeatureCollection", features: d.values}); });
+	});
+	// draw county/state borders last, as tract data would have covered them.
+  svg.append("path")
+      .datum(topojson.feature(usa, usa.objects.counties))
+	  .attr("class", "county-border")
+      .attr("d", path);
+  svg.append("path")
+      .datum(topojson.mesh(usa, usa.objects.counties, function(a, b) { return a.properties['state'] !== b.properties['state'] || a === b}))
+      .attr("class", "state-border")
+      .attr("d", path);
+});
+</script>
+</body>
+</html>

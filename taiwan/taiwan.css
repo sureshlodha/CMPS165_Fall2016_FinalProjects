@@ -1,0 +1,111 @@
+#title{
+    text-align: center;
+    -webkit-transform: translate(0px, 30px);
+}
+
+#storyline{
+    -webkit-transform: translate(0px, 30px);
+    width:auto;
+    font-family:serif;
+    font-size: 20px;
+}
+
+#info{
+    width: 900px;
+    height: 400px;
+    background-color:lightgray;
+    -webkit-transform: translate(100px, 0px);
+}
+#info .column-left{ float: left; width: 20%; }
+#info .column-right{ float: right; width: 35%; }
+#info .column-center{ float: left; width: 45%; }
+
+.column-left{ float: left; width: 65%; }
+.column-right{ float: right; width: 30%; }
+.column-center{ float: left; width: 5%; }
+
+.key{
+    -webkit-transform: translate(-200px, 660px);
+}
+.county {
+    stroke: #fff;
+    stroke-width: 1px;
+    -webkit-transform: translate(-100px, -60px);
+}
+.county:hover {
+    fill: #800;
+}
+
+path{
+    stroke-width: thick;
+    stroke:gray;
+}
+
+div.tooltip{
+    position: absolute;
+    width: 400px;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}
+
+.hidden{
+    display: none;
+}
+
+.tooltip p{
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.buttons{
+    -webkit-transform: translate(120px, 515px);
+}
+
+.yearText{
+    font-family: serif;
+    font-size: 20px;
+}
+
+#currentYear{
+    font-family:fantasy;
+    font-size: 35px;
+}
+
+.tick {
+  font: 14px sans-serif;
+}
+
+#yearSlider{
+    -webkit-transform: translate(250px, 680px);
+    height:80px;
+}
+.axis   .domain { 
+    fill: none; 
+    stroke: #000; 
+    stroke-opacity: .3; 
+    stroke-width: 10px; 
+    stroke-linecap: round; 
+}
+.axis .halo{ 
+    fill: none; 
+    stroke: #ddd; 
+    stroke-width: 8px;  
+    stroke-linecap: round; 
+}
+
+.handle {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 1.25px;
+}

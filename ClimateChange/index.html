@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="Climate_Change.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type= "text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+        <title>
+            Climate Change
+        </title>  
+    </head>
+        <body>
+
+            <div class="container">
+              
+                <h1 class="center-align">Climate Change</h1>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-8">
+                        <h4 class="center-align">
+                            The increasing carbon dioxide emission is a causation of rising sea levels, increasing global
+                            temperature, and decreasing artic sea ice. Although deniers call anthropogenic climate change a myth, the trends in data contradict their claims that these phenomena are coincidental and unrelated.
+                        </h4>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row">
+                    <div class="center-align">
+                        <div id="mygraph"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="center-align">
+                        <div class="buttonMargin">
+                            <button type="button" class="btn btn-default" id="separate_lines" >Separate Lines</button>
+                            <button type="button" class="btn btn-default" id="overlap_lines" >Overlap Lines</button>
+                            <button type="button" class="btn btn-default" id="1880_2015" >View 1880-2015</button>
+                            <button type="button" class="btn btn-default" id="1980_2015" >View 1980-2015</button>   
+                        </div>
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="offset-left">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="cardInnerMargin">
+                                    <span class="cardTitle">Submitted Files</span>
+                                    <ul>
+                                        <li>index.html</li>
+                                        <li>ClimateChange.js</li>
+                                        <li>ClimateChange.css</li>
+                                        <li>ANNUAL_CO2_Emission.csv</li>
+                                        <li>ANNUAL_GLOBAL_TEMP.csv</li>
+                                        <li>ANNUAL_ARTIC_SEA_ICE_MIN.csv</li>
+                                        <li>CISRO_recons_gmsl_mo_2015.csv</li>
+                                        <li>README</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="cardInnerMargin">
+                                    <span class="cardTitle">Data Sources</span>
+                                    <ul>
+                                        <li><a href="http://climate.nasa.gov/">NASA (Temp.)</a></li>
+                                        <li><a href="http://www.esrl.noaa.gov/gmd/ccgg/trends/global.html#global_data">NOAA (CO2)</a></li>
+                                        <li><a href="http://www.cmar.csiro.au/">CISRO (Sea Level)</a></li>
+                                        <li><a href="http://nsidc.org/">NSIDC (Sea Ice)</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="cardInnerMargin">
+                                    <span class="cardTitle">Visual & Code Sources</span>
+                                    <ul>
+                                        <li><a href="https://github.com/d3/d3-3.x-api-reference/blob/master/API-Reference.md">D3 API Reference</a></li>
+                                        <li><a href="http://bl.ocks.org/d3noob/6eb506b129f585ce5c8a">Favorite Tooltip by d3noob</a></li>
+                                        <li><a href="http://getbootstrap.com/">Bootstrap</a></li>
+                                        <li><a href="http://fiddle.jshell.net/8xkv3/6/">AmeliaBR: CSS in JavaScript</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>        
+                </div>
+                <div class="row">
+                    <div class="offset-right">
+                        <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <div class="createdByCard">
+                                    <div class="cardInnerMargin">
+                                        <div class="center-align">
+                                            Created by Ryan Tran in collabaration with Suresh K. Lodha for CMPS 165: Data Programming for Visualization, Fall 2016. 
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <script type="text/javascript" src="Climate_Change.js"></script> 
+            
+        </body>
+</html>

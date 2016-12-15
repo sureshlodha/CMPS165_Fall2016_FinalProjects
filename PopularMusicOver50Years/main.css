@@ -1,0 +1,231 @@
+body {
+    background-color: rgb(241, 241, 241);
+    position: relative;
+}
+
+.noSelect, h1, img, text {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Storyline */
+#storyline {
+    padding: 15px 5px;
+    width: 900px;
+    color: #000000;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 100;
+    line-height: 1.2em;
+}
+
+/* Clean axes */
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke-width: 2px;
+}
+
+
+/* Header Styling */
+
+h1 {
+    background-color: #5c5c5c;
+    font-size: 30px;
+}
+
+h4 {
+    color: #dddd00;
+    margin: 0;
+    padding: 0;
+}
+
+h6 {
+    margin-top: 7px;
+    line-height: 1.6em;
+}
+
+h1, img, text {
+    cursor: default;
+    pointer-events: none;
+}
+
+h1, h5, h6, h7 {
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Popover contents styling */
+
+.popContents {
+    display: inline-block;
+}
+
+#cover {
+    float: left;
+    width: 120px;
+    height: 120px;
+}
+
+#title {
+    color: #FFE600;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 250;
+    line-height: 1em;
+}
+
+#artist {
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 200;
+    line-height: 1em;
+}
+
+hr {
+    padding: 0px;
+    margin: 0px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+
+/* Play and stop icons */
+
+.speaker {
+    position: absolute;
+    pointer-events: none;
+}
+
+.speaker.hidden {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+#mainDiv, #rankDiv {
+    overflow-x: auto;
+    width: 100%;
+    height: 100%;
+}
+
+/* Legend Text */
+.legendText {
+    font-family: 'Lato', sans-serif;
+}
+
+/* Bootstrap tabs */
+
+.container {
+    float: left;
+    padding-right: 8px;
+}
+
+.nav-tabs {
+    -webkit-user-select: none;
+}
+
+
+/* Popover */
+
+.popover.left .arrow:after {
+  border-left-color: #393939;
+}
+
+.popover.right .arrow:after {
+  border-right-color: #393939;
+}
+
+.popover {
+    pointer-events: none;
+    background-color: #393939;
+    max-width: 320px;
+}
+
+
+/* Modal */
+.modal-dialog {
+    width: 800px;
+}
+
+.modal-wide .modal-body {
+  overflow-y: auto;
+}
+.modal-body a {
+    display: block;
+}
+
+/* Left column of modal */
+.songsLeft {
+    width: 55%;
+    float: left;
+    padding: 5px;
+}
+
+/* Right column of modal */
+.songsRight {
+    width: 45%;
+    float: left;
+    padding: 5px;
+}
+
+
+/* Footer */
+html, body {height: 100%;}
+
+#wrap {min-height: 100%;}
+
+#main {overflow:auto;
+    padding-bottom: 0px;}  /* must be same height as the footer */
+
+#footer {
+    background-color: gainsboro;
+    position: relative;
+    margin-top: -0px; /* negative value of footer height */
+    height: 0px;
+    clear:both;
+} 
+
+/*Opera Fix*/
+body:before {
+    content:"";
+    height:100%;
+    float:left;
+    width:0;
+    margin-top:-32767px;/
+}
+
+
+/* Footer columns */
+.alignleft {
+    font-size: 12px;
+    float: left;
+    width: 27.5%;
+    padding-left: 15px;
+}
+.aligncenter {
+    font-size: 12px;
+    padding-left: 15px;
+    float: left;
+    width: 36.25%;
+}
+.alignright {
+    font-size: 12px;
+    padding-left: 15px;
+    float: left;
+    width: 36.25%;
+}

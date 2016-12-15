@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+   
+svg{
+    display: block;
+    margin: auto;
+} 
+ div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 60px;                  
+  height: 28px;                 
+  padding: 2px;             
+  font: 12px sans-serif;        
+  background: lightsteelblue;   
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none;         
+}   
+.border {
+  fill:#fff7ec;
+  stroke: black;
+  stroke-opacity: .3;
+}
+.SyriaNeighbors {
+  fill:#ececec;
+  stroke: black;
+  stroke-opacity: .3;
+}
+    
+.border1 {
+  fill:none;
+  stroke: black;
+  stroke-opacity: .3;
+}
+.syria {
+  fill: red;
+  stroke: none;
+  stroke-opacity: .3;
+}
+    .border2 {
+  fill: #377eb8;
+    opacity: 0.7;
+  
+  stroke-opacity: 0.9;
+}
+    .border3 {
+  fill: #e41a1c;
+    opacity: 0.7;    
+  
+  stroke-opacity: 0.9;
+}
+    .border4 {
+  fill: #4daf4a;
+       
+        opacity: 0.7;
+  
+}
+    .border5 {
+  fill: #ff7f00;
+        opacity: 0.7;
+  
+  stroke-opacity: 0.9;
+}
+     .border6 {
+  fill: #984ea3;
+         opacity: 0.7;
+  
+  stroke-opacity: 0.9;
+}
+.syriaCross {
+  fill: green;
+  stroke: none;
+  stroke-opacity: .3;
+}
+    .d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 9px;
+  background: rgba(200, 200, 200, 0.8);
+  color: black;
+  border-radius: 2px;
+}
+    
+    #map1{
+        opacity: 0.0000001
+    }
+    .wrapper {
+    text-align: center;
+    margin-top:5px;
+    margin-bottom:2px;    
+}
+    .TheButtons{
+        
+    background-color: grey; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    } 
+/* Creates a small triangle extender for the tooltip */
+
+/* Style northward tooltips differently */
+
+
+    
+</style>
+<body>
+        
+     <h1 style = "text-align:center"; class="bg-primary";><bold> Syria Conflict </bold></h1>
+    <div id="option"; class="wrapper";>
+        
+        <input name="deathByGovernorates" 
+           type="button" 
+           value="Death By Governorates" 
+            class = "btn btn-danger btn-lg"
+            id = "Governorates"
+             />
+        
+        
+        <input name="deathByCounties" 
+           type="button" 
+           value="Death By Counties"
+            class="btn btn-danger btn-lg"       
+            id = "counties"      
+             />
+          
+        
+    </div>  
+    
+    <div id="option"; class="wrapper";>
+        
+        
+        
+    </div>  
+        
+    <div id="option"; class="wrapper";>
+         
+         <input name="Map of Current sitiuation" 
+           type="button" 
+           value="Who Controls Syria and Iraq" 
+            class = "btn btn-warning btn-lg" 
+            id = "ControlRegios"
+             /> 
+           
+        <input name="RefugeeLocation" 
+           type="button" 
+           value="Refugee Locations " 
+            class = "btn btn-info btn-lg" 
+            id = "RefugeeLoc"
+             /> 
+        
+        
+        
+        
+       
+           
+</div>
+
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
+    
+</body>
+<script>
+/*
+<input name="DeathLocation" 
+           type="button" 
+           value="Death Locations" 
+            class="btn btn-primary btn-lg" 
+            id = "DeathLoc"
+             /> 
+        
+         <input name="CrossLocation" 
+           type="button" 
+           value="Cross Boarder Locations" 
+            class = "btn btn-success btn-lg" 
+            id = "CrossLoc"
+             />
+                
+                */
+var width = 1215,  //2100
+    height = 600;
+    
+var isGov = false;     
+var isCounties = false;
+var isDeLoc = false;  
+var isCrossLoc = false;
+var isRefLoc = false;
+    // SVG element as a JavaScript object that we can manipulate later
+    svg = d3.select("body").append("svg")
+      .attr("width", width+300)
+      .attr("height", height+300);
+    
+    var InfoBlock = d3.select("body").append("svg")
+      .attr("width", 1400)
+      .attr("height", 350).attr("fill","blue");
+    
+    
+
+// Normally you'd look this up. This point is in the middle of Syria
+var colors = d3.scale.threshold()
+    .domain([ 1000, 15000, 30000, 50000])
+    .range(["#fdbb84", "#ef6548", "#b30000", "#7f0000"]);    
+    var colors1 = d3.scale.threshold()
+    .domain([ 1000, 15000, 30000, 50000])
+    .range(["#fdd49e", "#fdbb84", "#ef6548", "#b30000", "#7f0000"]);   
+    //  .domain([  15000, 30000, 50000])
+   // .range([ "#fdbb84", "#ef6548", "#b30000", "#7f0000"]); 
+    
+var color = d3.scale.threshold()
+    .domain([1, 10, 100, 500, 1000])
+    .range(["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
+    
+var formatNumber = d3.format(",d");    
+    
+var x = d3.scale.linear()
+    .domain([0, 50000])
+    .range([0, 600]);
+    
+var y = d3.scale.linear()
+    .domain([0, 50000])
+    .range([0, 600]);    
+    
+var refScale = d3.scale.linear()
+    .domain([0, 3000000])
+    .range([0, 30]);    
+    
+    var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Country:</strong> <span style='color:red'>" + d.Country + "</span>"+ 
+        "<p><strong>Border Country Crossing:</strong> <span style='color:red'>" + d.BorderCountry + "</span></p>" +
+           "<p><strong>Border syria Crossing:</strong> <span style='color:red'>" + d.Crossing + "</span></p>";});
+          // "<p><strong>GDP:</strong> <span style='color:red'>" + d.gdp  + "</span></p>" +
+           //"<p><strong>EPC:</strong> <span style='color:red'>" + d.epc + "</span></p>" +
+           //"<p><strong>Total:</strong> <span style='color:red'>" + d.total + "</span></p>";
+    
+    var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickSize(10)
+    .tickValues(colors1.domain())
+    .tickFormat(function(d) { return d >= 1000 ? formatNumber(d) : null; });
+    
+     var xAxisCounites = d3.svg.axis()
+    .scale(y)
+    .orient("bottom")
+    .tickSize(10)
+    .tickValues(colors1.domain())
+    .tickFormat(function(d) { return d >= 1000 ? formatNumber(d) : null; });
+    
+     var tip1 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+      console.log(d);
+    return "<p><strong>Country:</strong> <span style='color:blue'>" + d.country+ "</span></p>"+ 
+        "<p><strong>Total Refugees:</strong> <span style='color:blue'>" + d.TotalRef + "</span></p>" +
+           "<p><strong>Location:</strong> <span style='color:blue'>" + d.CampName + "</span></p>";});
+    
+    var tip2 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+      console.log(d);
+    return "<p><strong>Governante:</strong> <span style='color:blue'>" + d.properties.Gov+ "</span></p>"+  
+    "<p><strong>Total Death:</strong> <span style='color:blue'>" + d.properties.TotalDeath + "</span></p>";});
+    
+    var tip3 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+      console.log(d);
+    return "<p><strong>Governante:</strong> <span style='color:blue'>" + d.properties.Gov+ "</span></p>"+
+        "<p><strong>Nahya(county):</strong> <span style='color:blue'>" + d.properties.Nahya+ "</span></p>"+  
+    "<strong>Total Death:</strong> <span style='color:blue'>" + d.properties.TotalDeath + "</span>";});
+          
+     
+svg.call(tip);
+svg.call(tip1);
+svg.call(tip2);
+svg.call(tip3);
+    
+var div = d3.select("body").append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);  
+    
+
+      
+ 
+    
+var center = [38.996815, 34.802075];
+
+// Instantiate the projection object
+var projection = d3.geo.conicConformal()  
+    .center(center)
+    .clipAngle(180)
+    // Size of the map itself, you may want to play around with this in 
+    // relation to your canvas size
+    .scale(4500)
+    // Center the map in the middle of the canvas
+    .translate([width / 2, height / 2])
+    .precision(.1);
+    
+    
+
+var path = d3.geo.path().projection(projection);
+    
+    queue()
+	.defer(d3.json, "SyriaNeighbors.json")
+	.defer(d3.tsv, "NeighborsNames.tsv")
+    .defer(d3.json, "SyriaGovernorates.json")
+	.await(Draw);
+   function Draw(error,Neighbors,NeighNames,Govs){
+       console.log(Neighbors);
+       console.log(NeighNames);
+       
+    DrawNeighbors();
+    DreawCountriesNAme();
+       
+    function DrawNeighbors() {   
+    
+             
+    
+            svg.append("path")
+                .datum(topojson.feature(Neighbors, Neighbors.objects.SyriaNeighbors3, function(a, b) { return a !== b; }))
+                .attr("class", "SyriaNeighbors")
+                .attr("d", path);
+        
+//        svg.remove("text");
+       
+    
+        
+       svg.append("path")
+       .datum(topojson.feature(Govs, Govs.objects.SyriaGov, function(a, b) { return a !== b; }))
+      .attr("class", "border")
+      .attr("id","map")
+      .attr("d", path);
+        
+        svg.append("text")
+           .text("Syria")
+        //.attr("size", "d.size")
+           .attr("x", function(d) {
+                   return projection([38.434082,35.015061])[0];
+           })
+           .attr("y", function(d) {
+                  return projection([38.434082,35.015061])[1];
+           }).attr("font-size",50)
+            .attr("fill","black")
+     .attr("class","names")
+    .attr("font-family","serif")
+    .attr("text-anchor","middle")
+    .attr("font-weight","bold");
+        
+        svg.append("text")
+           .text("Iraq")
+        //.attr("size", "d.size")
+           .attr("x", function(d) {
+                   return projection([44.548205,32.604957])[0];
+           })
+           .attr("y", function(d) {
+                  return projection([44.548205,32.604957])[1];
+           }).attr("font-size",40)
+            .attr("fill","black")
+     .attr("class","names")
+    .attr("font-family","serif")
+    .attr("text-anchor","middle")
+    .attr("font-weight","bold");
+   }
+    
+    function DreawCountriesNAme(){
+        
+        
+        svg.selectAll("text")
+           .data(NeighNames)
+           .enter()
+           .append("text")
+           .text(function(d){
+            return d.country;
+         })
+        //.attr("size", "d.size")
+           .attr("x", function(d) {
+                   return projection([d.Lat, d.Long])[0];
+           })
+           .attr("y", function(d) {
+                  return projection([d.Lat, d.Long])[1];
+           }).attr("font-size",25)
+     .attr("class","names")
+    .attr("font-family","serif")
+    .attr("text-anchor","middle")
+    .attr("font-weight","bold");
+           
+      
+        
+        
+    }
+    function RemoveAllPaths(){
+       svg.selectAll("#map").remove();
+        svg.selectAll("#map1").remove();
+        svg.selectAll("#MapKey").remove();
+        svg.selectAll("#Ref").remove();
+       
+        svg.selectAll("path".tract).remove();
+        
+    }
+    function DrawControlRegions(){
+    //IraqiGovRegions.json
+    d3.json("IraqiGovRegions.json", function(err, Region) { 
+            console.log(Region);
+    svg.append("path")
+       .datum(topojson.feature(Region, Region.objects.collection, function(a, b) { return a !== b; }))
+      .attr("class", "border6")
+      .attr("id","map")
+      .attr("d", path);
+            
+        });
+    
+     d3.json("ISIScontrolAreas.json", function(err, Region) { 
+            console.log(Region);
+    svg.append("path")
+       .datum(topojson.feature(Region, Region.objects.collection, function(a, b) { return a !== b; }))
+      .attr("class", "border2")
+     .attr("id","map")
+      .attr("d", path);
+            
+        });
+     d3.json("SyriaGovControl.json", function(err, Region) { 
+            console.log(Region);
+    svg.append("path")
+       .datum(topojson.feature(Region, Region.objects.collection, function(a, b) { return a !== b; }))
+      .attr("class", "border3")
+      .attr("id","map")
+      .attr("d", path);
+            
+        });
+     d3.json("SyriaRebelControl.json", function(err, Region) { 
+            console.log(Region);
+    svg.append("path")
+       .datum(topojson.feature(Region, Region.objects.collection, function(a, b) { return a !== b; }))
+      .attr("class", "border4")
+      .attr("id","map")
+      .attr("d", path);
+            
+        });
+    //KurdishRegionControl.json
+     d3.json("KurdishRegionControl.json", function(err, Region) { 
+            console.log(Region);
+    svg.append("path")
+       .datum(topojson.feature(Region, Region.objects.collection, function(a, b) { return a !== b; }))
+      .attr("class", "border5")
+      .attr("id","map")
+      .attr("d", path);
+            
+        });
+        
+        svg.append("text")
+           .text("The powers that control Syria and Iraq as of December 1 2016")
+        .attr("id","MapKey")
+        .attr("x", 750 )
+           .attr("y", 25)
+           .attr("font-size",20)
+            .attr("fill","black")
+     .attr("class","names")
+    .attr("font-family","serif")
+    .attr("text-anchor","middle")
+    .attr("font-weight","bold");
+    }
+
+    
+    
+    
+  
+    function DrawGov(){
+        
+    
+    console.log(Govs);
+  var tracts = topojson.feature(Govs, Govs.objects.SyriaGov);
+          
+    
+    svg.append("path")
+       .datum(topojson.feature(Govs, Govs.objects.SyriaGov, function(a, b) { return a !== b; }))
+      .attr("class", "border")
+      .attr("id","map")
+      .attr("d", path);
+        
+        
+    svg.append("g")
+      .attr("class", "tract")
+    
+    .attr("id", "map")
+    
+      .attr("clip-path", "url(#clip-land)")
+    .selectAll("path")
+      .data(d3.nest()
+        .key(function(d) { return colors1(d.properties.TotalDeath); })
+        .entries(tracts.features.filter(function(d) { return d.properties.TotalDeath; })))
+    .enter().append("path")
+      .style("fill", function(d) { return d.key; })
+      .attr("d", function(d) { return path({type: "FeatureCollection", features: d.values}); });
+        
+        svg.append("path")
+       .datum(topojson.feature(Govs, Govs.objects.SyriaGov, function(a, b) { return a !== b; }))
+      .attr("class", "border1")
+      .attr("id","map")
+      .attr("d", path);
+        
+    svg.append("g")
+      .attr("class", "tract")
+      .attr("id","map1")
+      
+      .attr("clip-path", "url(#clip-land)")
+    .selectAll("path")
+      .data(tracts.features)
+    .enter()
+        .append("path")
+//      .style("fill", function(d) { return d.key; })
+      .attr("d", path).on('mouseover', tip2.show).on('mouseout', tip2.hide);
+//        .on('mouseover', tip);
+//        .on('mouseout', tip3.hide);; 
+        
+       
+        
+        
+
+    
+    
+    
+ var g = svg.append("g")
+    .attr("class", "key")
+    .attr("id","map")
+    .attr("transform", "translate(300,30)");
+
+g.call(xAxis).append("text")
+    .attr("class", "caption")
+    .attr("id","map")
+    .attr("y", -6)
+    .text("Death Per Governante From March 2011 to April 2016");
+    
+g.selectAll("rect")
+    .data(colors1.range().map(function(d, i) {
+      return {
+        x0: i ? x(colors1.domain()[i - 1]) : x.range()[0],
+        x1: i < colors1.domain().length ? x(colors1.domain()[i]) : x.range()[1],
+        z: d
+      };
+    }))
+  .enter().append("rect")
+    .attr("height", 10)
+    .attr("x", function(d) { return d.x0; })// d.x0
+    .attr("width", function(d) { return d.x1 - d.x0; }) //d.x1 - d.x0
+    .style("fill", function(d) { return d.z; }); //d.z 
+
+}
+    function DrawCountes(){
+        
+        
+               
+d3.json("SyriaCounties1.json", function(err, ca) {  
+    console.log(ca);
+  var tracts = topojson.feature(ca, ca.objects.SyriaMergedMap);
+    
+
+    
+d3.json("SyriaCounties.json", function(err, Newca) {      
+    var tracts1 = topojson.feature(Newca, Newca.objects.SyriaMergedMap);
+    svg.append("path")
+       .datum(topojson.feature(ca, ca.objects.Admin3s, function(a, b) { return a !== b; }))
+      .attr("class", "border")
+      .attr("id","map")
+      .attr("d", path);
+    
+    svg.append("g")
+      .attr("class", "tract")
+      .attr("id","map")
+      .attr("clip-path", "url(#clip-land)")
+      .selectAll("path")
+      .data(d3.nest()
+        .key(function(d) { return colors(d.properties.TotalDeath); })
+        .entries(tracts.features.filter(function(d) { return d.properties.TotalDeath; })))
+    .enter().append("path")
+      .style("fill", function(d) { return d.key; })
+      .attr("d", function(d) { return path({type: "FeatureCollection", features: d.values}); }); //.on('mouseover', tip1.show).on('mouseout', tip1.hide);
+    
+    
+    /*
+    svg
+    .selectAll("path")
+      .data(topojson.feature(Newca, Newca.objects.Nahya))
+     .on('mouseover', tip2.show).on('mouseout', tip2.hide);
+    */
+    svg.append("path")
+       .datum(topojson.feature(ca, ca.objects.Admin3s, function(a, b) { return a !== b; }))
+      .attr("class", "border1")
+      .attr("id","map")
+      .attr("d", path);
+    
+    svg.append("g")
+      .attr("class", "tract")
+      .attr("id","map1")
+      .attr("clip-path", "url(#clip-land)")
+    .selectAll("path")
+      .data(tracts1.features)
+    .enter()
+        .append("path")
+//      .style("fill", function(d) { return d.key; })
+      .attr("d", path).on('mouseover', tip3.show).on('mouseout', tip3.hide);
+});
+});    
+        var g1 = svg.append("g")
+    .attr("class", "key")
+    .attr("id","map")    
+    .attr("transform", "translate(300,30)");
+        g1.call(xAxisCounites).append("text")
+    .attr("class", "caption")
+    .attr("y", -6)
+    .text("Death Per County From March 2011 to February 2016");
+    
+g1.selectAll("rect")
+    .data(colors.range().map(function(d, i) {
+      return {
+        x0: i ? x(colors.domain()[i - 1]) : x.range()[0],
+        x1: i < colors.domain().length ? x(colors.domain()[i]) : x.range()[1],
+        z: d
+      };
+    }))
+  .enter().append("rect")
+    .attr("height", 10)
+    .attr("x", function(d) { return d.x0; })
+    .attr("width", function(d) { return d.x1 - d.x0; })
+    
+    .style("fill", function(d) { return d.z; });
+    }
+
+
+    //.style("fill", function (d) { return colors(100); });
+    /*
+    svg.append("path")
+       .datum(topojson.feature(ca, ca.objects.syr_ppla_bua, function(a, b) { return a !== b; }))
+      .attr("class", "border")
+      .attr("d", path) .style("fill","green");
+      */
+    
+    /*
+    svg.append("path")
+       .datum(topojson.feature(ca, ca.objects.DeathLocations, function(a, b) { return a !== b; }))
+      .attr("class", "syria")
+      .attr("d", path);
+    */
+   function DrewCrossBoarder(){ 
+       /*
+    d3.json("CrossingBoarder.json", function(err, ca) {  
+    console.log(ca);
+    
+    svg.append("path")
+       .datum(topojson.feature(ca, ca.objects.SyriaCrossingBoarder, function(a, b) { return a !== b; }))
+      .attr("class", "syriaCross")
+      .attr("d", path);
+      
+  });
+    */
+    
+      d3.tsv("syriaBorderCrossings.tsv", function(error, data) {
+        svg.selectAll("image")
+        .attr("class", "cross")
+           .data(data)
+           .enter()
+           .append("svg:image")
+        .attr("xlink:href", "golf.png")
+           .attr("x", function(d) {
+                   return projection([d.LON_DD, d.LAT_DD])[0];
+           })
+           .attr("y", function(d) {
+                   return projection([d.LON_DD, d.LAT_DD])[1];
+           })
+           .attr("width",function(d) { return 15; })
+            .attr("height", function(d) { return 15; })
+           .style("fill", "blue").on('mouseover', tip.show).on('mouseout', tip.hide);
+      });
+    }
+   
+    function DrawDeathLoations(){
+    d3.tsv("DeathLocation.tsv", function(error, data) {
+        svg.selectAll("image")
+        .attr("class", "deathLocation")
+        .attr("id","DeathLocation")
+           .data(data)
+           .enter()
+           .append("svg:image")
+        .attr("xlink:href", "fire.png")
+           .attr("x", function(d) {
+                   return projection([d.Lat,d.Lon])[0];
+           })
+           .attr("y", function(d) {
+                  return projection([d.Lat,d.Lon])[1];
+           })
+           .attr("width",function(d) { return 25; })
+            .attr("height", function(d) { return 25; })
+           .style("fill", "yellow")//.on('mouseover', tip1.show).on('mouseout', tip1.hide);
+      });
+    }
+    
+    function DrawReugees(){ 
+        
+        svg.append("path")
+       .datum(topojson.feature(Govs, Govs.objects.SyriaGov, function(a, b) { return a !== b; }))
+      .attr("class", "border")
+      .attr("id","map")
+      .attr("d", path);
+        
+         svg.append("path")
+       .datum(topojson.feature(Govs, Govs.objects.SyriaGov, function(a, b) { return a !== b; }))
+      .attr("class", "border")
+      .attr("id","map")
+      .attr("d", path);
+        
+        svg.append("text")
+           .text("Syria")
+        //.attr("size", "d.size")
+           .attr("x", function(d) {
+                   return projection([38.434082,35.015061])[0];
+           })
+           .attr("y", function(d) {
+                  return projection([38.434082,35.015061])[1];
+           }).attr("font-size",50)
+            .attr("fill","black")
+     .attr("class","names")
+    .attr("font-family","serif")
+    .attr("text-anchor","middle")
+    .attr("font-weight","bold");
+        
+        
+       d3.tsv("RefugeeLoc.tsv", function(error, data) {
+        svg.selectAll("image")
+        .attr("class", "refugee")
+           .data(data)
+           .enter()
+           .append("svg:image")
+        .attr("xlink:href", "peace.png").attr("id","ref")
+           .attr("x", function(d) {
+                   return projection([d.Lat, d.Long])[0];
+           })
+           .attr("y", function(d) {
+                  return projection([d.Lat, d.Long])[1];
+           })
+           .attr("width",function(d) { return 30; })
+            .attr("height", function(d) { return 30; })
+           .style("fill", "yellow").on('mouseover', tip1.show).on('mouseout', tip1.hide);
+      }); 
+        
+        
+        
+        
+        
+    }
+   
+
+function RemoveRefLoc(){
+    svg.selectAll("#ref").remove();
+    
+}
+     
+     function DrawMapLegendsConflict(){
+    
+    svg.append("rect").attr("id","MapKey")
+        .attr("x", width-150)
+        .attr("y", height-590)
+        .attr("rx",10)
+        .attr("ry",5)
+        .attr("stroke","black")
+        .attr("width", 200)
+        .attr("height", 230)
+        .attr("fill", "white")
+        
+        .style("stroke-size", "3px");
+
+
+    
+    svg.append("rect").attr("id","MapKey")
+        .attr("x", width-140)
+        .attr("y", height-580)
+           .attr("width",function(d) { return 40; })
+            .attr("height", function(d) { return 30; })
+    .attr("class","ControlRect")
+    .style("fill", "#4daf4a") 
+    .style("fill-opacity", 0.7) 
+    
+    svg.append("text").attr("id","MapKey")
+        .attr("class", "label")
+         .attr("x", width-57)
+        .attr("y", height-561)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("size", "25px")
+        .text(" Rebels Control"); 
+         
+         svg.append("rect").attr("id","MapKey")
+        .attr("x", width-140)
+        .attr("y", height-545)
+           .attr("width",function(d) { return 40; })
+            .attr("height", function(d) { return 30; })
+         .attr("class","ControlRect")
+    .style("fill", "#e41a1c") 
+    .style("fill-opacity", 0.7)
+         
+    svg.append("text").attr("id","MapKey")
+        .attr("class", "label")
+         .attr("x", width-25)
+        .attr("y", height-526)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "25px")
+        .text("Syrian Government Control"); 
+         
+         svg.append("rect").attr("id","MapKey")
+        .attr("x", width-140)
+        .attr("y", height-510)
+           .attr("width",function(d) { return 40; })
+            .attr("height", function(d) { return 30; })
+         .attr("class","ControlRect")
+    .style("fill", "#377eb8") 
+    .style("fill-opacity", 0.7)
+         
+    svg.append("text").attr("id","MapKey")
+        .attr("class", "label")
+         .attr("x", width-63)
+        .attr("y", height-491)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "25px")
+        .text(" ISIS control");
+         
+          svg.append("rect").attr("id","MapKey")
+        .attr("x", width-140)
+        .attr("y", height-475)
+           .attr("width",function(d) { return 40; })
+            .attr("height", function(d) { return 30; })
+          .attr("class","ControlRect")
+    .style("fill", "#ff7f00") 
+    .style("fill-opacity", 0.7)    
+          
+    svg.append("text").attr("id","MapKey")
+        .attr("class", "label")
+         .attr("x", width-55)
+        .attr("y", height-456)
+        .style("text-anchor", "middle")
+        .style("fill", "balck") 
+        .attr("font-size", "25px")
+        .text(" Kurdish control");
+         
+         svg.append("rect").attr("id","MapKey")
+        .attr("x", width-140)
+        .attr("y", height-440)
+           .attr("width",function(d) { return 40; })
+            .attr("height", function(d) { return 30; })
+         .attr("class","ControlRect")
+    .style("fill", "#984ea3") 
+    .style("fill-opacity", 0.7)     
+         
+    svg.append("text").attr("id","MapKey")
+        .attr("class", "label")
+         .attr("x", width-30)
+        .attr("y", height-421)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "25px")
+        .text("Iraqi Government Control");
+         
+          svg.append("rect").attr("id","MapKey")
+        .attr("x", width-140)
+        .attr("y", height-405)
+           .attr("width",function(d) { return 40; })
+            .attr("height", function(d) { return 30; })
+         .attr("class","ControlRect")
+    .style("fill", "#ececec") 
+         
+         
+    svg.append("text").attr("id","MapKey")
+        .attr("class", "label")
+         .attr("x", width-57)
+        .attr("y", height-386)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "25px")
+        .text("No one control");
+         
+         
+         
+
+   
+     }
+       
+       function DrawCountiesLegends(){
+           
+            svg.append("rect").attr("id","MapKey")
+        .attr("x", width-800)
+        .attr("y", height-500)
+           .attr("width",function(d) { return 40; })
+            .attr("height", function(d) { return 10; })
+    .attr("class","ControlRect")
+    .style("fill", "#fff7ec") 
+    .attr("stroke","black");
+    
+    svg.append("text").attr("id","MapKey")
+        .attr("class", "label")
+         .attr("x", width-707)
+        .attr("y", height-491)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("size", "25px")
+        .text(" No Death Reported"); 
+       }
+       function DrawRefLegands(){
+           svg.append("rect")
+           .attr("id","Ref")
+        .attr("x", width-150)
+        .attr("y", height-590)
+        .attr("rx",10)
+        .attr("ry",5)
+        .attr("stroke","black")
+        .attr("width", 200)
+        .attr("height", 50)
+        .attr("fill", "white")
+
+
+    
+    svg.append("image")
+        .attr("xlink:href", "peace.png")
+    .attr("id","Ref")
+            .attr("x", width-140)
+        .attr("y", height-580)
+           .attr("width",function(d) { return 40; })
+            .attr("height", function(d) { return 30; });
+    
+    svg.append("text")
+        .attr("class", "label")
+    .attr("id","Ref")
+          .attr("x", width-40)
+        .attr("y", height-561)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "20px")
+        .text("Refugee Locations"); 
+           
+           
+           svg.append("text")
+           .text("Refugees Locations as of December 1 2016 According to the UN")
+        .attr("id","Ref")
+        .attr("x", 750 )
+           .attr("y", 25)
+           .attr("font-size",20)
+            .attr("fill","black")
+     .attr("class","names")
+    .attr("font-family","serif")
+    .attr("text-anchor","middle")
+    .attr("font-weight","bold");
+    
+       }
+    function DrawMapLegends(){
+    
+    svg.append("rect")
+        .attr("x", width-1600)
+        .attr("y", height-200)
+        .attr("width", 220)
+        .attr("height", 180)
+        .attr("fill", "purple")
+        .style("stroke-size", "1px");
+
+
+    
+    svg.append("svg:image")
+        .attr("xlink:href", "peace.png")
+           .attr("x",width-1590)
+           .attr("y",height-180)
+           .attr("width",function(d) { return 20; })
+            .attr("height", function(d) { return 20; })
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", width- 1500)
+        .attr("y",height-167)
+        .style("text-anchor", "middle")
+        .style("fill", "#4daf4a") 
+        .attr("font-size", "16px")
+        .text("Refugees Location"); 
+
+    svg.append("svg:image")
+        .attr("xlink:href", "fire.png")
+           .attr("x",width-1590)
+           .attr("y",height-164)
+           .attr("width",function(d) { return 20; })
+            .attr("height", function(d) { return 20; })
+        .style("fill", "white");
+    
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", width- 1500)
+        .attr("y",height-147)
+        .style("text-anchor", "middle")
+        .style("fill", "Green") 
+        .attr("font-size", "16px")
+        .text("Death Location");
+
+    svg.append("svg:image")
+        .attr("xlink:href", "golf.png")
+           .attr("x",width-1590)
+           .attr("y",height-140)
+           .attr("width",function(d) { return 20; })
+            .attr("height", function(d) { return 20; })
+        
+    
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", width- 1500)
+        .attr("y",height-127)
+        .style("text-anchor", "middle")
+        .style("fill", "Green") 
+        .attr("font-size", "16px")
+        .text(" Cross Boarder Location");
+
+    svg.append("square")
+        //.attr("xlink:href", "peace.png")
+           .attr("x",width-1590)
+           .attr("y",height-120)
+           .attr("width",function(d) { return 20; })
+            .attr("height", function(d) { return 20; })
+            .attr("fill", "red")
+        .text(" 10 Trillion BTUs");
+    
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", width- 1500)
+        .attr("y",height-107)
+        .style("text-anchor", "middle")
+        .style("fill", "Green") 
+        .attr("font-size", "16px")
+        .text("Syrian Government Control");
+
+    svg.append("svg:image")
+        .attr("xlink:href", "peace.png")
+           .attr("x",width-1590)
+           .attr("y",height-100)
+           .attr("width",function(d) { return 20; })
+            .attr("height", function(d) { return 20; })
+        .text(" 100 Trillion BTUs");
+    
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", width- 1500)
+        .attr("y",height-87)
+        .style("text-anchor", "middle")
+        .style("fill", "Green") 
+        .attr("font-size", "16px")
+        .text("Refugees Location");
+    
+     svg.append("svg:image")
+        .attr("xlink:href", "peace.png")
+           .attr("x",width-1590)
+           .attr("y",height-80)
+           .attr("width",function(d) { return 20; })
+            .attr("height", function(d) { return 20; })
+        .text(" 100 Trillion BTUs");
+    
+     svg.append("text")
+        .attr("class", "label")
+        .attr("x",width- 1500)
+        .attr("y",height-67)
+        .style("text-anchor", "middle")
+        .style("fill", "Green") 
+        .attr("font-size", "16px")
+        .text("Refugees Location"); 
+     }
+    document.getElementById("counties").onclick =
+        function(){
+        TheSwitch("Counties");
+        
+    }
+     document.getElementById("Governorates").onclick =
+         function() {
+         TheSwitch("Gov");
+        
+    }
+     /*
+     document.getElementById("DeathLoc").onclick =
+        function(){
+        TheSwitch("DeatLocations");
+        
+    }
+     document.getElementById("CrossLoc").onclick =
+        
+         function(){
+        TheSwitch("Cross");
+     }
+        
+    */
+     document.getElementById("RefugeeLoc").onclick =
+         
+        function(){
+        TheSwitch("Refugee");
+     }
+     
+     document.getElementById("ControlRegios").onclick =
+         
+        function(){
+        TheSwitch("Control");
+     }
+     
+     //ControlRegios
+    
+    function TheSwitch(string){
+        
+       switch (string)
+            {
+               case 'Gov': RemoveAllPaths();
+                    svg.selectAll("#DeathLocation").remove();
+                     DrawGov();
+               break;
+            
+               case 'Counties': RemoveAllPaths();
+                    DrawCountiesLegends();
+                    DrawCountes();
+               break;
+            
+               case 'Refugee': 
+                    RemoveAllPaths();
+                    DrawRefLegands();
+                    DrawReugees();
+                    DrawMapLegends();
+               break;
+            /*
+               case 'Cross': RemoveAllPaths();
+                    
+                    DrewCrossBoarder();
+                    DrawMapLegends();
+               break;
+            
+               case 'DeatLocations': 
+                    
+                    DrawDeathLoations();
+                    DrawMapLegends();
+               break;
+               */     
+                case 'Control': RemoveAllPaths();
+                    //RemoveRefLoc();
+                    DrawControlRegions();
+                    DrawMapLegendsConflict();
+               break;
+            
+               default:  document.write("Unknown grade<br />")
+            } 
+        
+        
+        
+    }
+   }
+    InfoBlock.append("rect")
+           .attr("id","MapKey")
+        .attr("x", 5)
+        .attr("y", 5)
+        .attr("rx",10)
+        .attr("ry",5)
+        .attr("stroke","black")
+        .attr("width", 1350)
+        .attr("height", 330)
+        .attr("fill", "skyblue")
+    
+        
+InfoBlock.append("text")
+        .attr("x",600)
+        .attr("y",50)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "20px")
+        .text("This visualization was designed by Ahmed Almutawa For CMPS 165 Fall 2016 under the supervision of Porfessor Lodha Suresh. ");
+    
+    InfoBlock.append("text")
+        .attr("x",620)
+        .attr("y",80)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "20px")
+        .text("Special thanks to Shobhit(TA) and Ryan(Tutor) who helped me to overcome some challenges including code organization and tooltip.");
+    
+    InfoBlock.append("text")
+        .attr("x",240)
+        .attr("y",130)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "20px")
+        .text("Sources:- (Click on the link to go to the source)");
+    
+    InfoBlock.append("text")
+        .attr("x",200)
+        .attr("y",160)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "20px")
+        .text("Death Per Governorates:");
+    
+    InfoBlock.append("text")
+        .attr("x",410)
+        .attr("y",160)
+        .style("text-anchor", "middle")
+        .style("fill", "white") 
+        .attr("font-size", "20px")
+        .text("syrianshuhada.com") .on("click", function() { window.open("http://syrianshuhada.com/?lang=en"); });
+    
+     InfoBlock.append("text")
+        .attr("x",180)
+        .attr("y",190)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "20px")
+        .text("Death Per Counties:");
+    
+    InfoBlock.append("text")
+        .attr("x",410)
+        .attr("y",190)
+        .style("text-anchor", "middle")
+        .style("fill", "white") 
+        .attr("font-size", "20px")
+        .text("syriatracker.blogspot.com") .on("click", function() { window.open("http://syriatracker.blogspot.com/2012/11/maps-for-syria-trackers-crowdmapped.html"); });
+    
+    InfoBlock.append("text")
+        .attr("x",172)
+        .attr("y",220)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "20px")
+        .text("Controling powers:");
+    
+    InfoBlock.append("text")
+        .attr("x",410)
+        .attr("y",220)
+        .style("text-anchor", "middle")
+        .style("fill", "white") 
+        .attr("font-size", "20px")
+        .text("isis.liveuamap.com") .on("click", function() { window.open("https://isis.liveuamap.com"); });
+    InfoBlock.append("text")
+        .attr("x",175)
+        .attr("y",250)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "20px")
+        .text("Refugee Locations:");
+    
+    InfoBlock.append("text")
+        .attr("x",410)
+        .attr("y",250)
+        .style("text-anchor", "middle")
+        .style("fill", "white") 
+        .attr("font-size", "20px")
+        .text("http://data.unhcr.org") .on("click", function() { window.open("http://data.unhcr.org/syrianrefugees/regional.php"); });
+    
+    InfoBlock.append("text")
+        .attr("x",143)
+        .attr("y",280)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "20px")
+        .text("Tooltip style:");
+    
+    InfoBlock.append("text")
+        .attr("x",430)
+        .attr("y",280)
+        .style("text-anchor", "middle")
+        .style("fill", "white") 
+        .attr("font-size", "20px")
+        .text("Justin Palmer, http://bl.ocks.org/Caged/6476579") .on("click", function() { window.open("http://bl.ocks.org/Caged/6476579"); });
+    
+     InfoBlock.append("text")
+        .attr("x",153)
+        .attr("y",310)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "20px")
+        .text("Topojson code:");
+    
+    InfoBlock.append("text")
+        .attr("x",455)
+        .attr("y",310)
+        .style("text-anchor", "middle")
+        .style("fill", "white") 
+        .attr("font-size", "20px")
+        .text("Mike Bostock, https://bl.ocks.org/mbostock/5562380") .on("click", function() { window.open("https://bl.ocks.org/mbostock/5562380"); });
+    
+    InfoBlock.append("text")
+        .attr("x",820)
+        .attr("y",130)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "15px")
+        .text("File submitted:- (those are the files being used in this visualization)");
+    
+    InfoBlock.append("text")
+        .attr("x",961)
+        .attr("y",155)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "15px")
+        .text("index.html, IraqiGovRegions.json, ISIScontrolAreas.json, SyriaGovControl.json,");
+    InfoBlock.append("text")
+        .attr("x",1008)
+        .attr("y",185)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "15px")
+        .text("SyriaRebelControl.json, KurdishRegionControl.json, SyriaCounties.json, SyriaCounties1.json,");
+    InfoBlock.append("text")
+        .attr("x",1018)
+        .attr("y",215)
+        .style("text-anchor", "middle")
+        .style("fill", "black") 
+        .attr("font-size", "15px")
+        .text("SyriaNeighbors.json, NeighborsNames.tsv, SyriaGovernorates.json, RefugeeLoc.tsv, peace.png.");
+    
+
+
+
+    
+</script>
